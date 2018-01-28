@@ -8,7 +8,16 @@ const bot = linebot({
 });
 
 bot.on('message', (event) => {
-    console.log(event);
+    if (event.message.type = 'text') {
+        const msg = event.message.text;
+        event.reply(msg).then((data) => {
+            // success 
+            console.log(msg);
+        }).catch((error) => {
+            // error 
+            console.log('error');
+        });
+    }
 });
 
 const app = express();
