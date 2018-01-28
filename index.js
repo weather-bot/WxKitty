@@ -2,9 +2,9 @@ const linebot = require('linebot');
 const express = require('express');
 
 const bot = linebot({
-    channelId: channelId,
-    channelSecret: channelSecret,
-    channelAccessToken: channelAccessToken
+    channelId: process.env.channelId,
+    channelSecret: process.env.channelSecret,
+    channelAccessToken: process.env.channelAccessToken
 });
 
 bot.on('message', (event) => {
