@@ -1,0 +1,28 @@
+{
+  "name": "line-bot",
+  "version": "0.0.0",
+  "description": "line bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ntu-as-cooklab/line-bot.git"
+  },
+  "keywords": [
+    "line",
+    "bot"
+  ],
+  "author": "tigercosmos",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ntu-as-cooklab/line-bot/issues"
+  },
+  "homepage": "https://github.com/ntu-as-cooklab/line-bot#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "linebot": "^1.4.0"
+  }
+}
