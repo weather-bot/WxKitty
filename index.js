@@ -21,6 +21,7 @@ bot.on('message', event => {
                 "＊天氣圖\n" +
                 "＊雷達圖\n" +
                 "＊[名稱]測站\n" +
+                "＊測站清單\n" +
                 "＊回報問題\n"
             ).catch(error => {
                 logger.error(error);
@@ -92,6 +93,13 @@ bot.on('message', event => {
 });
 
 bot.on('join', event => {
+    const msg = 'Hi！我是氣象機器人￼￼￼￼(•ω•)\n想知道怎麼呼叫我\n請回覆：help';
+    event.reply(msg).catch((error) => {
+        logger.error('error');
+    });
+});
+
+bot.on('follow', event => {
     const msg = 'Hi！我是氣象機器人￼￼￼￼(•ω•)\n想知道怎麼呼叫我\n請回覆：help';
     event.reply(msg).catch((error) => {
         logger.error('error');
