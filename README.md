@@ -4,6 +4,20 @@
 
 Using line bot to implement weather rebot, in order to tell weather information to users automatically.
 
+## Use(Add Friend)
+
+Add the bot via QR code or click the button
+
+![QRcode](https://raw.githubusercontent.com/ntu-as-cooklab/line-bot/master/img/qrcode.png)
+
+<a href="https://line.me/R/ti/p/%40lbz9453s"><img height="36" border="0" alt="加入好友" src="https://scdn.line-apps.com/n/line_add_friends/btn/zh-Hant.png"></a>
+
+## Demo
+
+<img width="400" border="0" alt="demo_enter" src="https://raw.githubusercontent.com/ntu-as-cooklab/line-bot/master/img/demo_enter.png">
+
+<img width="400" border="0" alt="demo_station" src="https://raw.githubusercontent.com/ntu-as-cooklab/line-bot/master/img/demo_station.png">
+
 ## Develop
 
 Currently this repo is connecting with https://weather-bot-tw.herokuapp.com/.
@@ -22,11 +36,3 @@ cd line-bot
 npm install
 npm start
 ```
-
-## Use
-
-Add the bot via QR code or click the button
-
-![QRcode](https://raw.githubusercontent.com/ntu-as-cooklab/line-bot/master/qrcode.png)
-
-<a href="https://line.me/R/ti/p/%40lbz9453s"><img height="36" border="0" alt="加入好友" src="https://scdn.line-apps.com/n/line_add_friends/btn/zh-Hant.png"></a>
