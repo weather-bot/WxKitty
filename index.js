@@ -32,6 +32,25 @@ bot.on('message', event => {
             ).catch(error => {
                 logger.error(error);
             });
+        } else if (msg.includes("測站清單")) {
+            let replyMsg = '';
+            fetch('http://140.112.67.183/mospc/returnJson.php?file=CWBOBS.json')
+                .then(res => res.json())
+                .then(data => {
+                    data.forEach(e => {
+                        replyMsg += `${e.name} `;
+                    })
+                    event.reply(replyMsg).catch(error => {
+                        logger.error(error);
+                    });
+                })
+                .catch(err => {
+                    logger.error(error);
+                    replyMsg = '取得資料失敗';
+                    event.reply(replyMsg).catch(error => {
+                        logger.error(error);
+                    });
+                });
         } else if (msg.includes("測站")) {
             let replyMsg = '';
             const stationName = msg.split('測站')[0];
