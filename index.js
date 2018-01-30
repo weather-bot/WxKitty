@@ -18,17 +18,27 @@ bot.on('message', event => {
         if (msg.includes("help")) {
             event.reply(
                 "目前支援指令：\n" +
+                "＊help\n" +
                 "＊天氣圖\n" +
                 "＊雷達圖\n" +
                 "＊[名稱]測站\n" +
                 "＊測站清單\n" +
-                "＊回報問題\n"
+                "＊回報問題\n" +
+                "＊github\n"
             ).catch(error => {
                 logger.error(error);
             });
         } else if (msg.includes("回報問題")) {
             event.reply(
-                "請寄信到 phy.tiger@gmail.com 說明問題，謝謝回報！"
+                "請寄信到 phy.tiger@gmail.com 說明問題\n" +
+                "或是上 Github 發 issue: https://github.com/ntu-as-cooklab/line-bot \n" +
+                "謝謝回報！"
+            ).catch(error => {
+                logger.error(error);
+            });
+        } else if (msg.includes("github")) {
+            event.reply(
+                "https://github.com/ntu-as-cooklab/line-bot"
             ).catch(error => {
                 logger.error(error);
             });
