@@ -25,6 +25,8 @@ npm start
 
 ## Use
 
-Add the bot via QR code
+Add the bot via QR code or click the button
 
 ![QRcode](https://raw.githubusercontent.com/ntu-as-cooklab/line-bot/master/qrcode.png)
+
+<a href="https://line.me/R/ti/p/%40lbz9453s"><img height="36" border="0" alt="加入好友" src="https://scdn.line-apps.com/n/line_add_friends/btn/zh-Hant.png"></a>
