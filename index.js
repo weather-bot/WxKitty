@@ -12,18 +12,32 @@ const bot = linebot({
 bot.on('message', event => {
     if (event.message.type = 'text') {
         const msg = event.message.text;
-        event.reply(msg).then(data => {
-            // success 
-            logger.info(msg);
-        }).catch(error => {
-            // error 
-            logger.error(error);
-        });
+
+        if (msg.includes("天氣圖")) {
+            event.reply(
+                'http://www.cwb.gov.tw//V7/forecast/taiwan/Data/Forecast01.png'
+            ).then(data => {
+                // success 
+                logger.info(msg);
+            }).catch(error => {
+                // error 
+                logger.error(error);
+            });
+        }
+
+        // event.reply().then(data => {
+        //     // success 
+        //     logger.info(msg);
+        // }).catch(error => {
+        //     // error 
+        //     logger.error(error);
+        // });
+
     }
 });
 
 bot.on('join', event => {
-    const msg = '我是天氣機器人 :)\n想知道怎麼呼叫我，請回覆：\nhelp';
+    const msg = '我是氣象機器人￼￼￼￼ (moon grin)\n想知道怎麼呼叫我\n請回覆：help';
     event.reply(msg).then(data => {
         // success 
         logger.info(msg);
