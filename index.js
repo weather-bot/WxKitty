@@ -12,18 +12,16 @@ const bot = linebot({
 
 bot.on('message', event => {
     if (event.message.type = 'text') {
+        // message from user
         const msg = event.message.text;
 
         if (msg.includes("help")) {
             event.reply(
                 "目前支援指令：\n" +
-                "天氣圖\n雷達圖\n" +
+                "天氣圖\n" +
+                "雷達圖\n" +
                 "[名稱]測站"
-            ).then(data => {
-                // success 
-                logger.info(msg);
-            }).catch(error => {
-                // error 
+            ).catch(error => {
                 logger.error(error);
             });
         } else if (msg.includes("測站")) {
@@ -43,32 +41,21 @@ bot.on('message', event => {
                         replyMsg = `無此測站`;
                     }
                     event.reply(replyMsg).then(data => {
-                        // success 
                         logger.info(msg);
-                    }).catch(error => {
-                        // error 
                         logger.error(error);
                     });
                 })
                 .catch(err => {
                     logger.error(error);
                     replyMsg = '取得資料失敗';
-                    event.reply(replyMsg).then(data => {
-                        // success 
-                        logger.info(msg);
-                    }).catch(error => {
-                        // error 
+                    event.reply(replyMsg).catch(error => {
                         logger.error(error);
                     });
                 });
         } else if (msg.includes("天氣圖")) {
             event.reply(
                 'http://www.cwb.gov.tw//V7/forecast/taiwan/Data/Forecast01.png'
-            ).then(data => {
-                // success 
-                logger.info(msg);
-            }).catch(error => {
-                // error 
+            ).catch(error => {
                 logger.error(error);
             });
         } else if (msg.includes("雷達圖")) {
@@ -90,11 +77,7 @@ bot.on('message', event => {
             const time = `${year}${month}${day}${hour}${minute}`;
             event.reply(
                 `http://www.cwb.gov.tw/V7/observe/radar/Data/HD_Radar/CV1_3600_${time}.png`
-            ).then(data => {
-                // success 
-                logger.info(msg);
-            }).catch(error => {
-                // error 
+            ).catch(error => {
                 logger.error(error);
             });
         }
@@ -103,11 +86,7 @@ bot.on('message', event => {
 
 bot.on('join', event => {
     const msg = 'Hi！我是氣象機器人￼￼￼￼(•ω•)\n想知道怎麼呼叫我\n請回覆：help';
-    event.reply(msg).then(data => {
-        // success 
-        logger.info(msg);
-    }).catch((error) => {
-        // error 
+    event.reply(msg).catch((error) => {
         logger.error('error');
     });
 });
