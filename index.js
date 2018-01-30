@@ -1,5 +1,7 @@
 const linebot = require('linebot');
 const express = require('express');
+const Logger = require('node-color-log');
+const logger = new Logger();
 
 const bot = linebot({
     channelId: process.env.channelId,
@@ -7,17 +9,28 @@ const bot = linebot({
     channelAccessToken: process.env.channelAccessToken
 });
 
-bot.on('message', (event) => {
+bot.on('message', event => {
     if (event.message.type = 'text') {
         const msg = event.message.text;
-        event.reply(msg).then((data) => {
+        event.reply(msg).then(data => {
             // success 
-            console.log(msg);
-        }).catch((error) => {
+            logger.info(msg);
+        }).catch(error => {
             // error 
-            console.log('error');
+            logger.error(error);
         });
     }
+});
+
+bot.on('join', event => {
+    const msg = '我是天氣機器人 :)\n想知道怎麼呼叫我，請回覆：\nhelp';
+    event.reply(msg).then(data => {
+        // success 
+        logger.info(msg);
+    }).catch((error) => {
+        // error 
+        logger.error('error');
+    });
 });
 
 const app = express();

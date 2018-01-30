@@ -23,6 +23,7 @@
   "homepage": "https://github.com/ntu-as-cooklab/line-bot#readme",
   "dependencies": {
     "express": "^4.16.2",
-    "linebot": "^1.4.0"
+    "linebot": "^1.4.0",
+    "node-color-log": "^1.1.1"
   }
 }
