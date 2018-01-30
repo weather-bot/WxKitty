@@ -25,6 +25,31 @@ bot.on('message', event => {
             });
         }
 
+        if (msg.includes("雷達圖")) {
+            function format(val) {
+                if (val < 10) {
+                    val = '0' + val;
+                }
+                return val;
+            }
+            const date = new Date();
+            const year = date.getFullYear();
+            const month = format(date.getMonth() + 1);
+            const day = format(date.getDate());
+            const hour = format(date.getHours());
+            const minute = format(Math.floor(date.getMinutes() / 10) * 10);
+            const time = `${year}${month}${day}${hour}${minute}`;
+            event.reply(
+                `http://www.cwb.gov.tw/V7/observe/radar/Data/HD_Radar/CV1_3600_${time}.png`
+            ).then(data => {
+                // success 
+                logger.info(msg);
+            }).catch(error => {
+                // error 
+                logger.error(error);
+            });
+        }
+
         // event.reply().then(data => {
         //     // success 
         //     logger.info(msg);
