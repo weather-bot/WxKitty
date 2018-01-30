@@ -32,7 +32,9 @@ bot.on('message', event => {
                 }
                 return val;
             }
-            const date = new Date();
+            let date = new Date();
+            const utc = date.getTime() + (date.getTimezoneOffset() * 60000);
+            date = new Date(utc + (3600000 * 8));
             const year = date.getFullYear();
             const month = format(date.getMonth() + 1);
             const day = format(date.getDate());
