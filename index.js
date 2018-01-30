@@ -78,7 +78,7 @@ bot.on('message', event => {
 });
 
 bot.on('join', event => {
-    const msg = '我是氣象機器人￼￼￼￼ (moon grin)\n想知道怎麼呼叫我\n請回覆：help';
+    const msg = 'Hi！我是氣象機器人￼￼￼￼ (•ω•)\n想知道怎麼呼叫我\n請回覆：help';
     event.reply(msg).then(data => {
         // success 
         logger.info(msg);
