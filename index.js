@@ -18,9 +18,16 @@ bot.on('message', event => {
         if (msg.includes("help")) {
             event.reply(
                 "目前支援指令：\n" +
-                "天氣圖\n" +
-                "雷達圖\n" +
-                "[名稱]測站"
+                "＊天氣圖\n" +
+                "＊雷達圖\n" +
+                "＊[名稱]測站\n" +
+                "＊回報問題\n"
+            ).catch(error => {
+                logger.error(error);
+            });
+        } else if (msg.includes("回報問題")) {
+            event.reply(
+                "請寄信到 phy.tiger@gmail.com 說明問題，謝謝回報！"
             ).catch(error => {
                 logger.error(error);
             });
@@ -34,7 +41,7 @@ bot.on('message', event => {
                         if (e.name.includes(stationName)) {
                             replyMsg = `測站：${e.name}\n時間：${e.time}\n溫度：${e.temp}℃\n` +
                                 `濕度：${e.humd}%\n壓力：${e.pres}hPa\n風速：${e.ws}m/s\n` +
-                                `風向：${e.wd}\n雨量：${e.rain}mm\n`
+                                `風向：${e.wd}\n雨量：${e.rain}mm`
                         }
                     })
                     if (replyMsg == '') {
