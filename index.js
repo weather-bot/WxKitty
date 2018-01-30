@@ -26,7 +26,7 @@ bot.on('message', event => {
             });
         }
 
-        if (msg.includes("天氣圖")) {
+        else if (msg.includes("天氣圖")) {
             event.reply(
                 'http://www.cwb.gov.tw//V7/forecast/taiwan/Data/Forecast01.png'
             ).then(data => {
@@ -38,7 +38,7 @@ bot.on('message', event => {
             });
         }
 
-        if (msg.includes("雷達圖")) {
+        else if (msg.includes("雷達圖")) {
             function format(val) {
                 if (val < 10) {
                     val = '0' + val;
@@ -78,7 +78,7 @@ bot.on('message', event => {
 });
 
 bot.on('join', event => {
-    const msg = 'Hi！我是氣象機器人￼￼￼￼ (•ω•)\n想知道怎麼呼叫我\n請回覆：help';
+    const msg = 'Hi！我是氣象機器人￼￼￼￼(•ω•)\n想知道怎麼呼叫我\n請回覆：help';
     event.reply(msg).then(data => {
         // success 
         logger.info(msg);
