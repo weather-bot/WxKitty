@@ -24,6 +24,7 @@
   "dependencies": {
     "express": "^4.16.2",
     "linebot": "^1.4.0",
-    "node-color-log": "^1.1.1"
+    "node-color-log": "^1.1.1",
+    "node-fetch": "^1.7.3"
   }
 }

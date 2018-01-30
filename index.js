@@ -1,3 +1,4 @@
+const fetch = require('node-fetch');
 const linebot = require('linebot');
 const express = require('express');
 const Logger = require('node-color-log');
