@@ -129,7 +129,9 @@ bot.on('join', event => {
 });
 
 bot.on('follow', event => {
-    const msg = 'Hi！我是氣象機器人￼￼￼￼(•ω•)\n想知道怎麼呼叫我\n請回覆：help';
+    const msg = "Hi！我是氣象機器人￼￼￼￼(•ω•)\n" +
+        "您可以把我加進群組，讓大家一起使用\n" +
+        "想知道怎麼呼叫我\n請回覆：help";
     event.reply(msg).catch((error) => {
         logger.error('error');
     });
