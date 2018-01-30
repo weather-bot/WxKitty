@@ -47,14 +47,12 @@ bot.on('message', event => {
             }
             let date = new Date();
             const utc = date.getTime() + (date.getTimezoneOffset() * 60000);
-            // zone time utc+8
-            date = new Date(utc + (3600000 * 8));
+            // zone time utc+8, and back 30 min to ensure the url is valid
+            date = new Date(utc + (3600000 * 7.5));
             const year = date.getFullYear();
             const month = format(date.getMonth() + 1);
             const day = format(date.getDate());
             const hour = format(date.getHours());
-            // back 30 min to ensure the url is valid
-            date.setDate(date.getMinute() - 30);
             const minute = format(Math.floor(date.getMinutes() / 10) * 10);
             const time = `${year}${month}${day}${hour}${minute}`;
             event.reply(
