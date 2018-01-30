@@ -34,11 +34,14 @@ bot.on('message', event => {
             }
             let date = new Date();
             const utc = date.getTime() + (date.getTimezoneOffset() * 60000);
+            // zone time utc+8
             date = new Date(utc + (3600000 * 8));
             const year = date.getFullYear();
             const month = format(date.getMonth() + 1);
             const day = format(date.getDate());
             const hour = format(date.getHours());
+            // back 30 min to ensure the url is valid
+            date.setDate(date.getMinute() - 30);
             const minute = format(Math.floor(date.getMinutes() / 10) * 10);
             const time = `${year}${month}${day}${hour}${minute}`;
             event.reply(
@@ -65,7 +68,10 @@ bot.on('message', event => {
 
 bot.on('join', event => {
     const msg = '我是氣象機器人￼￼￼￼ (moon grin)\n想知道怎麼呼叫我\n請回覆：help';
-    event.reply(msg).then(data => {
+    event.reply(
+        "目前支援指令：\n" +
+        "天氣圖、雷達圖"
+    ).then(data => {
         // success 
         logger.info(msg);
     }).catch((error) => {
