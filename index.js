@@ -69,7 +69,8 @@ bot.on('message', event => {
                 .then(data => {
                     data.forEach(e => {
                         if (e.name.includes(stationName)) {
-                            replyMsg = `測站：${e.name}\n時間：${e.time}\n溫度：${e.temp}℃\n` +
+                            replyMsg = `測站：${e.name}\n時間：${e.time}\n` +
+                                `溫度：${e.temp}℃\n體感溫度：${e.feel}℃\n` +
                                 `濕度：${e.humd}%\n壓力：${e.pres}hPa\n風速：${e.ws}m/s\n` +
                                 `風向：${e.wd}\n雨量：${e.rain}mm`
                         }
