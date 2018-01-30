@@ -28,31 +28,39 @@ bot.on('message', event => {
             });
         } else if (msg.includes("測站")) {
             let replyMsg = '';
-            const name = msg.split('測站')[0];
+            const stationName = msg.split('測站')[0];
             fetch('http://140.112.67.183/mospc/returnJson.php?file=CWBOBS.json')
                 .then(res => res.json())
                 .then(data => {
                     data.forEach(e => {
-                        if (e.name.includes("測站")) {
+                        if (e.name.includes(stationName)) {
                             replyMsg = `測站：${e.name}\n時間：${e.time}\n溫度：${e.temp}\n` +
-                                `濕度：${e.humd}\n壓力：${e.press}\n風速：${e.ws}\n` +
-                                `風向：${e.wd}雨量：${e.rain}\n`
-                        } else {
-                            replyMsg = `無此測站`
+                                `濕度：${e.humd}\n壓力：${e.pres}\n風速：${e.ws}\n` +
+                                `風向：${e.wd}\n雨量：${e.rain}\n`
                         }
                     })
+                    if (replyMsg == '') {
+                        replyMsg = `無此測站`;
+                    }
+                    event.reply(replyMsg).then(data => {
+                        // success 
+                        logger.info(msg);
+                    }).catch(error => {
+                        // error 
+                        logger.error(error);
+                    });
                 })
                 .catch(err => {
                     logger.error(error);
                     replyMsg = '取得資料失敗';
+                    event.reply(replyMsg).then(data => {
+                        // success 
+                        logger.info(msg);
+                    }).catch(error => {
+                        // error 
+                        logger.error(error);
+                    });
                 });
-            event.reply(replyMsg).then(data => {
-                // success 
-                logger.info(msg);
-            }).catch(error => {
-                // error 
-                logger.error(error);
-            });
         } else if (msg.includes("天氣圖")) {
             event.reply(
                 'http://www.cwb.gov.tw//V7/forecast/taiwan/Data/Forecast01.png'
