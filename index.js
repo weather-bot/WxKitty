@@ -178,7 +178,7 @@ bot.on('message', event => {
                             replyMsg = `測站：${e.SiteName}\n時間：${e.Time}\n` +
                                 `空氣指標：${getAirCondition()}\n` +
                                 `PM10：${e.PM10}(μg/m3)\nPM2.5：${e.PM25}(μg/m3)\n` +
-                                `CO：${e.CO}(ppm)\nSO2：${e.SO2}(ppb)\nNO2：${e.NO2}NO2(ppb)\n`;
+                                `CO：${e.CO}(ppm)\nSO2：${e.SO2}(ppb)\nNO2：${e.NO2}(ppb)`;
                         }
                     })
                     if (replyMsg == '') {
