@@ -44,6 +44,7 @@ bot.on('message', event => {
             event.reply(
                 "目前支援指令：\n" +
                 "＊help\n" +
+                "＊預報圖\n" +
                 "＊天氣圖\n" +
                 "＊衛星雲圖\n" +
                 "＊雷達圖\n" +
@@ -116,9 +117,15 @@ bot.on('message', event => {
                         logger.error(error);
                     });
                 });
-        } else if (msg.includes("天氣圖")) {
+        } else if (msg.includes("預報圖")) {
             event.reply(
                 'http://www.cwb.gov.tw//V7/forecast/taiwan/Data/Forecast01.png'
+            ).catch(error => {
+                logger.error(error);
+            });
+        } else if (msg.includes("天氣圖")) {
+            event.reply(
+                'http://www.cwb.gov.tw/V7/forecast/fcst/Data/I04.jpg'
             ).catch(error => {
                 logger.error(error);
             });
