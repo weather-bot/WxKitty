@@ -102,7 +102,7 @@ bot.on('message', event => {
                 });
         } else if (msg.includes("觀測")) {
             let replyMsg = '';
-            const stationName = msg.split('測站')[0];
+            const stationName = msg.split('觀測')[0];
             fetch('http://140.112.67.183/mospc/returnJson.php?file=CWBOBS.json')
                 .then(res => res.json())
                 .then(data => {
