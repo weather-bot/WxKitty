@@ -43,13 +43,16 @@ bot.on('message', event => {
         if (msg.toLowerCase().includes("help")) {
             event.reply(
                 "目前支援指令：\n" +
-                "＊help\n" +
+                "<氣象圖>\n" +       
                 "＊預報圖\n" +
                 "＊天氣圖\n" +
                 "＊衛星雲圖\n" +
                 "＊雷達圖\n" +
+                "<測站>\n" +
                 "＊[名稱]測站\n" +
                 "＊測站清單\n" +
+                "<其他>\n" +
+                "＊氣象局/CWB\n" +
                 "＊回報問題\n" +
                 "＊Github\n"
             ).catch(error => {
@@ -66,6 +69,12 @@ bot.on('message', event => {
         } else if (msg.toLowerCase().includes("github")) {
             event.reply(
                 "https://github.com/ntu-as-cooklab/line-bot"
+            ).catch(error => {
+                logger.error(error);
+            });
+        } else if (msg.toLowerCase().includes("cwb")||msg.includes("氣象局")) {
+            event.reply(
+                "www.cwb.gov.tw/"
             ).catch(error => {
                 logger.error(error);
             });
