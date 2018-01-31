@@ -15,7 +15,7 @@ bot.on('message', event => {
         // message from user
         const msg = event.message.text;
 
-        if (msg.includes("help")) {
+        if (msg.toLowerCase().includes("help")) {
             event.reply(
                 "目前支援指令：\n" +
                 "＊help\n" +
@@ -24,7 +24,7 @@ bot.on('message', event => {
                 "＊[名稱]測站\n" +
                 "＊測站清單\n" +
                 "＊回報問題\n" +
-                "＊github\n"
+                "＊Github\n"
             ).catch(error => {
                 logger.error(error);
             });
@@ -36,7 +36,7 @@ bot.on('message', event => {
             ).catch(error => {
                 logger.error(error);
             });
-        } else if (msg.includes("github")) {
+        } else if (msg.toLowerCase().includes("github")) {
             event.reply(
                 "https://github.com/ntu-as-cooklab/line-bot"
             ).catch(error => {
