@@ -10,6 +10,31 @@ const bot = linebot({
     channelAccessToken: process.env.channelAccessToken
 });
 
+const getTime = () => {
+    function format(val) {
+        if (val < 10) {
+            val = '0' + val;
+        }
+        return val;
+    }
+    let date = new Date();
+    const utc = date.getTime() + (date.getTimezoneOffset() * 60000);
+    // zone time utc+8, and back 30 min to ensure the url is valid
+    date = new Date(utc + (3600000 * 7.5));
+    const year = date.getFullYear();
+    const month = format(date.getMonth() + 1);
+    const day = format(date.getDate());
+    const hour = format(date.getHours());
+    const minute = format(Math.floor(date.getMinutes() / 10) * 10);
+    return {
+        year,
+        month,
+        day,
+        hour,
+        minute
+    };
+}
+
 bot.on('message', event => {
     if (event.message.type = 'text') {
         // message from user
@@ -20,6 +45,7 @@ bot.on('message', event => {
                 "目前支援指令：\n" +
                 "＊help\n" +
                 "＊天氣圖\n" +
+                "＊衛星雲圖\n" +
                 "＊雷達圖\n" +
                 "＊[名稱]測站\n" +
                 "＊測站清單\n" +
@@ -97,24 +123,18 @@ bot.on('message', event => {
                 logger.error(error);
             });
         } else if (msg.includes("雷達圖")) {
-            function format(val) {
-                if (val < 10) {
-                    val = '0' + val;
-                }
-                return val;
-            }
-            let date = new Date();
-            const utc = date.getTime() + (date.getTimezoneOffset() * 60000);
-            // zone time utc+8, and back 30 min to ensure the url is valid
-            date = new Date(utc + (3600000 * 7.5));
-            const year = date.getFullYear();
-            const month = format(date.getMonth() + 1);
-            const day = format(date.getDate());
-            const hour = format(date.getHours());
-            const minute = format(Math.floor(date.getMinutes() / 10) * 10);
-            const time = `${year}${month}${day}${hour}${minute}`;
+            const d = getTime();
+            const time = `${d.year}${d.month}${d.day}${d.hour}${d.minute}`;
             event.reply(
                 `http://www.cwb.gov.tw/V7/observe/radar/Data/HD_Radar/CV1_3600_${time}.png`
+            ).catch(error => {
+                logger.error(error);
+            });
+        } else if (msg.includes("衛星雲圖")) {
+            const d = getTime();
+            const time = `${d.year}-${d.month}-${d.day}-${d.hour}-${d.minute}`;
+            event.reply(
+                `http://www.cwb.gov.tw/V7/observe/satellite/Data/s1p/s1p-${time}.jpg`
             ).catch(error => {
                 logger.error(error);
             });
