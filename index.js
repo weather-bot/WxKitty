@@ -43,7 +43,7 @@ bot.on('message', event => {
         if (msg.toLowerCase().includes("help")) {
             event.reply(
                 "目前支援指令：\n" +
-                "<氣象圖>\n" +       
+                "<氣象圖>\n" +
                 "＊預報圖\n" +
                 "＊天氣圖\n" +
                 "＊衛星雲圖\n" +
@@ -72,7 +72,7 @@ bot.on('message', event => {
             ).catch(error => {
                 logger.error(error);
             });
-        } else if (msg.toLowerCase().includes("cwb")||msg.includes("氣象局")) {
+        } else if (msg.toLowerCase().includes("cwb") || msg.includes("氣象局")) {
             event.reply(
                 "www.cwb.gov.tw/"
             ).catch(error => {
@@ -152,6 +152,16 @@ bot.on('message', event => {
             event.reply(
                 `http://www.cwb.gov.tw/V7/observe/satellite/Data/s1p/s1p-${time}.jpg`
             ).catch(error => {
+                logger.error(error);
+            });
+        } else if (msg.includes('test')) {
+            event.reply({
+                type: 'image',
+                originalContentUrl: 'http://www.cwb.gov.tw/V7/forecast/fcst/Data/I04.jpg',
+                previewImageUrl: 'http://www.cwb.gov.tw/V7/forecast/fcst/Data/I04.jpg'
+            }).then(e => {
+                logger.log("done", e)
+            }).catch(error => {
                 logger.error(error);
             });
         }
