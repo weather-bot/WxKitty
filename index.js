@@ -162,18 +162,18 @@ bot.on('message', event => {
                     data['Data'].forEach(e => {
                         if (e.SiteName.includes(stationName)) {
                             function getAirCondition() {
-                                if (e.PM25 < 50)
+                                if (e.AQI < 50)
                                     return `良好`;
-                                else if (e.PM25 < 100)
+                                else if (e.AQI < 100)
                                     return `普通`;
-                                else if (e.PM25 < 150)
+                                else if (e.AQI < 150)
                                     return `對敏感族群不健康`;
-                                else if (e.PM25 < 200)
+                                else if (e.AQI < 200)
                                     return `對所有族群不健康`;
-                                else if (e.PM25 < 300)
+                                else if (e.AQI < 300)
                                     return `非常不健康`;
-                                else if (e.M25 > 300)
-                                    return `危害Ｆ`;
+                                else if (e.AQI > 300)
+                                    return `危害`;
                             }
                             replyMsg = `測站：${e.SiteName}\n時間：${e.Time}\n` +
                                 `空氣指標：${getAirCondition()}\n` +
