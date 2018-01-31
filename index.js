@@ -48,9 +48,12 @@ bot.on('message', event => {
                 "＊天氣圖\n" +
                 "＊衛星雲圖\n" +
                 "＊雷達圖\n" +
-                "<測站>\n" +
-                "＊[名稱]測站\n" +
-                "＊測站清單\n" +
+                "<觀測站>\n" +
+                "＊[名稱]觀測\n" +
+                "＊觀測站清單\n" +
+                "<空氣品質監測站>\n" +
+                "＊[名稱]空氣\n" +
+                "＊監測站清單\n" +
                 "<其他>\n" +
                 "＊氣象局/CWB\n" +
                 "＊回報問題\n" +
@@ -78,7 +81,7 @@ bot.on('message', event => {
             ).catch(error => {
                 logger.error(error);
             });
-        } else if (msg.includes("測站清單")) {
+        } else if (msg.includes("觀測站清單")) {
             let replyMsg = '';
             fetch('http://140.112.67.183/mospc/returnJson.php?file=CWBOBS.json')
                 .then(res => res.json())
@@ -97,7 +100,7 @@ bot.on('message', event => {
                         logger.error(error);
                     });
                 });
-        } else if (msg.includes("測站")) {
+        } else if (msg.includes("觀測")) {
             let replyMsg = '';
             const stationName = msg.split('測站')[0];
             fetch('http://140.112.67.183/mospc/returnJson.php?file=CWBOBS.json')
@@ -109,6 +112,73 @@ bot.on('message', event => {
                                 `溫度：${e.temp}℃\n體感溫度：${e.feel}℃\n` +
                                 `濕度：${e.humd}%\n壓力：${e.pres}hPa\n風速：${e.ws}m/s\n` +
                                 `風向：${e.wd}\n雨量：${e.rain}mm`
+                        }
+                    })
+                    if (replyMsg == '') {
+                        replyMsg = `無此測站`;
+                    }
+                    event.reply(replyMsg).then(data => {
+                        logger.info(msg);
+                        logger.error(error);
+                    });
+                })
+                .catch(err => {
+                    logger.error(error);
+                    replyMsg = '取得資料失敗';
+                    event.reply(replyMsg).catch(error => {
+                        logger.error(error);
+                    });
+                });
+
+        } else if (msg.includes("監測站清單")) {
+            let replyMsg = '';
+            const epoch = new Date().getMilliseconds();
+            const url = `https://taqm.epa.gov.tw/taqm/aqs.ashx?lang=tw&act=aqi-epa&ts=${epoch}`;
+            fetch(url)
+                .then(res => res.json())
+                .then(data => {
+                    data['Data'].forEach(e => {
+                        replyMsg += `${e.SiteName} `;
+                    })
+                    event.reply(replyMsg).catch(error => {
+                        logger.error(error);
+                    });
+                })
+                .catch(err => {
+                    logger.error(error);
+                    replyMsg = '取得資料失敗';
+                    event.reply(replyMsg).catch(error => {
+                        logger.error(error);
+                    });
+                });
+        } else if (msg.includes("空氣")) {
+            let replyMsg = '';
+            const epoch = new Date().getMilliseconds();
+            const url = `https://taqm.epa.gov.tw/taqm/aqs.ashx?lang=tw&act=aqi-epa&ts=${epoch}`;
+            const stationName = msg.split('空氣')[0];
+            fetch(url)
+                .then(res => res.json())
+                .then(data => {
+                    data['Data'].forEach(e => {
+                        if (e.SiteName.includes(stationName)) {
+                            function getAirCondition() {
+                                if (e.PM25 < 50)
+                                    return `良好`;
+                                else if (e.PM25 < 100)
+                                    return `普通`;
+                                else if (e.PM25 < 150)
+                                    return `對敏感族群不健康`;
+                                else if (e.PM25 < 200)
+                                    return `對所有族群不健康`;
+                                else if (e.PM25 < 300)
+                                    return `非常不健康`;
+                                else if (e.M25 > 300)
+                                    return `危害Ｆ`;
+                            }
+                            replyMsg = `測站：${e.SiteName}\n時間：${e.Time}\n` +
+                                `空氣指標：${getAirCondition()}\n` +
+                                `PM10：${e.PM10}(μg/m3)\nPM2.5：${e.PM25}(μg/m3)\n` +
+                                `CO：${e.CO}(ppm)\nSO2：${e.SO2}(ppb)\nNO2：${e.NO2}NO2(ppb)\n`;
                         }
                     })
                     if (replyMsg == '') {
@@ -152,16 +222,6 @@ bot.on('message', event => {
             event.reply(
                 `http://www.cwb.gov.tw/V7/observe/satellite/Data/s1p/s1p-${time}.jpg`
             ).catch(error => {
-                logger.error(error);
-            });
-        } else if (msg.includes('test')) {
-            event.reply({
-                type: 'image',
-                originalContentUrl: 'http://www.cwb.gov.tw/V7/forecast/fcst/Data/I04.jpg',
-                previewImageUrl: 'http://www.cwb.gov.tw/V7/forecast/fcst/Data/I04.jpg'
-            }).then(e => {
-                logger.log("done", e)
-            }).catch(error => {
                 logger.error(error);
             });
         }
