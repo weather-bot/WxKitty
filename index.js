@@ -46,32 +46,37 @@ bot.on('message', event => {
 
         if (msg.toLowerCase().includes("help")) {
             event.reply(
-                "請對我輸入指令，目前支援指令：\n" +
+                "請對我輸入指令（回覆我以下的關鍵字）\n" +
+                "目前支援指令，以及其說明：\n" +
+                "\n" +
                 "<氣象圖>\n" +
                 " ＊預報圖\n" +
                 " ＊天氣圖\n" +
                 " ＊衛星雲圖\n" +
-                " ＊雷達圖\n\n" +
-                "<觀測站>\n" +
+                " ＊雷達圖\n" +
+                "\n" +
+                "<氣象觀測站>\n" +
                 " ＊[觀測站名稱]觀測\n" +
-                "   例如：宜蘭觀測\n" +
-                " ＊觀測站清單\n\n" +
+                "    例如：宜蘭觀測、士林觀測\n" +
+                " ＊觀測站清單：用來查詢有哪些觀測站\n" +
+                "\n" +
                 "<空氣品質監測站>\n" +
                 " ＊[監測站名稱]空氣\n" +
-                "   例如：基隆空氣\n" +
-                " ＊監測站清單\n\n" +
+                "    例如：基隆空氣、淡水空氣\n" +
+                " ＊監測站清單：用來查詢有哪些監測站\n" +
+                "\n" +
                 "<其他>\n" +
                 " ＊氣象局/CWB\n" +
-                " ＊回報問題\n" +
-                " ＊Github"
+                " ＊回報問題/issue\n" +
+                " ＊Github/原始碼"
             );
-        } else if (msg.includes("回報問題")) {
+        } else if (msg.toLowerCase().includes("issue") || msg.includes("回報問題")) {
             event.reply(
                 "請寄信到 phy.tiger@gmail.com 說明問題\n" +
                 "或是上 Github 發 issue: https://github.com/ntu-as-cooklab/line-bot \n" +
                 "謝謝回報！"
             );
-        } else if (msg.toLowerCase().includes("github")) {
+        } else if (msg.toLowerCase().includes("github") || msg.includes("原始碼")) {
             event.reply("https://github.com/ntu-as-cooklab/line-bot");
         } else if (msg.toLowerCase().includes("cwb") || msg.includes("氣象局")) {
             event.reply("www.cwb.gov.tw/");
