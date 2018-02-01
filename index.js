@@ -40,25 +40,29 @@ const getTime = () => {
 bot.on('message', event => {
     if (event.message.type = 'text') {
         // message from user
-        const msg = event.message.text;
+        const msg = event.message.text.replace(/\s/g, '');
 
         if (msg.toLowerCase().includes("help")) {
             event.reply(
                 "請對我輸入指令（回覆我以下的關鍵字）\n" +
                 "目前支援指令，以及其說明：\n" +
                 "\n" +
-                "<氣象圖>\n" +
+                "<地區天氣>：直接查詢地區的天氣狀況\n" +
+                " ＊[地址]天氣\n" +
+                "    例如：台北天氣、高雄天氣、淡水天氣\n" +
+                "\n" +
+                "<氣象圖>：提供氣象圖的連結\n" +
                 " ＊預報圖\n" +
                 " ＊天氣圖\n" +
                 " ＊衛星雲圖\n" +
                 " ＊雷達圖\n" +
                 "\n" +
-                "<氣象觀測站>\n" +
+                "<氣象觀測站>：查詢單一測站的詳細數據\n" +
                 " ＊[觀測站名稱]觀測\n" +
                 "    例如：宜蘭觀測、士林觀測\n" +
                 " ＊觀測站清單：用來查詢有哪些觀測站\n" +
                 "\n" +
-                "<空氣品質監測站>\n" +
+                "<空氣品質監測站>：查詢單一測站的詳細數據\n" +
                 " ＊[監測站名稱]空氣\n" +
                 "    例如：基隆空氣、淡水空氣\n" +
                 " ＊監測站清單：用來查詢有哪些監測站\n" +
