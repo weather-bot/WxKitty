@@ -124,7 +124,7 @@ bot.on('message', event => {
                         });
                 }).catch(err => {
                     console.log(err);
-                    replyMsg = '找不到這個地區';
+                    replyMsg = '找不到這個地區，請試著把地區放大，或是輸入更完整的名稱';
                     event.reply(replyMsg);
                 });
         } else if (msg.includes("觀測")) {
