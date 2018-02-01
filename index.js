@@ -10,6 +10,10 @@ const bot = linebot({
     channelAccessToken: process.env.channelAccessToken
 });
 
+const app = express();
+const linebotParser = bot.parser();
+app.post('/', linebotParser);
+
 const getTime = () => {
     function format(val) {
         if (val < 10) {
@@ -58,7 +62,7 @@ bot.on('message', event => {
                 "＊氣象局/CWB\n" +
                 "＊回報問題\n" +
                 "＊Github\n"
-            ).catch(error => {
+            ).then(res => {console.log(res)}).catch(error => {
                 logger.error(error);
             });
         } else if (msg.includes("回報問題")) {
@@ -104,8 +108,7 @@ bot.on('message', event => {
                         replyMsg = `無此測站`;
                     }
                     event.reply(replyMsg).then(data => {
-                        logger.info(msg);
-                        logger.error(error);
+                        console.log(JSON.stringify(data));
                     });
                 })
                 .catch(err => {
@@ -213,10 +216,6 @@ bot.on('follow', event => {
         logger.error('error');
     });
 });
-
-const app = express();
-const linebotParser = bot.parser();
-app.post('/', linebotParser);
 
 const server = app.listen(process.env.PORT || 8080, () => {
     const port = server.address().port;
