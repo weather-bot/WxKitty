@@ -1,8 +1,6 @@
 const fetch = require('node-fetch');
 const linebot = require('linebot');
 const express = require('express');
-const Logger = require('node-color-log');
-const logger = new Logger();
 
 const bot = linebot({
     channelId: process.env.channelId,
@@ -103,7 +101,6 @@ bot.on('message', event => {
                     event.reply(replyMsg);
                 })
                 .catch(err => {
-                    logger.error(error);
                     replyMsg = '取得資料失敗';
                     event.reply(replyMsg);
                 });
@@ -179,5 +176,4 @@ bot.on('follow', event => {
 
 const server = app.listen(process.env.PORT || 8080, () => {
     const port = server.address().port;
-    logger.log("App now running on port", port);
 });
