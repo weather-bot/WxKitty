@@ -61,7 +61,7 @@ bot.on('message', event => {
                 "<其他>\n" +
                 "＊氣象局/CWB\n" +
                 "＊回報問題\n" +
-                "＊Github\n"
+                "＊Github"
             );
         } else if (msg.includes("回報問題")) {
             event.reply(
@@ -172,5 +172,5 @@ bot.on('follow', event => {
 
 const server = app.listen(process.env.PORT || 8080, () => {
     const port = server.address().port;
-    console.log("App now running on port", port);
+    logger.log("App now running on port", port);
 });
