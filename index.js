@@ -147,20 +147,39 @@ bot.on('message', event => {
             fetch('http://140.112.67.183/mospc/returnJson.php?file=CWBOBS.json')
                 .then(res => res.json())
                 .then(data => {
+                    function getText(e) {
+                        return `測站：${e.name}\n時間：${e.time}\n` +
+                            `溫度：${e.temp}℃\n體感溫度：${e.feel}℃\n` +
+                            `濕度：${e.humd}%\n壓力：${e.pres}hPa\n風速：${e.ws}m/s\n` +
+                            `風向：${e.wd}\n雨量：${e.rain}mm`;
+                    }
+                    const results = [];
+                    //  find candidates stations
                     data.forEach(e => {
                         if (e.name.includes(stationName)) {
-                            replyMsg = `測站：${e.name}\n時間：${e.time}\n` +
-                                `溫度：${e.temp}℃\n體感溫度：${e.feel}℃\n` +
-                                `濕度：${e.humd}%\n壓力：${e.pres}hPa\n風速：${e.ws}m/s\n` +
-                                `風向：${e.wd}\n雨量：${e.rain}mm`
+                            results.push(e);
                         }
                     })
+                    // choose candidates for precise name
+                    results.forEach(e => {
+                        if (e.name == stationName) {
+                            replyMsg = getText(e);
+                        }
+                    })
+                    // choose candidates for approximative name
+                    if (replyMsg == '') {
+                        results.forEach(e => {
+                            if (e.name.includes(stationName)) {
+                                replyMsg = getText(e);
+                            }
+                        })
+                    }
                     if (replyMsg == '') {
                         replyMsg = `無此測站`;
                     }
                     event.reply(replyMsg);
-                })
-                .catch(err => {
+                }).catch(err => {
+                    console.log(err);
                     replyMsg = '取得資料失敗';
                     event.reply(replyMsg);
                 });
@@ -203,6 +222,7 @@ bot.on('message', event => {
                     event.reply(replyMsg);
                 })
                 .catch(err => {
+                    console.log(err);
                     replyMsg = '取得資料失敗';
                     event.reply(replyMsg);
                 });
