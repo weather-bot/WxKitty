@@ -1,8 +1,11 @@
 const fetch = require('node-fetch');
 const linebot = require('linebot');
 const express = require('express');
-const jieba = require("nodejieba");
-const trans = require('chinese-conv');
+
+const parseWindDirection = require('./lib/parseWindDirection');
+const segment = require('./lib/segment');
+const parseTime = require('./lib/parseTime');
+const parseAqi = require('./lib/parseAqi');
 
 const bot = linebot({
     channelId: process.env.channelId,
@@ -13,47 +16,6 @@ const bot = linebot({
 const app = express();
 const linebotParser = bot.parser();
 app.post('/', linebotParser);
-
-const getTime = epoch => {
-    function format(val) {
-        if (val < 10) {
-            val = '0' + val;
-        }
-        return val;
-    }
-    let date = new Date();
-    const utc = date.getTime() + (date.getTimezoneOffset() * 60000);
-    // zone time utc+8, and back 30 min to ensure the url is valid
-    date = new Date(utc + (3600000 * 7.5));
-
-    if (epoch) {
-        date = new Date(epoch * 1000);
-    }
-
-    const year = date.getFullYear();
-    const month = format(date.getMonth() + 1);
-    const day = format(date.getDate());
-    const hour = format(date.getHours());
-    const minute = format(Math.floor(date.getMinutes() / 10) * 10);
-    return {
-        year,
-        month,
-        day,
-        hour,
-        minute
-    };
-}
-
-// nodejieba only support Simplified Chinese, so translate Traditonal to Simplified.
-// After segmentation, translate back to Traditonal Chinese.
-const segment = input => {
-    const words = jieba.cut(trans.sify(input));
-    const results = [];
-    words.forEach(w => {
-        results.push(trans.tify(w));
-    })
-    return results;
-}
 
 bot.on('message', event => {
     if (event.message.type = 'text') {
@@ -118,7 +80,7 @@ bot.on('message', event => {
                     fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${process.env.apiKey}`)
                         .then(r2 => r2.json())
                         .then(data => {
-                            const d = getTime(data.ts);
+                            const d = parseTime(data.ts);
                             const time = `${d.year}/${d.month}/${d.day} ${d.hour}:${d.minute}`;
                             const rain = data.rain == undefined ? 0 : (data.rain["3h"] / 3).toFixed(2);
                             const temp = data.main.temp;
@@ -128,10 +90,11 @@ bot.on('message', event => {
                                 0.2 * rh / 100 * 6.105 *
                                 Math.pow(2.71828, (17.27 * temp / (237.7 + temp))) -
                                 0.65 * ws - 2.7);
+                            const wd = ws == 0? '-':parseWindDirection(data.wind.deg);
                             replyMsg = `地區：${area}\n時間：${time}\n` +
                                 `溫度：${temp}℃\n體感溫度：${feel}℃\n` +
                                 `濕度：${rh}%\n壓力：${data.main.pressure}hPa\n風速：${ws}m/s\n` +
-                                `風向：${Math.floor(data.wind.deg)}度方位角\n雨量：${rain}mm`;
+                                `風向：${wd}度方位角\n雨量：${rain}mm`;
                             event.reply(replyMsg);
                         }).catch(err => {
                             console.log(err)
@@ -200,22 +163,8 @@ bot.on('message', event => {
                 .then(data => {
                     data['Data'].forEach(e => {
                         if (e.SiteName.includes(stationName)) {
-                            function getAirCondition() {
-                                if (e.AQI < 50)
-                                    return `良好`;
-                                else if (e.AQI < 100)
-                                    return `普通`;
-                                else if (e.AQI < 150)
-                                    return `對敏感族群不健康`;
-                                else if (e.AQI < 200)
-                                    return `對所有族群不健康`;
-                                else if (e.AQI < 300)
-                                    return `非常不健康`;
-                                else if (e.AQI > 300)
-                                    return `危害`;
-                            }
                             replyMsg = `測站：${e.SiteName}\n時間：${e.Time}\n` +
-                                `空氣指標：${getAirCondition()}\n` +
+                                `空氣指標：${parseAqi(e.AQI)}\n` +
                                 `PM10：${e.PM10}(μg/m3)\nPM2.5：${e.PM25}(μg/m3)\n` +
                                 `CO：${e.CO}(ppm)\nSO2：${e.SO2}(ppb)\nNO2：${e.NO2}(ppb)`;
                         }
@@ -236,11 +185,11 @@ bot.on('message', event => {
         } else if (msg.includes("天氣圖")) {
             event.reply('http://www.cwb.gov.tw/V7/forecast/fcst/Data/I04.jpg');
         } else if (msg.includes("雷達圖")) {
-            const d = getTime();
+            const d = parseTime();
             const time = `${d.year}${d.month}${d.day}${d.hour}${d.minute}`;
             event.reply(`http://www.cwb.gov.tw/V7/observe/radar/Data/HD_Radar/CV1_3600_${time}.png`);
         } else if (msg.includes("衛星雲圖")) {
-            const d = getTime();
+            const d = parseTime();
             const time = `${d.year}-${d.month}-${d.day}-${d.hour}-${d.minute}`;
             event.reply(`http://www.cwb.gov.tw/V7/observe/satellite/Data/s1p/s1p-${time}.jpg`);
         } else if (msg.includes('概況')){
@@ -298,7 +247,7 @@ bot.on('join', event => {
 
 bot.on('follow', event => {
     event.reply(
-        "Hi！我是氣象機器人￼￼￼￼(•ω•)\n" +
+        "Hi！我是氣象機器人(•ω•)\n" +
         "您可以把我加進群組，讓大家一起使用\n" +
         "想知道怎麼呼叫我\n請回覆：help"
     );
