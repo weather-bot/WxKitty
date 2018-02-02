@@ -25,36 +25,7 @@ bot.on('message', event => {
 
         if (msg.toLowerCase().includes("help")) {
             event.reply(
-                "請對我輸入指令（回覆我以下的關鍵字）\n" +
-                "目前支援指令，以及其說明：\n" +
-                "\n" +
-                "<地區天氣>：直接查詢地區的天氣狀況（支援英文查詢國外地區）\n" +
-                " ＊[地址]天氣：取得地區氣象數據\n" +
-                "    例如：高雄市天氣、淡水天氣\n" +
-                "            new york 天氣\n" +
-                " ＊[縣市]概況：臺灣的縣市天氣概況\n" +
-                "    例如：全臺概況、金門縣概況\n" +
-                "\n" +
-                "<氣象圖>：提供氣象圖的連結\n" +
-                " ＊預報圖\n" +
-                " ＊天氣圖\n" +
-                " ＊衛星雲圖\n" +
-                " ＊雷達圖\n" +
-                "\n" +
-                "<氣象觀測站>：查詢單一測站的詳細數據\n" +
-                " ＊[觀測站名稱]觀測\n" +
-                "    例如：宜蘭觀測、士林觀測\n" +
-                " ＊觀測站清單：用來查詢有哪些觀測站\n" +
-                "\n" +
-                "<空氣品質監測站>：查詢單一測站的詳細數據\n" +
-                " ＊[監測站名稱]空氣\n" +
-                "    例如：基隆空氣、淡水空氣\n" +
-                " ＊監測站清單：用來查詢有哪些監測站\n" +
-                "\n" +
-                "<其他>\n" +
-                " ＊氣象局/CWB\n" +
-                " ＊回報問題/issue\n" +
-                " ＊Github/原始碼"
+                require('./message/helpMsg')
             );
         } else if (msg.toLowerCase().includes("issue") || msg.includes("回報問題")) {
             event.reply(
@@ -90,11 +61,11 @@ bot.on('message', event => {
                                 0.2 * rh / 100 * 6.105 *
                                 Math.pow(2.71828, (17.27 * temp / (237.7 + temp))) -
                                 0.65 * ws - 2.7);
-                            const wd = ws == 0? '-':parseWindDirection(data.wind.deg);
+                            const wd = ws == 0 ? '-' : parseWindDirection(data.wind.deg);
                             replyMsg = `地區：${area}\n時間：${time}\n` +
                                 `溫度：${temp}℃\n體感溫度：${feel}℃\n` +
                                 `濕度：${rh}%\n壓力：${data.main.pressure}hPa\n風速：${ws}m/s\n` +
-                                `風向：${wd}度方位角\n雨量：${rain}mm`;
+                                `風向：${wd}\n雨量：${rain}mm`;
                             event.reply(replyMsg);
                         }).catch(err => {
                             console.log(err)
@@ -192,49 +163,49 @@ bot.on('message', event => {
             const d = parseTime();
             const time = `${d.year}-${d.month}-${d.day}-${d.hour}-${d.minute}`;
             event.reply(`http://www.cwb.gov.tw/V7/observe/satellite/Data/s1p/s1p-${time}.jpg`);
-        } else if (msg.includes('概況')){
+        } else if (msg.includes('概況')) {
             const table = {
-                "W50":"全臺",
-                "W50_63":"臺北市",
-                "W50_65":"新北市",
-                "W50_68":"桃園市",
-                "W50_66":"臺中市",
-                "W50_67":"臺南市",
-                "W50_64":"高雄市",
-                "W50_10017":"基隆市",
-                 "W50_10004":"新竹縣",
-                "W50_10018":"新竹市",
-                "W50_10005":"苗栗縣",
-                "W50_10007":"彰化縣",
-                "W50_10008":"南投縣",
-                "W50_10009":"雲林縣",
-                "W50_10010":"嘉義縣",
-                "W50_10020":"嘉義市",
-                "W50_10013":"屏東縣",
-                "W50_10002":"宜蘭縣",
-                "W50_10015":"花蓮縣",
-                "W50_10014":"臺東縣",
-                "W50_10016":"澎湖縣",
-                "W50_09020":"金門縣",
-                "W50_09007":"連江縣",
+                "W50": "全臺",
+                "W50_63": "臺北市",
+                "W50_65": "新北市",
+                "W50_68": "桃園市",
+                "W50_66": "臺中市",
+                "W50_67": "臺南市",
+                "W50_64": "高雄市",
+                "W50_10017": "基隆市",
+                "W50_10004": "新竹縣",
+                "W50_10018": "新竹市",
+                "W50_10005": "苗栗縣",
+                "W50_10007": "彰化縣",
+                "W50_10008": "南投縣",
+                "W50_10009": "雲林縣",
+                "W50_10010": "嘉義縣",
+                "W50_10020": "嘉義市",
+                "W50_10013": "屏東縣",
+                "W50_10002": "宜蘭縣",
+                "W50_10015": "花蓮縣",
+                "W50_10014": "臺東縣",
+                "W50_10016": "澎湖縣",
+                "W50_09020": "金門縣",
+                "W50_09007": "連江縣",
             }
             const areaName = msg.split('概況')[0];
             let replyMsg = '';
-            for(areaID in table) {
-                if(table[areaID].includes(areaName)){
+            for (areaID in table) {
+                if (table[areaID].includes(areaName)) {
                     fetch(`http://www.cwb.gov.tw/V7/forecast/taiwan/Data/${areaID}.txt`)
-                    .then(res =>  res.text())
-                    .then(data => {
-                        replyMsg = data.replace(/<BR>/g, '\n');
-                        replyMsg = replyMsg.split('<div')[0];
-                        event.reply(replyMsg);
-                    })
-                    .catch(err => {
-                        console.log("input text: ", msg);
-                        console.log(err);
-                        replyMsg = '取得資料失敗';
-                        event.reply(replyMsg);
-                    });
+                        .then(res => res.text())
+                        .then(data => {
+                            replyMsg = data.replace(/<BR>/g, '\n');
+                            replyMsg = replyMsg.split('<div')[0];
+                            event.reply(replyMsg);
+                        })
+                        .catch(err => {
+                            console.log("input text: ", msg);
+                            console.log(err);
+                            replyMsg = '取得資料失敗';
+                            event.reply(replyMsg);
+                        });
                 }
             }
         }
