@@ -22,6 +22,8 @@ Add the bot via QR code or click the button
 
 <img width="400" border="0" alt="demo3" src="https://raw.githubusercontent.com/ntu-as-cooklab/line-bot/master/img/demo3.png">
 
+<img width="400" border="0" alt="demo4" src="https://raw.githubusercontent.com/ntu-as-cooklab/line-bot/master/img/demo4.png">
+
 ## Document
 
 ```text
