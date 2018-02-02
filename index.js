@@ -58,8 +58,8 @@ const segment = input => {
 bot.on('message', event => {
     if (event.message.type = 'text') {
         // message from user
-        const msg = event.message.text.replace(/\s/g, '');
-        console.log("new text: ", msg);
+        let msg = event.message.text.replace(/\s/g, '');
+        msg = msg.replace(/台/g, '臺');
 
         if (msg.toLowerCase().includes("help")) {
             event.reply(
@@ -67,9 +67,11 @@ bot.on('message', event => {
                 "目前支援指令，以及其說明：\n" +
                 "\n" +
                 "<地區天氣>：直接查詢地區的天氣狀況（支援英文查詢國外地區）\n" +
-                " ＊[地址]天氣\n" +
+                " ＊[地址]天氣：取得地區氣象數據\n" +
                 "    例如：高雄市天氣、淡水天氣\n" +
                 "            new york 天氣\n" +
+                " ＊[縣市]概況：臺灣的縣市天氣概況\n" +
+                "    例如：全臺概況、金門縣概況\n" +
                 "\n" +
                 "<氣象圖>：提供氣象圖的連結\n" +
                 " ＊預報圖\n" +
@@ -137,6 +139,7 @@ bot.on('message', event => {
                             event.reply(replyMsg);
                         });
                 }).catch(err => {
+                    console.log("input text: ", msg);
                     console.log(err);
                     replyMsg = '找不到這個地區，請再試一次，或試著把地區放大、輸入更完整的名稱。例如有時候「花蓮」會找不到，但「花蓮縣」就可以。';
                     event.reply(replyMsg);
@@ -179,6 +182,7 @@ bot.on('message', event => {
                     }
                     event.reply(replyMsg);
                 }).catch(err => {
+                    console.log("input text: ", msg);
                     console.log(err);
                     replyMsg = '取得資料失敗';
                     event.reply(replyMsg);
@@ -222,6 +226,7 @@ bot.on('message', event => {
                     event.reply(replyMsg);
                 })
                 .catch(err => {
+                    console.log("input text: ", msg);
                     console.log(err);
                     replyMsg = '取得資料失敗';
                     event.reply(replyMsg);
@@ -238,6 +243,51 @@ bot.on('message', event => {
             const d = getTime();
             const time = `${d.year}-${d.month}-${d.day}-${d.hour}-${d.minute}`;
             event.reply(`http://www.cwb.gov.tw/V7/observe/satellite/Data/s1p/s1p-${time}.jpg`);
+        } else if (msg.includes('概況')){
+            const table = {
+                "W50":"全臺",
+                "W50_63":"臺北市",
+                "W50_65":"新北市",
+                "W50_68":"桃園市",
+                "W50_66":"臺中市",
+                "W50_67":"臺南市",
+                "W50_64":"高雄市",
+                "W50_10017":"基隆市",
+                 "W50_10004":"新竹縣",
+                "W50_10018":"新竹市",
+                "W50_10005":"苗栗縣",
+                "W50_10007":"彰化縣",
+                "W50_10008":"南投縣",
+                "W50_10009":"雲林縣",
+                "W50_10010":"嘉義縣",
+                "W50_10020":"嘉義市",
+                "W50_10013":"屏東縣",
+                "W50_10002":"宜蘭縣",
+                "W50_10015":"花蓮縣",
+                "W50_10014":"臺東縣",
+                "W50_10016":"澎湖縣",
+                "W50_09020":"金門縣",
+                "W50_09007":"連江縣",
+            }
+            const areaName = msg.split('概況')[0];
+            let replyMsg = '';
+            for(areaID in table) {
+                if(table[areaID].includes(areaName)){
+                    fetch(`http://www.cwb.gov.tw/V7/forecast/taiwan/Data/${areaID}.txt`)
+                    .then(res =>  res.text())
+                    .then(data => {
+                        replyMsg = data.replace(/<BR>/g, '\n');
+                        replyMsg = replyMsg.split('<div')[0];
+                        event.reply(replyMsg);
+                    })
+                    .catch(err => {
+                        console.log("input text: ", msg);
+                        console.log(err);
+                        replyMsg = '取得資料失敗';
+                        event.reply(replyMsg);
+                    });
+                }
+            }
         }
     }
 });
