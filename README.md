@@ -16,7 +16,11 @@ Add the bot via QR code or click the button
 
 <img width="400" border="0" alt="demo_enter" src="https://raw.githubusercontent.com/ntu-as-cooklab/line-bot/master/img/demo_enter.png">
 
-<img width="400" border="0" alt="demo_station" src="https://raw.githubusercontent.com/ntu-as-cooklab/line-bot/master/img/demo_station.png">
+<img width="400" border="0" alt="demo1" src="https://raw.githubusercontent.com/ntu-as-cooklab/line-bot/master/img/demo1.png">
+
+<img width="400" border="0" alt="demo2" src="https://raw.githubusercontent.com/ntu-as-cooklab/line-bot/master/img/demo2.png">
+
+<img width="400" border="0" alt="demo3" src="https://raw.githubusercontent.com/ntu-as-cooklab/line-bot/master/img/demo3.png">
 
 ## Document
 
