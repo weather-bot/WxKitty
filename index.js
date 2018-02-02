@@ -1,6 +1,8 @@
 const fetch = require('node-fetch');
 const linebot = require('linebot');
 const express = require('express');
+const jieba = require("nodejieba");
+const trans = require('chinese-conv');
 
 const bot = linebot({
     channelId: process.env.channelId,
@@ -40,6 +42,17 @@ const getTime = epoch => {
         hour,
         minute
     };
+}
+
+// nodejieba only support Simplified Chinese, so translate Traditonal to Simplified.
+// After segmentation, translate back to Traditonal Chinese.
+const segment = input => {
+    const words = jieba.cut(trans.sify(input));
+    const results = [];
+    words.forEach(w => {
+        results.push(trans.tify(w));
+    })
+    return results;
 }
 
 bot.on('message', event => {
