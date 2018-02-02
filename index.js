@@ -105,7 +105,7 @@ bot.on('message', event => {
                             console.log(data)
                             const d = getTime(data.ts);
                             const time = `${d.year}/${d.month}/${d.day} ${d.hour}:${d.minute}`;
-                            const rain = data.rain == undefined ? 0 : data.rain;
+                            const rain = data.rain == undefined ? 0 : data.rain["3h"] / 3;
                             const temp = data.main.temp;
                             const rh = data.main.humidity;
                             const ws = data.wind.speed;
