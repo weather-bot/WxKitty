@@ -22,8 +22,10 @@
   },
   "homepage": "https://github.com/ntu-as-cooklab/line-bot#readme",
   "dependencies": {
+    "chinese-conv": "^1.0.1",
     "express": "^4.16.2",
     "linebot": "^1.4.0",
-    "node-fetch": "^1.7.3"
+    "node-fetch": "^1.7.3",
+    "nodejieba": "^2.2.5"
   }
 }
