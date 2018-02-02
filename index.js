@@ -116,10 +116,9 @@ bot.on('message', event => {
                     fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${process.env.apiKey}`)
                         .then(r2 => r2.json())
                         .then(data => {
-                            console.log(data)
                             const d = getTime(data.ts);
                             const time = `${d.year}/${d.month}/${d.day} ${d.hour}:${d.minute}`;
-                            const rain = data.rain == undefined ? 0 : data.rain["3h"] / 3;
+                            const rain = data.rain == undefined ? 0 : (data.rain["3h"] / 3).toFixed(2);
                             const temp = data.main.temp;
                             const rh = data.main.humidity;
                             const ws = data.wind.speed;
@@ -139,7 +138,7 @@ bot.on('message', event => {
                         });
                 }).catch(err => {
                     console.log(err);
-                    replyMsg = '找不到這個地區，請試著把地區放大，或是輸入更完整的名稱';
+                    replyMsg = '找不到這個地區，請再試一次，或試著把地區放大、輸入更完整的名稱。例如有時候「花蓮」會找不到，但「花蓮縣」就可以。';
                     event.reply(replyMsg);
                 });
         } else if (msg.includes("觀測")) {
