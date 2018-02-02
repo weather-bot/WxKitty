@@ -59,6 +59,7 @@ bot.on('message', event => {
     if (event.message.type = 'text') {
         // message from user
         const msg = event.message.text.replace(/\s/g, '');
+        console.log("new text: ", msg);
 
         if (msg.toLowerCase().includes("help")) {
             event.reply(
