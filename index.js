@@ -209,10 +209,6 @@ bot.on('message', event => {
                         });
                 }
             }
-        } else if(msg.includes('test')) {
-            event.reply('test1');
-            event.reply('test222');
-            setTimeout(()=>{event.reply('test222')}, 1000);
         }
     }
 });
