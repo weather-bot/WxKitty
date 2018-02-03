@@ -210,21 +210,9 @@ bot.on('message', event => {
                 }
             }
         } else if(msg.includes('test')) {
-            event.reply({
-                type: 'imagemap',
-                baseUrl: 'http://www.cwb.gov.tw/V7/forecast/taiwan/Data/Forecast01.png',
-                altText: 'this is an imagemap',
-                baseSize: { height: 1040, width: 1040 },
-                actions: [{
-                  type: 'uri',
-                  linkUri: 'http://www.cwb.gov.tw/V7/forecast/taiwan/Data/Forecast01.png',
-                  area: { x: 0, y: 0, width: 520, height: 1040 }
-                }, {
-                  type: 'message',
-                  text: 'hello',
-                  area: { x: 520, y: 0, width: 520, height: 1040 }
-                }]
-              });
+            event.reply('test1');
+            event.reply('test222');
+            setTimeout(()=>{event.reply('test222')}, 1000);
         }
     }
 });
