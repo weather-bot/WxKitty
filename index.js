@@ -125,6 +125,12 @@ bot.on('message', event => {
             event.reply(
                 require('./message/airStMsg')
             );
+        } else if (msg.includes("test")) {
+            event.reply({
+                type: 'image',
+                originalContentUrl: 'https://www.petmd.com/sites/default/files/petmd-cat-happy-10.jpg',
+                previewImageUrl: 'https://www.petmd.com/sites/default/files/petmd-cat-happy-10.jpg'
+              });
         } else if (msg.includes("空氣")) {
             let replyMsg = '';
             const epoch = new Date().getMilliseconds();
