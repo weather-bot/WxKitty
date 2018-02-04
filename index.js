@@ -7,18 +7,19 @@ const parseWindDirection = require('./lib/parseWindDirection');
 const segment = require('./lib/segment');
 const parseTime = require('./lib/parseTime');
 const parseAqi = require('./lib/parseAqi');
+const uploadImgur = require('./lib/uploadImgur');
 
 const bot = linebot({
-    channelId:  config.channelId,
-    channelSecret:  config.channelSecret,
-    channelAccessToken:  config.channelAccessToken
+    channelId: config.channelId,
+    channelSecret: config.channelSecret,
+    channelAccessToken: config.channelAccessToken
 });
 
 const app = express();
 const linebotParser = bot.parser();
 app.post('/', linebotParser);
 
-bot.on('message', event => {
+bot.on('message', async event => {
     if (event.message.type = 'text') {
 
         // trim space and change charactor
@@ -131,7 +132,7 @@ bot.on('message', event => {
                 type: 'image',
                 originalContentUrl: 'https://www.petmd.com/sites/default/files/petmd-cat-happy-10.jpg',
                 previewImageUrl: 'https://www.petmd.com/sites/default/files/petmd-cat-happy-10.jpg'
-              });
+            });
         } else if (msg.includes("空氣")) {
             let replyMsg = '';
             const epoch = new Date().getMilliseconds();
@@ -160,7 +161,17 @@ bot.on('message', event => {
                     event.reply(replyMsg);
                 });
         } else if (msg.includes("預報圖")) {
-            event.reply('http://www.cwb.gov.tw//V7/forecast/taiwan/Data/Forecast01.png');
+            const img = 'http://www.cwb.gov.tw//V7/forecast/taiwan/Data/Forecast01.png';
+            const url = await uploadImgur(img);
+            if (url == null) {
+                event.reply({
+                    type: 'image',
+                    originalContentUrl: url,
+                    previewImageUrl: url
+                });
+            } else {
+                event.reply(img);
+            }
         } else if (msg.includes("天氣圖")) {
             event.reply('http://www.cwb.gov.tw/V7/forecast/fcst/Data/I04.jpg');
         } else if (msg.includes("雷達圖")) {
@@ -232,6 +243,6 @@ bot.on('follow', event => {
     );
 });
 
-const server = app.listen( process.env.PORT || 8080, () => {
+const server = app.listen(process.env.PORT || 8080, () => {
     const port = server.address().port;
 });
