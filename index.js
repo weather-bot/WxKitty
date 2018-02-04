@@ -2,15 +2,16 @@ const fetch = require('node-fetch');
 const linebot = require('linebot');
 const express = require('express');
 
+const config = require('./config');
 const parseWindDirection = require('./lib/parseWindDirection');
 const segment = require('./lib/segment');
 const parseTime = require('./lib/parseTime');
 const parseAqi = require('./lib/parseAqi');
 
 const bot = linebot({
-    channelId: process.env.channelId,
-    channelSecret: process.env.channelSecret,
-    channelAccessToken: process.env.channelAccessToken
+    channelId:  config.channelId,
+    channelSecret:  config.channelSecret,
+    channelAccessToken:  config.channelAccessToken
 });
 
 const app = express();
@@ -48,7 +49,7 @@ bot.on('message', event => {
                 .then(res => {
                     const lon = res.results[0].geometry.location.lng;
                     const lat = res.results[0].geometry.location.lat;
-                    fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${process.env.apiKey}`)
+                    fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${ config.apiKey}`)
                         .then(r2 => r2.json())
                         .then(data => {
                             const d = parseTime(data.ts);
@@ -231,6 +232,6 @@ bot.on('follow', event => {
     );
 });
 
-const server = app.listen(process.env.PORT || 8080, () => {
+const server = app.listen( process.env.PORT || 8080, () => {
     const port = server.address().port;
 });
