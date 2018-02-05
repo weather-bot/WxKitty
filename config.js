@@ -7,4 +7,8 @@ module.exports = {
     owmApiKey:process.env.owmApiKey,
     // imgur
     imgurClientId: process.env.imgurClientId,
+    // firebase
+    firebaseApiKey: process.env.firebaseApiKey,
+    firebaseAuthDomain: "weather-bot-tw.firebaseapp.com",
+    firebaseDatabaseURL: "https://weather-bot-tw.firebaseio.com"
 }
