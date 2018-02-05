@@ -60,7 +60,7 @@ bot.onEvent(async context => {
                 const lat = geoData.results[0].geometry.location.lat;
                 const realAreaName = geoData.results[0].formatted_address;
                 try {
-                    const openWeatherMaprUrl = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${ config.apiKey}`;
+                    const openWeatherMaprUrl = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${config.owmApiKey}`;
                     const res = await axios.get(openWeatherMaprUrl);
                     const data = res.data;
                     const d = parseTime(data.ts);

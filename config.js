@@ -3,8 +3,8 @@ module.exports = {
     channelId: process.env.channelId,
     channelSecret: process.env.channelSecret,
     channelAccessToken: process.env.channelAccessToken,
-    // weather map
-    apiKey:process.env.apiKey,
+    // open weather map
+    owmApiKey:process.env.owmApiKey,
     // imgur
-    clientId: process.env.clientId,
+    imgurClientId: process.env.imgurClientId,
 }
