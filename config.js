@@ -8,5 +8,6 @@ module.exports = {
     // imgur
     imgurClientId: process.env.imgurClientId,
     // firebase database
-    firebase: "weather-bot-tw"
+    firebase: "weather-bot-tw",
+    firebaseSecret: process.env.firebaseSecret
 }
