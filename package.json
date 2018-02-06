@@ -4,7 +4,7 @@
   "description": "line bot",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha ./test/lib",
     "start": "node ."
   },
   "repository": {
@@ -25,10 +25,11 @@
     "axios": "^0.17.1",
     "bottender": "^0.14.20",
     "chinese-conv": "^1.0.1",
-    "express": "^4.16.2",
-    "firebase": "^4.9.1",
-    "linebot": "^1.4.0",
-    "node-fetch": "^1.7.3",
     "nodejieba": "^2.2.5"
+  },
+  "devDependencies": {
+    "assert": "^1.4.1",
+    "mocha": "^5.0.0",
+    "node-color-log": "^2.0.0"
   }
 }
