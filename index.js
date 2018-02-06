@@ -119,7 +119,7 @@ bot.onEvent(async context => {
                     })
                 }
                 if (replyMsg == '') {
-                    replyMsg = `無此測站`;
+                    replyMsg = `無此測站，請輸入「觀測站清單」尋找欲查詢測站`;
                 }
             } catch (err) {
                 console.log("input text: ", msg);
@@ -145,7 +145,7 @@ bot.onEvent(async context => {
                     }
                 })
                 if (replyMsg == '') {
-                    replyMsg = `無此測站`;
+                    replyMsg = `無此測站，請輸入「監測站清單」尋找欲查詢測站`;
                 }
             } catch (err) {
                 console.log("input text: ", msg);
