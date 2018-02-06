@@ -158,8 +158,23 @@ bot.onEvent(async context => {
             }
             await context.replyText(replyMsg);
         } else if (msg.includes("預報圖")) {
-            const img = 'http://www.cwb.gov.tw//V7/forecast/taiwan/Data/Forecast01.png';
-            const url = await uploadImgur(img);
+            const d = parseTime();
+            const dbKey = `${d.year}${d.month}${d.day}${d.hour}`;
+            const dbData = await dbRead(`forecast/${dbKey}`);
+            let url = '';
+            if (dbData == null || dbData.url == null) {
+                const img = 'http://www.cwb.gov.tw/V7/forecast/taiwan/Data/Forecast01.png';
+                url = await uploadImgur(img);
+                result = await dbWrite(`forecast/${dbKey}`, {
+                    url
+                });
+                if (result == null) {
+                    url = null;
+                }
+            } else {
+                url = dbData.url;
+            }
+
             if (url != null) {
                 await context.replyImage(url);
             } else {

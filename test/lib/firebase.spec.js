@@ -17,7 +17,7 @@ describe('=== Check firebase ===', () => {
             const input = {
                 url: url
             };
-            const res = await dbWrite(input, 'tests');
+            const res = await dbWrite('tests', input);
             assert.equal(res.url, url);
 
             logger.info("test dbRead");
