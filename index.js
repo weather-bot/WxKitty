@@ -156,12 +156,13 @@ bot.onEvent(async context => {
         } else if (msg.includes("預報")) {
             const d = parseTime();
             const dbKey = `${d.year}${d.month}${d.day}${d.hour}`;
-            const url = await imagedb('forecast', dbKey, 'http://www.cwb.gov.tw/V7/forecast/taiwan/Data/Forecast01.png')
+            const imgUrl = 'http://www.cwb.gov.tw/V7/forecast/taiwan/Data/Forecast01.png';
+            const url = await imagedb('forecast', dbKey, imgUrl)
             if (url != null) {
                 await context.replyImage(url);
             } else {
                 // if get imgur image url fail, just reply in text
-                await context.replyText(img);
+                await context.replyText(imgUrl);
             }
         } else if (msg.includes("天氣圖")) {
             const d = parseTime();
@@ -172,7 +173,7 @@ bot.onEvent(async context => {
                 await context.replyImage(url);
             } else {
                 // if get imgur image url fail, just reply in text                
-                await context.replyText(img);
+                await context.replyText(imgUrl);
             }
         } else if (msg.includes("雷達")) {
             const d = parseTime();
@@ -183,7 +184,7 @@ bot.onEvent(async context => {
                 await context.replyImage(url);
             } else {
                 // if get imgur image url fail, just reply in text                
-                await context.replyText(img);
+                await context.replyText(imgUrl);
             }
         } else if (msg.includes("衛星雲")) {
             const d = parseTime();
@@ -195,7 +196,7 @@ bot.onEvent(async context => {
                 await context.replyImage(url);
             } else {
                 // if get imgur image url fail, just reply in text
-                await context.replyText(img);
+                await context.replyText(imgUrl);
             }
         } else if (msg.includes('概況')) {
             const table = require('./data/overviewID');
