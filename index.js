@@ -11,6 +11,10 @@ const parseWindDirection = require('./lib/parseWindDirection');
 const segment = require('./lib/segment');
 const parseTime = require('./lib/parseTime');
 const uploadImgur = require('./lib/uploadImgur');
+const {
+    dbRead,
+    dbWrite
+} = require('./lib/firebase');
 
 
 const bot = new LineBot({

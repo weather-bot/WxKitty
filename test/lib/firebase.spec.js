@@ -4,8 +4,8 @@ const logger = require('node-color-log');
 const assert = require('assert');
 
 const {
-    read,
-    write
+    dbRead,
+    dbWrite
 } = require('../../lib/firebase');
 
 describe('=== Check firebase ===', () => {
@@ -13,15 +13,15 @@ describe('=== Check firebase ===', () => {
         (async () => {
             const url = `http://example.com/${Math.floor(Math.random()*100)}`;
 
-            logger.info("test write");
+            logger.info("test dbWrite");
             const input = {
                 url: url
             };
-            const res = await write(input, 'tests');
+            const res = await dbWrite(input, 'tests');
             assert.equal(res.url, url);
 
-            logger.info("test read");
-            const data = await read('tests');
+            logger.info("test dbRead");
+            const data = await dbRead('tests');
             assert.equal(data.url, url);
 
             done();
