@@ -10,11 +10,7 @@ const config = require('./config');
 const parseWindDirection = require('./lib/parseWindDirection');
 const segment = require('./lib/segment');
 const parseTime = require('./lib/parseTime');
-const uploadImgur = require('./lib/uploadImgur');
-const {
-    dbRead,
-    dbWrite
-} = require('./lib/firebase');
+const imagedb = require('./lib/imagedb');
 
 
 const bot = new LineBot({
@@ -160,21 +156,7 @@ bot.onEvent(async context => {
         } else if (msg.includes("預報圖")) {
             const d = parseTime();
             const dbKey = `${d.year}${d.month}${d.day}${d.hour}`;
-            const dbData = await dbRead(`forecast/${dbKey}`);
-            let url = '';
-            if (dbData == null || dbData.url == null) {
-                const img = 'http://www.cwb.gov.tw/V7/forecast/taiwan/Data/Forecast01.png';
-                url = await uploadImgur(img);
-                result = await dbWrite(`forecast/${dbKey}`, {
-                    url
-                });
-                if (result == null) {
-                    url = null;
-                }
-            } else {
-                url = dbData.url;
-            }
-
+            const url = await imagedb('forecast', dbKey, 'http://www.cwb.gov.tw/V7/forecast/taiwan/Data/Forecast01.png')
             if (url != null) {
                 await context.replyImage(url);
             } else {
@@ -182,8 +164,10 @@ bot.onEvent(async context => {
                 await context.replyText(img);
             }
         } else if (msg.includes("天氣圖")) {
-            const img = 'http://www.cwb.gov.tw/V7/forecast/fcst/Data/I04.jpg';
-            const url = await uploadImgur(img);
+            const d = parseTime();
+            const dbKey = `${d.year}${d.month}${d.day}${d.hour}`;
+            const imgUrl = 'http://www.cwb.gov.tw/V7/forecast/fcst/Data/I04.jpg';
+            const url = await imagedb('weather', dbKey, imgUrl);
             if (url != null) {
                 await context.replyImage(url);
             } else {
@@ -193,8 +177,8 @@ bot.onEvent(async context => {
         } else if (msg.includes("雷達圖")) {
             const d = parseTime();
             const time = `${d.year}${d.month}${d.day}${d.hour}${d.minute}`;
-            const img = `http://www.cwb.gov.tw/V7/observe/radar/Data/HD_Radar/CV1_3600_${time}.png`;
-            const url = await uploadImgur(img);
+            const imgUrl = `http://www.cwb.gov.tw/V7/observe/radar/Data/HD_Radar/CV1_3600_${time}.png`;
+            const url = await imagedb('radar', time, imgUrl);
             if (url != null) {
                 await context.replyImage(url);
             } else {
@@ -204,8 +188,9 @@ bot.onEvent(async context => {
         } else if (msg.includes("衛星雲圖")) {
             const d = parseTime();
             const time = `${d.year}-${d.month}-${d.day}-${d.hour}-${d.minute}`;
-            const img = `http://www.cwb.gov.tw/V7/observe/satellite/Data/s1p/s1p-${time}.jpg`;
-            const url = await uploadImgur(img);
+            const dbKey = `${d.year}${d.month}${d.day}${d.hour}${d.minute}`;
+            const imgUrl = `http://www.cwb.gov.tw/V7/observe/satellite/Data/s1p/s1p-${time}.jpg`;
+            const url = await imagedb('satellite', dbKey, imgUrl);
             if (url != null) {
                 await context.replyImage(url);
             } else {
