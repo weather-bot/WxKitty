@@ -153,7 +153,7 @@ bot.onEvent(async context => {
                 replyMsg = '取得資料失敗';
             }
             await context.replyText(replyMsg);
-        } else if (msg.includes("預報圖")) {
+        } else if (msg.includes("預報")) {
             const d = parseTime();
             const dbKey = `${d.year}${d.month}${d.day}${d.hour}`;
             const url = await imagedb('forecast', dbKey, 'http://www.cwb.gov.tw/V7/forecast/taiwan/Data/Forecast01.png')
@@ -174,7 +174,7 @@ bot.onEvent(async context => {
                 // if get imgur image url fail, just reply in text                
                 await context.replyText(img);
             }
-        } else if (msg.includes("雷達圖")) {
+        } else if (msg.includes("雷達")) {
             const d = parseTime();
             const time = `${d.year}${d.month}${d.day}${d.hour}${d.minute}`;
             const imgUrl = `http://www.cwb.gov.tw/V7/observe/radar/Data/HD_Radar/CV1_3600_${time}.png`;
@@ -185,7 +185,7 @@ bot.onEvent(async context => {
                 // if get imgur image url fail, just reply in text                
                 await context.replyText(img);
             }
-        } else if (msg.includes("衛星雲圖")) {
+        } else if (msg.includes("衛星雲")) {
             const d = parseTime();
             const time = `${d.year}-${d.month}-${d.day}-${d.hour}-${d.minute}`;
             const dbKey = `${d.year}${d.month}${d.day}${d.hour}${d.minute}`;
