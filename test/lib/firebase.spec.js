@@ -24,6 +24,10 @@ describe('=== Check firebase ===', () => {
             const data = await dbRead('tests');
             assert.equal(data.url, url);
 
+            logger.info("test dbRead null");
+            const dataNull = await dbRead('testNull');
+            assert.equal(dataNull, null);
+
             done();
         })();
     }).timeout(5000);
