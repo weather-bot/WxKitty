@@ -198,6 +198,14 @@ bot.onEvent(async context => {
                 // if get imgur image url fail, just reply in text
                 await context.replyText(imgUrl);
             }
+        } else if (msg.includes("地震")) {
+            const url = await require('./lib/getEarthquake')();
+            if (url != null) {
+                await context.replyImage(url);
+            } else {
+                // if get imgur image url fail, just reply in text
+                await context.replyText("取得最新資料失敗。請上 http://www.cwb.gov.tw/V7/earthquake/ 查詢");
+            }
         } else if (msg.includes('概況')) {
             const table = require('./data/overviewID');
             const areaName = msg.split('概況')[0];
