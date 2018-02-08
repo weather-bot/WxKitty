@@ -225,6 +225,8 @@ bot.onEvent(async context => {
                     await context.replyText(replyMsg);
                 }
             }
+        } else if (msg.includes('君倢')) {
+            await context.replyText("揍你喔！");
         }
     }
 });
