@@ -6,12 +6,10 @@ const {
 } = require('bottender/express');
 const axios = require("axios");
 
-const config = require('./config');
-const parseWindDirection = require('./lib/parseWindDirection');
 const segment = require('./lib/segment');
 const parseTime = require('./lib/parseTime');
 const imagedb = require('./lib/imagedb');
-
+const getAreaWeather = require('./lib/getAreaWeather');
 
 const bot = new LineBot({
     channelSecret: process.env.channelSecret,
@@ -49,47 +47,13 @@ bot.onEvent(async context => {
                 require('./message/obsStMsg')
             );
         } else if (msg.includes("天氣") && !msg.includes("天氣圖")) {
-            let replyMsg = '';
-
+            const area = msg.split('天氣')[0];
             try {
-                const area = msg.split('天氣')[0];
-                const googleGeoUrl = encodeURI(`https://maps.googleapis.com/maps/api/geocode/json?address=${area}`);
-                const geoRes = await axios.get(googleGeoUrl);
-                const geoData = geoRes.data;
-                const lon = geoData.results[0].geometry.location.lng;
-                const lat = geoData.results[0].geometry.location.lat;
-                const realAreaName = geoData.results[0].formatted_address;
-                try {
-                    const openWeatherMaprUrl = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${config.owmApiKey}`;
-                    const res = await axios.get(openWeatherMaprUrl);
-                    const data = res.data;
-                    const d = parseTime(data.ts);
-                    const newData = {};
-                    newData['area'] = realAreaName;
-                    newData['time'] = `${d.year}/${d.month}/${d.day} ${d.hour}:${d.minute}`;
-                    newData['rain'] = data.rain == undefined ? 0 : (data.rain["3h"] / 3).toFixed(2);
-                    newData['temp'] = data.main.temp;
-                    newData['rh'] = data.main.humidity;
-                    newData['ws'] = data.wind.speed;
-                    newData['feel'] = Math.round(1.07 * newData['temp'] +
-                        0.2 * newData['rh'] / 100 * 6.105 *
-                        Math.pow(2.71828, (17.27 * newData['temp'] / (237.7 + newData['temp']))) -
-                        0.65 * newData['ws'] - 2.7);
-                    newData['wd'] = newData['ws'] == 0 ? '-' : parseWindDirection(data.wind.deg);
-                    newData['pres'] = data.main.pressure;
-                    replyMsg = require('./message/parseAreaWeatherMsg')(newData);
-                } catch (e) {
-                    console.log("input text: ", msg);
-                    console.log(e)
-                    replyMsg = `查不到此地區天氣資料`;
-                }
-            } catch (err) {
+                const replyMsg = await getAreaWeather(area);
+                await context.replyText(replyMsg);
+            } catch (error) {
                 console.log("input text: ", msg);
-                console.log(err);
-                replyMsg = '找不到這個地區，請再試一次，或試著把地區放大、輸入更完整的名稱。例如有時候「花蓮」會找不到，但「花蓮縣」就可以。';
             }
-            await context.replyText(replyMsg);
-
         } else if (msg.includes("觀測")) {
             let replyMsg = '';
             const parseObsStMsg = require('./message/parseObsStMsg');
@@ -227,6 +191,21 @@ bot.onEvent(async context => {
             }
         } else if (msg.includes('君倢')) {
             await context.replyText("揍你喔！");
+        } else {
+            const keywords = ["氣溫", "溫度", "壓力", "氣壓", "濕度", "溼度", "風速", "風向", "雨量"];
+            let isReply = false;
+            let replyMsg = '';
+            let area = '';
+            keywords.forEach(e => {
+                if (msg.includes(e)) {
+                    area = msg.split(e)[0];
+                    isReply = true;
+                }
+            });
+            if (isReply) {
+                replyMsg = await getAreaWeather(area);
+                await context.replyText(replyMsg);
+            }
         }
     }
 });
