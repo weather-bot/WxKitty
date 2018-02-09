@@ -19,8 +19,8 @@ describe('=== Check getAreaWeather ===', () => {
     }).timeout(5000);
 
     it('Test isAreaWeather', done => {
-        assert.equal(isAreaWeather("天氣"), true);
-        assert.equal(isAreaWeather("氣溫"), true);
+        assert.equal(isAreaWeather("台北天氣"), "天氣");
+        assert.equal(isAreaWeather("台北氣溫"), "氣溫");
         done();
     });
 });

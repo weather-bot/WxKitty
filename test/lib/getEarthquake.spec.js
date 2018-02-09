@@ -14,5 +14,5 @@ describe('=== Check getEarthquake ===', () => {
             assert.notEqual(url, null);
             done();
         })();
-    }).timeout(5000);
+    }).timeout(10000);
 });
