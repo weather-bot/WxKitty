@@ -11,8 +11,12 @@ const parseTime = require('./lib/parseTime');
 const imagedb = require('./lib/imagedb');
 const {
     getAreaWeather,
-    isAreaWeather
 } = require('./lib/areaWeather');
+const {
+    isAir,
+    isWeather,
+    isObservation
+} = require('./lib/keywords');
 
 const bot = new LineBot({
     channelSecret: process.env.channelSecret,
@@ -32,7 +36,7 @@ bot.onEvent(async context => {
         // trim space and change charactor
         let msg = context.event.text.replace(/\s/g, '');
         msg = msg.replace(/台/g, '臺');
-        const weatherKeyword = isAreaWeather(msg);
+        const weatherKeyword = isWeather(msg);
 
         if (msg.toLowerCase().includes("help")) {
             await context.replyText(

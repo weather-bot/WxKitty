@@ -5,7 +5,6 @@ const assert = require('assert');
 
 const {
     getAreaWeather,
-    isAreaWeather
 } = require('../../lib/areaWeather');
 
 describe('=== Check getAreaWeather ===', () => {
@@ -17,10 +16,4 @@ describe('=== Check getAreaWeather ===', () => {
             done();
         })();
     }).timeout(5000);
-
-    it('Test isAreaWeather', done => {
-        assert.equal(isAreaWeather("台北天氣"), "天氣");
-        assert.equal(isAreaWeather("台北氣溫"), "氣溫");
-        done();
-    });
 });
