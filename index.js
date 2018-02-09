@@ -9,7 +9,10 @@ const axios = require("axios");
 const segment = require('./lib/segment');
 const parseTime = require('./lib/parseTime');
 const imagedb = require('./lib/imagedb');
-const getAreaWeather = require('./lib/getAreaWeather');
+const {
+    getAreaWeather,
+    isAreaWeather
+} = require('./lib/areaWeather');
 
 const bot = new LineBot({
     channelSecret: process.env.channelSecret,
@@ -29,6 +32,7 @@ bot.onEvent(async context => {
         // trim space and change charactor
         let msg = context.event.text.replace(/\s/g, '');
         msg = msg.replace(/台/g, '臺');
+        const weatherKeyword = isAreaWeather(msg);
 
         if (msg.toLowerCase().includes("help")) {
             await context.replyText(
@@ -46,14 +50,6 @@ bot.onEvent(async context => {
             await context.replyText(
                 require('./message/obsStMsg')
             );
-        } else if (msg.includes("天氣") && !msg.includes("天氣圖")) {
-            const area = msg.split('天氣')[0];
-            try {
-                const replyMsg = await getAreaWeather(area);
-                await context.replyText(replyMsg);
-            } catch (error) {
-                console.log("input text: ", msg);
-            }
         } else if (msg.includes("觀測")) {
             let replyMsg = '';
             const parseObsStMsg = require('./message/parseObsStMsg');
@@ -191,21 +187,10 @@ bot.onEvent(async context => {
             }
         } else if (msg.includes('君倢')) {
             await context.replyText("揍你喔！");
-        } else {
-            const keywords = ["氣溫", "溫度", "壓力", "氣壓", "濕度", "溼度", "風速", "風向", "雨量"];
-            let isReply = false;
-            let replyMsg = '';
-            let area = '';
-            keywords.forEach(e => {
-                if (msg.includes(e)) {
-                    area = msg.split(e)[0];
-                    isReply = true;
-                }
-            });
-            if (isReply) {
-                replyMsg = await getAreaWeather(area);
-                await context.replyText(replyMsg);
-            }
+        } else if (weatherKeyword) {
+            const area = msg.split(weatherKeyword)[0];
+            const replyMsg = await getAreaWeather(area);
+            await context.replyText(replyMsg);
         }
     }
 });
