@@ -6,9 +6,11 @@
 
 Using line bot to implement weather rebot, in order to tell weather information to users automatically.
 
+<img width="300" border="0" alt="bot_home" src="https://raw.githubusercontent.com/ntu-as-cooklab/line-bot/master/img/bot-home.png">
+
 ## Use(Add Friend)
 
-Add the bot via QR code or click the button
+Add the bot via QR code or click the button below
 
 ![QRcode](https://raw.githubusercontent.com/ntu-as-cooklab/line-bot/master/img/qrcode.png)
 
@@ -79,3 +81,12 @@ cd line-bot
 npm install
 npm start
 ```
+
+## Developer
+
+- programmer: [＠tigercosmos](https://github.com/tigercosmos)
+- designer: 戴君倢 Jennesy Dai
+
+## License
+
+MIT
