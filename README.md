@@ -1,5 +1,7 @@
 # 氣象機器人 Weather Bot
 
+[![Build Status](https://travis-ci.org/ntu-as-cooklab/weather-bot.svg?branch=master)](https://travis-ci.org/ntu-as-cooklab/weather-bot)
+
 使用 line bot 實作的氣象機器人，用來自動回應有關天氣的訊息
 
 Using line bot to implement weather rebot, in order to tell weather information to users automatically.
