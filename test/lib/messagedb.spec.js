@@ -10,7 +10,7 @@ describe('=== Check messagedb ===', () => {
         (async () => {
             const time = date2json();
             const msg = `${time.year}-${time.month}-${time.day}-${time.hour}-${time.minute}-${time.second}`;
-            const res = await messagedb.write(`"${msg}"`, 'tests/message')
+            const res = await messagedb.write(msg, 'tests/message')
             assert.equal(res, msg);
             done();
         })();
