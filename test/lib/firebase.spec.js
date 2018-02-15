@@ -17,11 +17,11 @@ describe('=== Check firebase ===', () => {
             const input = {
                 url: url
             };
-            const res = await dbWrite('tests', input);
+            const res = await dbWrite('tests/url', input);
             assert.equal(res.url, url);
 
             logger.info("test dbRead");
-            const data = await dbRead('tests');
+            const data = await dbRead('tests/url');
             assert.equal(data.url, url);
 
             logger.info("test dbRead null");
