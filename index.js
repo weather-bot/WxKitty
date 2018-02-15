@@ -15,7 +15,8 @@ const {
 const {
     isAir,
     isWeather,
-    isObservation
+    isObservation,
+    isFunny
 } = require('./lib/keywords');
 const messagedb = require('./lib/messagedb');
 
@@ -41,6 +42,7 @@ bot.onEvent(async context => {
         msg = msg.replace(/\s/g, '');
         msg = msg.replace(/台/g, '臺');
         const weatherKeyword = isWeather(msg);
+        const funnyReply = isFunny(msg);
 
         if (msg.toLowerCase().includes("help")) {
             await context.replyText(
@@ -193,8 +195,8 @@ bot.onEvent(async context => {
                     await context.replyText(replyMsg);
                 }
             }
-        } else if (msg.includes('君倢')) {
-            await context.replyText("揍你喔！");
+        } else if (funnyReply) {
+            await context.replyText(funnyReply);
         } else if (weatherKeyword) {
             const area = msg.split(weatherKeyword)[0];
             const replyMsg = await getAreaWeather(area);

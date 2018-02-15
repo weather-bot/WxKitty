@@ -4,7 +4,8 @@ const assert = require('assert');
 const {
     isObservation,
     isAir,
-    isWeather
+    isWeather,
+    isFunny
 } = require('../../lib/keywords');
 
 describe('=== Check keywords ===', () => {
@@ -25,6 +26,12 @@ describe('=== Check keywords ===', () => {
     it('Test isObservation', done => {
         assert.equal(isObservation("鞍部"), "鞍部");
         assert.equal(isObservation("基隆"), "基隆");
+        assert.equal(isObservation("美國"), null);
+        done();
+    });
+
+    it('Test isFunny', done => {
+        assert.notEqual(isFunny("新年"));
         assert.equal(isObservation("美國"), null);
         done();
     });
