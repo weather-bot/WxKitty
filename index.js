@@ -17,6 +17,7 @@ const {
     isWeather,
     isObservation
 } = require('./lib/keywords');
+const messagedb = require('./lib/messagedb');
 
 const bot = new LineBot({
     channelSecret: process.env.channelSecret,
@@ -33,8 +34,11 @@ bot.onEvent(async context => {
             require('./message/joinMsg')
         );
     } else if (context.event.isText) {
+        let msg = context.event.text;
+        // record all message
+        messagedb.write(msg);
         // trim space and change charactor
-        let msg = context.event.text.replace(/\s/g, '');
+        msg = msg.replace(/\s/g, '');
         msg = msg.replace(/台/g, '臺');
         const weatherKeyword = isWeather(msg);
 
