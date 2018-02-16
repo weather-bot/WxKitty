@@ -25,7 +25,7 @@
     "axios": "^0.17.1",
     "bottender": "^0.14.20",
     "chinese-conv": "^1.0.1",
-    "date2json": "0.0.4",
+    "date2obj": "0.0.7",
     "nodejieba": "^2.2.5"
   },
   "devDependencies": {
