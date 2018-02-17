@@ -24,8 +24,11 @@
   "dependencies": {
     "axios": "^0.17.1",
     "bottender": "^0.14.20",
+    "canvas": "^1.6.9",
     "chinese-conv": "^1.0.1",
     "date2obj": "0.0.7",
+    "image-downloader": "^3.3.0",
+    "merge-images": "^1.1.0",
     "nodejieba": "^2.2.5"
   },
   "devDependencies": {
