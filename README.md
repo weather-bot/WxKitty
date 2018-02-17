@@ -71,6 +71,12 @@ The bot use webhook to receive message and reply to users.
 
 For more detail about line bot, can visit https://developers.line.me/
 
+### Heroku
+
+see https://github.com/Automattic/node-canvas/wiki/Installation-on-Heroku
+
+`./Aptfile`, `app.json` is for Heroku.
+
 ## Setup
 
 ### Dependencies
