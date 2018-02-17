@@ -71,7 +71,30 @@ The bot use webhook to receive message and reply to users.
 
 For more detail about line bot, can visit https://developers.line.me/
 
-### Setup and Run
+## Setup
+
+### Dependencies
+
+#### node-canvas
+
+Linux:
+
+```sh
+sudo apt-get install libcairo2-dev libjpeg-dev libpango1.0-dev libgif-dev build-essential g++
+```
+
+MacOS:
+
+```sh
+brew install pkg-config cairo pango libpng jpeg giflib
+export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
+export PATH="/usr/local/opt/icu4c/bin:$PATH
+export PATH="/usr/local/opt/icu4c/sbin:$PATH
+cp /usr/local/Cellar/libpng/1.6.34/lib/pkgconfig/libpng.pc /usr/local/lib/pkgconfig
+cp /usr/local/Cellar/fontconfig/2.12.6/lib/pkgconfig/fontconfig.pc /usr/local/lib/pkgconfig
+```
+
+### Run
 
 Make sure npm and nodeJS have installed.
 
