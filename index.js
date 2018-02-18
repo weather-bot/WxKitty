@@ -170,7 +170,7 @@ bot.onEvent(async context => {
             const d = parseTime();
             const time = `${d.year}-${d.month}-${d.day}-${d.hour}-${d.minute}`;
             const dbKey = `${d.year}${d.month}${d.day}${d.hour}${d.minute}`;
-            const imgUrl = `http://www.cwb.gov.tw/V7/observe/satellite/Data/s1p/s1p-${time}.jpg`;
+            const imgUrl = `http://www.cwb.gov.tw/V7/observe/satellite/Data/ts1p/ts1p-${time}.jpg`;
             const url = await imagedb('satellite', dbKey, imgUrl);
             if (url != null) {
                 await context.replyImage(url);
