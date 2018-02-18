@@ -16,7 +16,8 @@ const {
     isAir,
     isWeather,
     isObservation,
-    isFunny
+    isFunny,
+    isAirStation
 } = require('./lib/keywords');
 const messagedb = require('./lib/messagedb');
 
@@ -42,6 +43,7 @@ bot.onEvent(async context => {
         msg = msg.replace(/\s/g, '');
         msg = msg.replace(/台/g, '臺');
         const weatherKeyword = isWeather(msg);
+        const airKeyword = isAir(msg);
         const funnyReply = isFunny(msg);
 
         if (msg.toLowerCase().includes("help")) {
@@ -101,28 +103,36 @@ bot.onEvent(async context => {
             await context.replyText(
                 require('./message/airStMsg')
             );
-        } else if (msg.includes("空氣")) {
-            let replyMsg = '';
-            const epoch = new Date().getMilliseconds();
-            const url = `https://taqm.epa.gov.tw/taqm/aqs.ashx?lang=tw&act=aqi-epa&ts=${epoch}`;
-            const stationName = msg.split('空氣')[0];
-            try {
-                const res = await axios.get(url);
-                const data = res.data;
-                data['Data'].forEach(e => {
-                    if (e.SiteName.includes(stationName)) {
-                        replyMsg = require('./message/parseAirStMsg')(e);
-                    }
-                })
-                if (replyMsg == '') {
-                    replyMsg = `無此測站，請輸入「監測站清單」尋找欲查詢測站`;
+        } else if (airKeyword) {
+            // If there is a staton, return detail data
+            const stationName = isAirStation(msg);
+            if (stationName) {
+                let replyMsg = '';
+                const epoch = new Date().getMilliseconds();
+                const url = `https://taqm.epa.gov.tw/taqm/aqs.ashx?lang=tw&act=aqi-epa&ts=${epoch}`;
+                try {
+                    const res = await axios.get(url);
+                    const data = res.data;
+                    data['Data'].forEach(e => {
+                        if (e.SiteName.includes(stationName)) {
+                            replyMsg = require('./message/parseAirStMsg')(e);
+                        }
+                    })
+                } catch (err) {
+                    console.log("input text: ", msg);
+                    console.log(err);
+                    replyMsg = '取得資料失敗';
                 }
-            } catch (err) {
-                console.log("input text: ", msg);
-                console.log(err);
-                replyMsg = '取得資料失敗';
+                await context.replyText(replyMsg);
+            } else { // else return taiwan air image
+                const url = await require('./lib/createAirImage')();
+                if (url != null) {
+                    await context.replyImage(url);
+                } else {
+                    // if get imgur image url fail, just reply in text
+                    await context.replyText("取得空氣品質圖失敗。請輸入[監測站清單]來查詢詳細數值。");
+                }
             }
-            await context.replyText(replyMsg);
         } else if (msg.includes("預報")) {
             const d = parseTime();
             const dbKey = `${d.year}${d.month}${d.day}${d.hour}`;

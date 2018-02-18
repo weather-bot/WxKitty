@@ -1,14 +1,16 @@
 'use strict';
 const assert = require('assert');
+const logger = require('node-color-log');
 
 const createAirImage = require('../../lib/createAirImage');
 
 describe('=== Check createAirImage ===', () => {
     it('Test createAirImage', done => {
         (async () => {
-            const base64Data = await createAirImage();
-            assert.ok(base64Data);
+            const url = await createAirImage();
+            logger.debug(url);
+            assert.ok(url);
             done();
         })();
-    }).timeout(5000);
+    }).timeout(10000);
 });
