@@ -36,6 +36,22 @@ const {
 } = require('./lib/keywords');
 const messagedb = require('./lib/messagedb');
 
+async function platformReplyText(context, messenge) {
+    if (config.chatroomPlatform == 'messenger') {
+        await context.sendText(messenge)
+    } else {
+        await context.replyText(messenge);
+    }
+}
+
+async function platformReplyImage(context, url) {
+    if (config.chatroomPlatform == 'messenger') {
+        await context.sendImage(url)
+    } else {
+        await context.replyImage(url);
+    }
+}
+
 bot.onEvent(async context => {
     if (context.event.isFollow) {
         await context.replyText(
@@ -171,7 +187,7 @@ bot.onEvent(async context => {
             const imgUrl = `http://www.cwb.gov.tw/V7/observe/radar/Data/HD_Radar/CV1_3600_${time}.png`;
             const url = await imagedb('radar', time, imgUrl);
             if (url != null) {
-                await context.replyImage(url);
+                await platformReplyImage(context, url);
             } else {
                 // if get imgur image url fail, just reply in text                
                 await context.replyText(imgUrl);
@@ -216,7 +232,7 @@ bot.onEvent(async context => {
                 }
             }
         } else if (funnyReply) {
-            await context.replyText(funnyReply);
+            await platformReplyText(context, funnyReply);
         } else if (weatherKeyword) {
             const area = msg.split(weatherKeyword)[0];
             const replyMsg = await getAreaWeather(area);
