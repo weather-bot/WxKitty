@@ -8,8 +8,8 @@ const {
 
 const bot = (config.chatroomPlatform == 'messenger') ?
     new MessengerBot({
-        accessToken: config.messagerAccessToken,
-        appSecret: config.messagerAppSecret,
+        accessToken: config.messengerAccessToken,
+        appSecret: config.messengerAppSecret,
     }) : new LineBot({
         channelSecret: config.channelSecret,
         accessToken: config.channelAccessToken
