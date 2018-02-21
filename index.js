@@ -6,7 +6,7 @@ const {
     MessengerBot
 } = require('bottender');
 
-const bot = (config.platform == 'messenger') ?
+const bot = (config.chatroomPlatform == 'messenger') ?
     new MessengerBot({
         accessToken: config.messagerAccessToken,
         appSecret: config.messagerAppSecret,
