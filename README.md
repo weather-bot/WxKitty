@@ -2,13 +2,23 @@
 
 [![Build Status](https://travis-ci.org/ntu-as-cooklab/weather-bot.svg?branch=master)](https://travis-ci.org/ntu-as-cooklab/weather-bot)
 
-使用 line bot 實作的氣象機器人，用來自動回應有關天氣的訊息
+使用 messenger 和 line bot 實作的氣象機器人，用來自動回應有關天氣的訊息
 
-Using line bot to implement weather rebot, in order to tell weather information to users automatically.
+Using messenger and line bot to implement weather rebot, in order to tell weather information to users automatically.
 
 <img width="300" border="0" alt="bot_home" src="https://raw.githubusercontent.com/ntu-as-cooklab/line-bot/master/img/bot-home.png">
 
 ## Use(Add Friend)
+
+### For messenger
+
+Like to page https://www.facebook.com/weather.bot.tw/
+
+and enjoy talk to messeenger :)
+
+<img width="400" border="0" alt="demo_messenger" src="https://raw.githubusercontent.com/ntu-as-cooklab/line-bot/master/img/messenger.png">
+
+### For Line
 
 Add the bot via QR code or click the button below
 
@@ -34,6 +44,15 @@ Add the bot via QR code or click the button below
 請對我輸入指令（回覆我以下的關鍵字）
 目前支援指令，以及其說明：
 
+【快速使用】
+- 預報（圖）
+- 地震（圖）
+- 空氣品質（圖）
+- 衛星雲圖（圖）
+- [地區]天氣（例如：東京天氣）
+- [縣市]概況（例如：台北概況）
+
+【進階指令】
 <地區天氣>：直接查詢地區的天氣狀況（支援英文查詢國外地區）
  ＊[地址]天氣：取得地區氣象數據
     例如：高雄市天氣、淡水天氣
@@ -42,10 +61,11 @@ Add the bot via QR code or click the button below
     例如：全臺概況、金門縣概況
 
 <氣象圖>：提供氣象圖的連結
- ＊預報圖
+ ＊空汙
+ ＊預報
  ＊天氣圖
- ＊衛星雲圖
- ＊雷達圖
+ ＊衛星雲
+ ＊雷達
 
 <氣象觀測站>：查詢單一測站的詳細數據
  ＊[觀測站名稱]觀測
