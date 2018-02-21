@@ -1,11 +1,26 @@
+const config = require('./config');
+
+// chatroom platform framework
 const {
-    LineBot
+    LineBot,
+    MessengerBot
 } = require('bottender');
+
+const bot = (config.platform == 'messenger') ?
+    new MessengerBot({
+        accessToken: config.messagerAccessToken,
+        appSecret: config.messagerAppSecret,
+    }) : new LineBot({
+        channelSecret: config.channelSecret,
+        accessToken: config.channelAccessToken
+    });
+
 const {
     createServer
 } = require('bottender/express');
-const axios = require("axios");
 
+// third parties
+const axios = require("axios");
 const segment = require('./lib/segment');
 const parseTime = require('./lib/parseTime');
 const imagedb = require('./lib/imagedb');
@@ -20,11 +35,6 @@ const {
     isAirStation
 } = require('./lib/keywords');
 const messagedb = require('./lib/messagedb');
-
-const bot = new LineBot({
-    channelSecret: process.env.channelSecret,
-    accessToken: process.env.channelAccessToken
-});
 
 bot.onEvent(async context => {
     if (context.event.isFollow) {

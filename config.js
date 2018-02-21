@@ -1,11 +1,13 @@
 module.exports = {
+    // platform
+    platform: process.env.platform,    
     // line
     channelId: process.env.channelId,
     channelSecret: process.env.channelSecret,
     channelAccessToken: process.env.channelAccessToken,
-    // messager
-    messagerAccessToken: process.env.messagerAccessToken,
-    messagerAppSecret: process.env.messagerAppSecret,
+    // messenger
+    messengerAccessToken: process.env.messengerAccessToken,
+    messengerAppSecret: process.env.messengerAppSecret,
     // open weather map
     owmApiKey: process.env.owmApiKey,
     // imgur
