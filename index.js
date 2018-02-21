@@ -54,11 +54,11 @@ async function platformReplyImage(context, url) {
 
 bot.onEvent(async context => {
     if (context.event.isFollow) {
-        await context.replyText(
+        await platformReplyText(context,
             require('./message/followMsg')
         );
     } else if (context.event.isJoin) {
-        await context.replyText(
+        await platformReplyText(context,
             require('./message/joinMsg')
         );
     } else if (context.event.isText) {
@@ -73,19 +73,19 @@ bot.onEvent(async context => {
         const funnyReply = isFunny(msg);
 
         if (msg.toLowerCase().includes("help")) {
-            await context.replyText(
+            await platformReplyText(context,
                 require('./message/helpMsg')
             );
         } else if (msg.toLowerCase().includes("issue") || msg.includes("回報問題")) {
-            await context.replyText(
+            await platformReplyText(context,
                 require('./message/issueMsg')
             );
         } else if (msg.toLowerCase().includes("github") || msg.includes("原始碼")) {
-            await context.replyText("https://github.com/ntu-as-cooklab/line-bot");
+            await platformReplyText(context, "https://github.com/ntu-as-cooklab/line-bot");
         } else if (msg.toLowerCase().includes("cwb") || msg.includes("氣象局")) {
-            await context.replyText("www.cwb.gov.tw/");
+            await platformReplyText(context, "www.cwb.gov.tw/");
         } else if (msg.includes("觀測站清單")) {
-            await context.replyText(
+            await platformReplyText(context,
                 require('./message/obsStMsg')
             );
         } else if (msg.includes("觀測")) {
@@ -124,9 +124,9 @@ bot.onEvent(async context => {
                 console.log(err);
                 replyMsg = '取得資料失敗';
             }
-            await context.replyText(replyMsg);
+            await platformReplyText(context, replyMsg);
         } else if (msg.includes("監測站清單")) {
-            await context.replyText(
+            await platformReplyText(context,
                 require('./message/airStMsg')
             );
         } else if (airKeyword) {
@@ -149,14 +149,14 @@ bot.onEvent(async context => {
                     console.log(err);
                     replyMsg = '取得資料失敗';
                 }
-                await context.replyText(replyMsg);
+                await platformReplyText(context, replyMsg);
             } else { // else return taiwan air image
                 const url = await require('./lib/createAirImage')();
                 if (url != null) {
-                    await context.replyImage(url);
+                    await platformReplyImage(context, url);
                 } else {
                     // if get imgur image url fail, just reply in text
-                    await context.replyText("取得空氣品質圖失敗。請輸入[監測站清單]來查詢詳細數值。");
+                    await platformReplyText(context, "取得空氣品質圖失敗。請輸入[監測站清單]來查詢詳細數值。");
                 }
             }
         } else if (msg.includes("預報")) {
@@ -165,10 +165,10 @@ bot.onEvent(async context => {
             const imgUrl = 'http://www.cwb.gov.tw/V7/forecast/taiwan/Data/Forecast01.png';
             const url = await imagedb('forecast', dbKey, imgUrl)
             if (url != null) {
-                await context.replyImage(url);
+                await platformReplyImage(context, url);
             } else {
                 // if get imgur image url fail, just reply in text
-                await context.replyText(imgUrl);
+                await platformReplyText(context, imgUrl);
             }
         } else if (msg.includes("天氣圖")) {
             const d = parseTime();
@@ -176,10 +176,10 @@ bot.onEvent(async context => {
             const imgUrl = 'http://www.cwb.gov.tw/V7/forecast/fcst/Data/I04.jpg';
             const url = await imagedb('weather', dbKey, imgUrl);
             if (url != null) {
-                await context.replyImage(url);
+                await platformReplyImage(context, url);
             } else {
                 // if get imgur image url fail, just reply in text                
-                await context.replyText(imgUrl);
+                await platformReplyText(context, imgUrl);
             }
         } else if (msg.includes("雷達")) {
             const d = parseTime();
@@ -190,7 +190,7 @@ bot.onEvent(async context => {
                 await platformReplyImage(context, url);
             } else {
                 // if get imgur image url fail, just reply in text                
-                await context.replyText(imgUrl);
+                await platformReplyText(context, imgUrl);
             }
         } else if (msg.includes("衛星雲")) {
             const d = parseTime();
@@ -199,18 +199,18 @@ bot.onEvent(async context => {
             const imgUrl = `http://www.cwb.gov.tw/V7/observe/satellite/Data/ts1p/ts1p-${time}.jpg`;
             const url = await imagedb('satellite', dbKey, imgUrl);
             if (url != null) {
-                await context.replyImage(url);
+                await platformReplyImage(context, url);
             } else {
                 // if get imgur image url fail, just reply in text
-                await context.replyText(imgUrl);
+                await platformReplyText(context, imgUrl);
             }
         } else if (msg.includes("地震")) {
             const url = await require('./lib/getEarthquake')();
             if (url != null) {
-                await context.replyImage(url);
+                await platformReplyImage(context, url);
             } else {
                 // if get imgur image url fail, just reply in text
-                await context.replyText("取得最新資料失敗。請上 http://www.cwb.gov.tw/V7/earthquake/ 查詢");
+                await platformReplyText(context, "取得最新資料失敗。請上 http://www.cwb.gov.tw/V7/earthquake/ 查詢");
             }
         } else if (msg.includes('概況')) {
             const table = require('./data/overviewID');
@@ -228,7 +228,7 @@ bot.onEvent(async context => {
                         console.log(err);
                         replyMsg = '取得資料失敗';
                     }
-                    await context.replyText(replyMsg);
+                    await platformReplyText(context, replyMsg);
                 }
             }
         } else if (funnyReply) {
@@ -236,7 +236,7 @@ bot.onEvent(async context => {
         } else if (weatherKeyword) {
             const area = msg.split(weatherKeyword)[0];
             const replyMsg = await getAreaWeather(area);
-            await context.replyText(replyMsg);
+            await platformReplyText(context, replyMsg);
         }
     }
 });
