@@ -14,7 +14,7 @@ module.exports = {
     // imgur
     imgurClientId: process.env.imgurClientId,
     // firebase database
-    firebase: "weather-bot-tw",
+    firebaseID: process.env.firebaseID,
     firebaseSecret: process.env.firebaseSecret,
     // Google Map
     googleMapKey: process.env.googleMapKey
