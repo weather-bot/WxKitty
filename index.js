@@ -32,7 +32,8 @@ const {
     isWeather,
     isObservation,
     isFunny,
-    isAirStation
+    isAirStation,
+    isTaiwanArea
 } = require('./lib/keywords');
 const messagedb = require('./lib/messagedb');
 
@@ -234,7 +235,12 @@ bot.onEvent(async context => {
         } else if (funnyReply) {
             await platformReplyText(context, funnyReply);
         } else if (weatherKeyword) {
-            const area = msg.split(weatherKeyword)[0];
+            let area = null;
+            area = isTaiwanArea(msg);
+            if (area == null) {
+                area = {};
+                area['name'] = msg.split(weatherKeyword)[0];
+            }
             const replyMsg = await getAreaWeather(area);
             await platformReplyText(context, replyMsg);
         }

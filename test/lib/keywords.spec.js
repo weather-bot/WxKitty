@@ -41,33 +41,33 @@ describe('=== Check keywords ===', () => {
     it('Test isTaiwanArea', done => {
         let msg = "台北士林的天氣狀況";
         assert.equal(
-            isTaiwanArea(msg).includes("臺北市士林區"),
+            isTaiwanArea(msg).name.includes("臺北市士林區"),
             true,
-            logger.debug(`${msg} & ${isTaiwanArea(msg)}`)
+            logger.debug(`${msg} & ${isTaiwanArea(msg).name}`)
         );
         msg = "我想知道桃園復興霞雲天氣";
         assert.equal(
-            isTaiwanArea(msg).includes("桃園市復興區霞雲里"),
+            isTaiwanArea(msg).name.includes("桃園市復興區霞雲里"),
             true,
-            logger.debug(`${msg} & ${isTaiwanArea(msg)}`)
+            logger.debug(`${msg} & ${isTaiwanArea(msg).name}`)
         );
         msg = "我想知道中壢天氣";
         assert.equal(
-            isTaiwanArea(msg).includes("桃園市中壢區"),
+            isTaiwanArea(msg).name.includes("桃園市中壢區"),
             true,
-            logger.debug(`${msg} & ${isTaiwanArea(msg)}`)
+            logger.debug(`${msg} & ${isTaiwanArea(msg).name}`)
         );
         msg = "現在臺南濕度";
         assert.equal(
-            isTaiwanArea(msg).includes("臺南市"),
+            isTaiwanArea(msg).name.includes("臺南市"),
             true,
-            logger.debug(`${msg} & ${isTaiwanArea(msg)}`)
+            logger.debug(`${msg} & ${isTaiwanArea(msg).name}`)
         );
         msg = "內湖的天氣";
         assert.equal(
-            isTaiwanArea(msg).includes("臺北市內湖區"),
+            isTaiwanArea(msg).name.includes("臺北市內湖區"),
             true,
-            logger.debug(`${msg} & ${isTaiwanArea(msg)}`)
+            logger.debug(`${msg} & ${isTaiwanArea(msg).name}`)
         );
         assert.equal(isTaiwanArea("美國紐約"), null);
         done();

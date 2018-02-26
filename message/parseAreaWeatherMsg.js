@@ -1,5 +1,5 @@
 function parseAreaWeatherMsg(e) {
-    return `地區：${e.area}
+    return `地區：${e.name}
 時間：${e.time}
 溫度：${e.temp}℃
 體感溫度：${e.feel}℃
