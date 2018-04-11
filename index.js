@@ -232,8 +232,8 @@ bot.onEvent(async context => {
                     await platformReplyText(context, replyMsg);
                 }
             }
-        } else if (funnyReply) {
-            await platformReplyText(context, funnyReply);
+        // } else if (funnyReply) {
+        //     await platformReplyText(context, funnyReply);
         } else if (weatherKeyword) {
             let area = null;
             area = isTaiwanArea(msg);
