@@ -125,8 +125,8 @@ cp /usr/local/Cellar/fontconfig/2.12.6/lib/pkgconfig/fontconfig.pc /usr/local/li
 Make sure npm and nodeJS have installed.
 
 ```sh
-git clone https://github.com/ntu-as-cooklab/line-bot
-cd line-bot
+git clone https://github.com/ntu-as-cooklab/weather-bot
+cd weather-bot
 npm install
 npm start
 ```
