@@ -16,4 +16,16 @@ describe('=== Check getAreaWeather ===', () => {
             done();
         })();
     }).timeout(5000);
+    it('Test getAreaWeather', done => {
+        (async () => {
+            const msg = await getAreaWeather({
+                name: "士林區",
+                x: "121.5357813",
+                y: "25.10390683"
+            });
+            logger.debug(msg);
+            assert.equal(msg.includes("資料來源：中央氣象局"), true);
+            done();
+        })();
+    }).timeout(5000);
 });
