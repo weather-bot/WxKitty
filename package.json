@@ -27,6 +27,7 @@
     "canvas": "^1.6.9",
     "chinese-conv": "^1.0.1",
     "date2obj": "0.0.7",
+    "geodist": "^0.2.1",
     "image-downloader": "^3.3.0",
     "merge-images": "^1.1.0",
     "nodejieba": "^2.2.5"
