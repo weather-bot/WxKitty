@@ -33,6 +33,7 @@ const {
     isObservation,
     isFunny,
     isAirStation,
+    isForeignAirStation,
     isTaiwanArea
 } = require('./lib/keywords');
 const messagedb = require('./lib/messagedb');
@@ -133,6 +134,7 @@ bot.onEvent(async context => {
         } else if (airKeyword) {
             // If there is a staton, return detail data
             const stationName = isAirStation(msg);
+            let foreignStationidX = null ;
             if (stationName) {
                 let replyMsg = '';
                 const epoch = new Date().getMilliseconds();
@@ -151,7 +153,23 @@ bot.onEvent(async context => {
                     replyMsg = '取得資料失敗';
                 }
                 await platformReplyText(context, replyMsg);
-            } else { // else return taiwan air image
+            } else if( foreignStationidX = await isForeignAirStation(msg)) {  //isForStation() return[{name,x}]
+                replyMsg = "共找到"+foreignStationidX.length + "項結果";
+                for(let i = 0;i<foreignStationidX.length;i++){ 
+                    const url = 'https://api.waqi.info/api/feed/@'+foreignStationidX[i].x+'/now.json';
+                    try{
+                        const res = await axios.get(url);
+                        let data = res.rxs.obs[0].msg;
+                        replyMsg += require('./message/parseForeignAirMsg')(data,foreignStationidX[i]);
+                        replyMsg +='\n';
+                    } catch(err){
+                        console.log('input text: ',msg);
+                        console.log(err);
+                        replyMsg += '取得資料失敗\n' ;
+                    }
+                }
+            }
+            else { // else return taiwan air image
                 const url = await require('./lib/createAirImage')();
                 if (url != null) {
                     await platformReplyImage(context, url);
