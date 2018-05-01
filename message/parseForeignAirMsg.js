@@ -1,6 +1,7 @@
+const parseAqi = require('../lib/parseAqi');
 
 function parseForeAirStMsg(e) {
-    return `地點：${e.ChineseName}+ ${e.EnglishName} 
+    return `地點：${e.ChineseName} ${e.EnglishName} 
 時間：${e.time} 
 空氣指標AQI：${parseAqi(e.aqi)} 
 PM10：${e.PM10}(μg/m3) 

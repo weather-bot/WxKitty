@@ -136,9 +136,9 @@ bot.onEvent(async context => {
         } else if (airKeyword) {
             // If there is a staton, return detail data
             const stationName = isAirStation(msg);
-            let foreignStation = null ;
-            if( ststionName == null){
-                foreignStation = await isForeignAirStation(msg) ;
+            let foreignStation = null;
+            if (ststionName == null) {
+                foreignStation = await isForeignAirStation(msg);
             }
             if (stationName) {
                 let replyMsg = '';
@@ -158,7 +158,7 @@ bot.onEvent(async context => {
                     replyMsg = '取得資料失敗';
                 }
                 await platformReplyText(context, replyMsg);
-            } else if(foreignStation == null ){ // else return taiwan air image
+            } else if (foreignStation == null) { // else return taiwan air image
                 const url = await require('./lib/createAirImage')();
                 if (url != null) {
                     await platformReplyImage(context, url);
@@ -166,14 +166,14 @@ bot.onEvent(async context => {
                     // if get imgur image url fail, just reply in text
                     await platformReplyText(context, "取得空氣品質圖失敗。請輸入[監測站清單]來查詢詳細數值。");
                 }
-            }else{
+            } else {
                 const AirData = await getForeignAirData(foreignStation);
-                if(Airdata.length != 0){
-                    replyMsg = "共找到"+Airdata.length + "項結果";
-                    for (let i = 0 ; i<Airdata.length ; i++){
-                        replyMsg += parseForeAirStMsg(AirData[i])
+                if (Airdata.length != 0) {
+                    replyMsg = "共找到" + Airdata.length + "項結果";
+                    for (let i = 0; i < Airdata.length; i++) {
+                        replyMsg += parseForeAirStMsg(AirData[i]);
                     }
-                }else{
+                } else {
                     replyMsg = '取得資料失敗';
                 }
             }
