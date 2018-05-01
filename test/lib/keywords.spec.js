@@ -28,11 +28,11 @@ describe('=== Check keywords ===', () => {
     it('Test isForeignAirStation', done => {
         (async () => {
             let res = await isForeignAirStation("請告訴我紐約的空氣品質");
-            let a = [{ "name": [ '紐約', 'New York' ], "x": 3309 }];
-            assert.equal( res.toString(), a.toString());
+            let a =  "NY";
+            assert.equal( res[0].address_components[1].short_name, a);
             done();
         })();
-    }).timeout(15000);
+    }).timeout(10000);
 
     it('Test isObservation', done => {
         assert.equal(isObservation("鞍部"), "鞍部");
@@ -80,5 +80,5 @@ describe('=== Check keywords ===', () => {
         );
         assert.equal(isTaiwanArea("美國紐約"), null);
         done();
-    });
+    }).timeout(3000);
 });
