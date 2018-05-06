@@ -19,7 +19,7 @@ describe("=======parseForeAirMsg=======", () => {
         (async () => {
             let foreignStation = await isForeignAirStation("紐約");
             let data = await getForeignAirData(foreignStation);
-            let msg = parseForeAirStMsg(data[0]);
+            let msg = parseForeAirStMsg(data);
             console.log(msg);
             assert(1, 1);
             done();

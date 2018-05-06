@@ -28,8 +28,8 @@ describe('=== Check keywords ===', () => {
     it('Test isForeignAirStation', done => {
         (async () => {
             let res = await isForeignAirStation("請告訴我紐約的空氣品質");
-            let a =  "NY";
-            assert.equal( res[0].address_components[1].short_name, a);
+            let a = "NY";
+            assert.equal(res.address_components[1].short_name, a);
             done();
         })();
     }).timeout(10000);

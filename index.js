@@ -168,11 +168,8 @@ bot.onEvent(async context => {
                 }
             } else {
                 const AirData = await getForeignAirData(foreignStation);
-                if (Airdata.length != 0) {
-                    replyMsg = "共找到" + Airdata.length + "項結果";
-                    for (let i = 0; i < Airdata.length; i++) {
-                        replyMsg += parseForeAirStMsg(AirData[i]);
-                    }
+                if (Airdata != null) {
+                    replyMsg += parseForeAirStMsg(AirData);
                 } else {
                     replyMsg = '取得資料失敗';
                 }
