@@ -9,7 +9,6 @@ PM2.5：${e.PM25}(μg/m3)
 CO：${e.CO}(ppm) 
 SO2：${e.SO2}(ppb) 
 NO2：${e.NO2}(ppb)
-空氣狀態:${e.description}
 ---
 資料來源：breezometer.com
 

@@ -171,7 +171,7 @@ bot.onEvent(async context => {
                 if (Airdata != null) {
                     replyMsg += parseForeAirStMsg(AirData);
                 } else {
-                    replyMsg = '取得資料失敗';
+                    replyMsg = '外國地區取得資料失敗';
                 }
             }
         } else if (msg.includes("預報")) {
