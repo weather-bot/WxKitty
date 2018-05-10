@@ -1,6 +1,6 @@
 module.exports = {
     // platform
-    chatroomPlatform: process.env.chatroomPlatform,    
+    chatroomPlatform: process.env.chatroomPlatform,
     // line
     channelId: process.env.channelId,
     channelSecret: process.env.channelSecret,
@@ -17,5 +17,7 @@ module.exports = {
     firebaseID: process.env.firebaseID,
     firebaseSecret: process.env.firebaseSecret,
     // Google Map
-    googleMapKey: process.env.googleMapKey
+    googleMapKey: process.env.googleMapKey,
+    //bri
+    breezometerKey: process.env.breezometerKey
 }

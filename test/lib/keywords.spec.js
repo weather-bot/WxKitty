@@ -5,13 +5,13 @@ const logger = require('node-color-log');
 const {
     isObservation,
     isAirStation,
+    isForeignAirStation,
     isWeather,
     isFunny,
     isTaiwanArea
 } = require('../../lib/keywords');
 
 describe('=== Check keywords ===', () => {
-
     it('Test isWeather', done => {
         assert.equal(isWeather("台北天氣"), "天氣");
         assert.equal(isWeather("台北氣溫"), "氣溫");
@@ -24,6 +24,15 @@ describe('=== Check keywords ===', () => {
         assert.equal(isAirStation("公館"), null);
         done();
     });
+
+    it('Test isForeignAirStation', done => {
+        (async () => {
+            let res = await isForeignAirStation("請告訴我紐約的空氣品質");
+            let a = "NY";
+            assert.equal(res.address_components[1].short_name, a);
+            done();
+        })();
+    }).timeout(10000);
 
     it('Test isObservation', done => {
         assert.equal(isObservation("鞍部"), "鞍部");
@@ -71,5 +80,5 @@ describe('=== Check keywords ===', () => {
         );
         assert.equal(isTaiwanArea("美國紐約"), null);
         done();
-    });
+    }).timeout(3000);
 });
