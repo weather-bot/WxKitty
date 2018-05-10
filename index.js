@@ -137,7 +137,7 @@ bot.onEvent(async context => {
             // If there is a staton, return detail data
             const stationName = isAirStation(msg);
             let foreignStation = null;
-            if (stationName == null) {
+            if (stationName == null && msg != airKeyword) {
                 foreignStation = await isForeignAirStation(msg);
             }
             if (stationName) {
