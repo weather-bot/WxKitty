@@ -167,12 +167,14 @@ bot.onEvent(async context => {
                     await platformReplyText(context, "取得空氣品質圖失敗。請輸入[監測站清單]來查詢詳細數值。");
                 }
             } else {
+                let replyMsg = '';
                 const AirData = await getForeignAirData(foreignStation);
-                if (Airdata != null) {
+                if (AirData != null) {
                     replyMsg += parseForeAirStMsg(AirData);
                 } else {
                     replyMsg = '外國地區取得資料失敗';
                 }
+                await platformReplyText(context, replyMsg);                
             }
         } else if (msg.includes("預報")) {
             const d = parseTime();
