@@ -260,7 +260,7 @@ bot.onEvent(async context => {
             }
             const replyMsg = await getAreaWeather(area);
             await platformReplyText(context, replyMsg);
-        } else if (context.event.rawevent.source.type == 'user') {
+        } else if (context.event.rawEvent.source.type == 'user') {
             const replyMsg = "請輸入 help 查詢";
             await platformReplyText(context, replyMsg);
         }
