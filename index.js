@@ -174,7 +174,7 @@ bot.onEvent(async context => {
                 } else {
                     replyMsg = '外國地區取得資料失敗';
                 }
-                await platformReplyText(context, replyMsg);                
+                await platformReplyText(context, replyMsg);
             }
         } else if (msg.includes("預報")) {
             const d = parseTime();
@@ -248,9 +248,9 @@ bot.onEvent(async context => {
                     await platformReplyText(context, replyMsg);
                 }
             }
-        // 先暫時關掉
-        // } else if (funnyReply) {
-        //     await platformReplyText(context, funnyReply);
+            // 先暫時關掉
+            // } else if (funnyReply) {
+            //     await platformReplyText(context, funnyReply);
         } else if (weatherKeyword) {
             let area = null;
             area = isTaiwanArea(msg);
@@ -259,6 +259,9 @@ bot.onEvent(async context => {
                 area['name'] = msg.split(weatherKeyword)[0];
             }
             const replyMsg = await getAreaWeather(area);
+            await platformReplyText(context, replyMsg);
+        } else if (context.event.rawevent.source.type == 'user') {
+            const replyMsg = "請輸入 help 查詢";
             await platformReplyText(context, replyMsg);
         }
     }
