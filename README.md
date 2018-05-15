@@ -8,9 +8,9 @@ Using messenger and line bot to implement weather rebot, in order to tell weathe
 
 <img width="300" border="0" alt="bot_home" src="https://raw.githubusercontent.com/ntu-as-cooklab/line-bot/master/img/bot-home.png">
 
-## Use(Add Friend)
+## Use 如何使用
 
-### For messenger
+### For Messenger
 
 Like to page https://www.facebook.com/weather.bot.tw/
 
@@ -38,7 +38,7 @@ Add the bot via QR code or click the button below
 
 <img width="400" border="0" alt="demo4" src="https://raw.githubusercontent.com/ntu-as-cooklab/line-bot/master/img/demo4.png">
 
-## Document
+## Document 文件
 
 ```text
 請對我輸入指令（回覆我以下的關鍵字）
@@ -51,7 +51,8 @@ Add the bot via QR code or click the button below
 - 衛星雲圖（圖）
 - [地區]天氣（例如：東京天氣）
 - [縣市]概況（例如：台北概況）
-
+- [地區]空氣（例如：北京空氣）
+ 
 【進階指令】
 <地區天氣>：直接查詢地區的天氣狀況（支援英文查詢國外地區）
  ＊[地址]天氣：取得地區氣象數據
@@ -72,9 +73,11 @@ Add the bot via QR code or click the button below
     例如：宜蘭觀測、士林觀測
  ＊觀測站清單：用來查詢有哪些觀測站
 
-<空氣品質監測站>：查詢單一測站的詳細數據（支援中外文查詢國外地區）
+<空氣品質查詢>：查詢地區或測站空氣資訊
+ ＊[地區]空氣
+    例如：紐約空氣、北京空氣、台北空氣
  ＊[監測站名稱]空氣
-    例如：基隆空氣、淡水空氣、紐約空氣
+    例如：基隆空氣、淡水空氣
  ＊監測站清單：用來查詢有哪些台灣監測站
 
 <其他>
@@ -83,13 +86,26 @@ Add the bot via QR code or click the button below
  ＊Github/原始碼
 ```
 
-## Develop
+## Develop 開發
 
-Currently this repo is connecting with https://weather-bot-tw.herokuapp.com/.
+Currently this repo is connecting with:
+
+- Line: https://weather-bot-tw.herokuapp.com/ 
+- Messenger: https://messenger-weather-bot-tw.herokuapp.com/
 
 The bot use webhook to receive message and reply to users.
 
+The two bot are synced to `master`.
+
 For more detail about line bot, can visit https://developers.line.me/
+
+### How to test
+
+There is a `dev` branch which syncs to a test line bot.
+
+Please PR to `dev` then test the bot and check the new patch is fine.
+
+Test bot(line) link: https://line.me/R/ti/p/pOGQWj-4j-
 
 ### Heroku
 
@@ -133,7 +149,7 @@ npm start
 
 ## Developer
 
-- programmer: [＠tigercosmos](https://github.com/tigercosmos)
+- programmer: [＠tigercosmos](https://github.com/tigercosmos), [@csinrn](https://github.com/csinrn)
 - designer: 戴君倢 Jennesy Dai
 
 ## License
