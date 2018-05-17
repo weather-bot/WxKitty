@@ -18,6 +18,8 @@ module.exports = {
     firebaseSecret: process.env.firebaseSecret,
     // Google Map
     googleMapKey: process.env.googleMapKey,
-    //bri
-    breezometerKey: process.env.breezometerKey
+    // breezometer
+    breezometerKey: process.env.breezometerKey,
+    // CWB Open Data
+    cwbKey: process.env.cwbKey
 }
