@@ -8,7 +8,8 @@ const {
     isForeignAirStation,
     isWeather,
     isFunny,
-    isTaiwanArea
+    isTaiwanArea,
+    isTime
 } = require('../../lib/keywords');
 
 describe('=== Check keywords ===', () => {
@@ -44,6 +45,20 @@ describe('=== Check keywords ===', () => {
     it('Test isFunny', done => {
         assert.notEqual(isFunny("新年"), null);
         assert.equal(isObservation("美國"), null);
+        done();
+    });
+
+    it('Test isTime', done => {
+        assert.equal(isTime("裡面沒有時間"), null);
+        assert.equal(isTime("for fun no time"), null);
+        assert.equal(isTime("明天天氣好嗎").text, "明天");
+        assert.equal(isTime("後天天氣好嗎").text, "後天");        
+        assert.equal(isTime("What is next Sun. weather?").text, "next Sun");
+        assert.equal(isTime("星期五天氣好嗎").text, "星期五");
+        assert.equal(isTime("禮拜六天氣好嗎").text, "禮拜六");
+        assert.equal(isTime("今天下午天氣好嗎").text, "今天下午");
+        assert.equal(isTime("明天早上天氣好嗎").text, "明天早上");
+        assert.equal(isTime("昨天晚上天氣好嗎").text, "昨天晚上");
         done();
     });
 
