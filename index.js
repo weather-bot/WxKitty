@@ -34,11 +34,13 @@ const {
     isFunny,
     isAirStation,
     isForeignAirStation,
-    isTaiwanArea
+    isTaiwanArea,
+    isTime
 } = require('./lib/keywords');
 const messagedb = require('./lib/messagedb');
-const getForeignAirData = require('./lib/ForeignAir');
+const getForeignAirData = require('./lib/getForeignAir');
 const parseForeAirStMsg = require('./message/parseForeignAirMsg');
+const getForecast = require('./lib/getForecast');
 
 async function platformReplyText(context, messenge) {
     if (config.chatroomPlatform == 'messenger') {
@@ -74,7 +76,9 @@ bot.onEvent(async context => {
         msg = msg.replace(/台/g, '臺');
         const weatherKeyword = isWeather(msg);
         const airKeyword = isAir(msg);
-        const funnyReply = isFunny(msg);
+        // 暫時關掉
+        // const funnyReply = isFunny(msg);
+        const timeKeyword = isTime(msg);
 
         if (msg.toLowerCase().includes("help")) {
             await platformReplyText(context,
@@ -177,15 +181,21 @@ bot.onEvent(async context => {
                 await platformReplyText(context, replyMsg);
             }
         } else if (msg.includes("預報")) {
-            const d = parseTime();
-            const dbKey = `${d.year}${d.month}${d.day}${d.hour}`;
-            const imgUrl = 'http://www.cwb.gov.tw/V7/forecast/taiwan/Data/Forecast01.png';
-            const url = await imagedb('forecast', dbKey, imgUrl)
-            if (url != null) {
-                await platformReplyImage(context, url);
-            } else {
-                // if get imgur image url fail, just reply in text
-                await platformReplyText(context, imgUrl);
+            // Case 1: only forecast, then return image
+            if (msg == "預報") {
+                const d = parseTime();
+                const dbKey = `${d.year}${d.month}${d.day}${d.hour}`;
+                const imgUrl = 'http://www.cwb.gov.tw/V7/forecast/taiwan/Data/Forecast01.png';
+                const url = await imagedb('forecast', dbKey, imgUrl)
+                if (url != null) {
+                    await platformReplyImage(context, url);
+                } else {
+                    // if get imgur image url fail, just reply in text
+                    await platformReplyText(context, imgUrl);
+                }
+            } else { // Case2: there is future time
+                const replyMsg = getForecast(msg);
+                await platformReplyText(context, replyMsg);
             }
         } else if (msg.includes("天氣圖")) {
             const d = parseTime();
@@ -252,13 +262,20 @@ bot.onEvent(async context => {
             // } else if (funnyReply) {
             //     await platformReplyText(context, funnyReply);
         } else if (weatherKeyword) {
+            let replyMsg;
             let area = null;
             area = isTaiwanArea(msg);
             if (area == null) {
                 area = {};
                 area['name'] = msg.split(weatherKeyword)[0];
             }
-            const replyMsg = await getAreaWeather(area);
+            // If there is time, use forecast
+            if (timeKeyword) {
+                replyMsg = await getForecast(msg);
+            } else {
+                // get the current wearther
+                replyMsg = await getAreaWeather(area);
+            }
             await platformReplyText(context, replyMsg);
         } else if ((context.platform == 'line' && context.event.rawEvent.source.type == 'user') || context.platform == 'messenger') {
             const replyMsg = "請輸入 help 查詢";
