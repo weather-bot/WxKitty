@@ -194,7 +194,7 @@ bot.onEvent(async context => {
                     await platformReplyText(context, imgUrl);
                 }
             } else { // Case2: there is future time
-                const replyMsg = getForecast(msg);
+                const replyMsg = await getForecast(msg);
                 await platformReplyText(context, replyMsg);
             }
         } else if (msg.includes("天氣圖")) {
