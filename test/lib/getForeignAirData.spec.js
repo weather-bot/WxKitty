@@ -1,7 +1,7 @@
 //'use strict';
 const assert = require('assert');
 const logger = require('node-color-log');
-const getForeignAirData = require('../../lib/ForeignAir');
+const getForeignAirData = require('../../lib/getForeignAir');
 
 // third parties
 const axios = require("axios");
