@@ -69,6 +69,12 @@ describe('=== Check keywords ===', () => {
             true,
             logger.debug(`${msg} & ${isTaiwanArea(msg).name}`)
         );
+        msg = "台中明天天氣";
+        assert.equal(
+            isTaiwanArea(msg).name.includes("臺中市北屯區北屯里"),
+            true,
+            logger.debug(`${msg} & ${isTaiwanArea(msg).name}`)
+        );
         msg = "我想知道桃園復興霞雲天氣";
         assert.equal(
             isTaiwanArea(msg).name.includes("桃園市復興區霞雲里"),
