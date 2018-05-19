@@ -24,7 +24,7 @@ describe('=== Check getForecast ===', () => {
             assert.equal(msg.includes("降雨機率"), true);
             done();
         })();
-    }).timeout(12000);
+    }).timeout(16000);
 
     it('Case 2: No Area', done => {
         (async () => {
