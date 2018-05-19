@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha ./test/lib",
-    "start": "node ."
+    "start": "node --icu-data-dir=./node_modules/full-icu ."
   },
   "repository": {
     "type": "git",
@@ -30,6 +30,7 @@
     "chinese-conv": "^1.0.1",
     "chrono-node": "github:tigercosmos/chrono",
     "date2obj": "0.0.7",
+    "full-icu": "^1.2.1",
     "geodist": "^0.2.1",
     "image-downloader": "^3.3.0",
     "merge-images": "^1.1.0",

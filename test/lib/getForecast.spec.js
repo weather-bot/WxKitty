@@ -13,7 +13,7 @@ describe('=== Check getForecast ===', () => {
             assert.equal(msg.includes("臺北市"), true);
             assert.equal(msg.includes("降雨機率"), true);
 
-            msg = await getForecast("台中明天的天氣");
+            msg = await getForecast("台中明天14:00天氣");
             logger.debug(msg);
             assert.equal(msg.includes("臺中市"), true);
             assert.equal(msg.includes("降雨機率"), true);
