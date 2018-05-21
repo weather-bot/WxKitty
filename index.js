@@ -35,7 +35,8 @@ const {
     isAirStation,
     isForeignAirStation,
     isTaiwanArea,
-    isTime
+    isTime,
+    isForecast
 } = require('./lib/keywords');
 const messagedb = require('./lib/messagedb');
 const getForeignAirData = require('./lib/getForeignAir');
@@ -180,7 +181,7 @@ bot.onEvent(async context => {
                 }
                 await platformReplyText(context, replyMsg);
             }
-        } else if (msg.includes("預報")) {
+        } else if (isForecast(msg)) {
             // Case 1: only forecast, then return image
             if (msg == "預報") {
                 const d = parseTime();
