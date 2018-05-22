@@ -6,9 +6,11 @@
 
 Using messenger and line bot to implement weather rebot, in order to tell weather information to users automatically.
 
+對此專案有興趣的話，可以閱讀這篇：[來寫個氣象機器人吧！](https://medium.com/@tigercosmos/1563c32a2f34)。
+
 <img width="300" border="0" alt="bot_home" src="https://raw.githubusercontent.com/ntu-as-cooklab/line-bot/master/img/bot-home.png">
 
-## Use 如何使用
+## Usage 如何使用
 
 ### For Messenger
 
