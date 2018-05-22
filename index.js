@@ -77,8 +77,7 @@ bot.onEvent(async context => {
         msg = msg.replace(/台/g, '臺');
         const weatherKeyword = isWeather(msg);
         const airKeyword = isAir(msg);
-        // 暫時關掉
-        // const funnyReply = isFunny(msg);
+        const funnyReply = isFunny(msg);
         const timeKeyword = isTime(msg);
 
         if (msg.toLowerCase().includes("help")) {
@@ -259,9 +258,6 @@ bot.onEvent(async context => {
                     await platformReplyText(context, replyMsg);
                 }
             }
-            // 先暫時關掉
-            // } else if (funnyReply) {
-            //     await platformReplyText(context, funnyReply);
         } else if (weatherKeyword) {
             let replyMsg;
             let area = null;
@@ -279,8 +275,12 @@ bot.onEvent(async context => {
             }
             await platformReplyText(context, replyMsg);
         } else if ((context.platform == 'line' && context.event.rawEvent.source.type == 'user') || context.platform == 'messenger') {
-            const replyMsg = "請輸入 help 查詢";
-            await platformReplyText(context, replyMsg);
+            if (funnyReply) {
+                await platformReplyText(context, funnyReply);
+            } else {
+                const replyMsg = "很抱歉目前只能回答氣象問題，可以輸入 help 查看更多細節喔！";
+                await platformReplyText(context, replyMsg);
+            }
         }
     }
 });
