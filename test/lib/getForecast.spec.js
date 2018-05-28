@@ -34,10 +34,11 @@ describe('=== Check getForecast ===', () => {
         })();
     }).timeout(5000);
 
-    it('Case 3: Invalid Time', done => {
+    it('Case 3: Weather within 7 days', done => {
         (async () => {
             const msg = await getForecast("臺北市後天的天氣");
-            assert.equal(msg.includes("查不到"), true);
+            logger.debug(msg);
+            assert.equal(msg.includes("降雨機率"), true);
             done();
         })();
     }).timeout(1000);
