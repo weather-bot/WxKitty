@@ -11,17 +11,17 @@ describe('=== Check getForecast ===', () => {
             let msg = await getForecast("士林區明天的天氣");
             logger.debug(msg);
             assert.equal(msg.includes("臺北市"), true);
-            assert.equal(msg.includes("降雨機率"), true);
+            assert.equal(msg.includes("最高溫度"), true);
 
             msg = await getForecast("台中明天14:00天氣");
             logger.debug(msg);
             assert.equal(msg.includes("臺中市"), true);
-            assert.equal(msg.includes("降雨機率"), true);
+            assert.equal(msg.includes("最高溫度"), true);
 
             msg = await getForecast("宜蘭明天晚上預報");
             logger.debug(msg);
             assert.equal(msg.includes("宜蘭"), true);
-            assert.equal(msg.includes("降雨機率"), true);
+            assert.equal(msg.includes("最高溫度"), true);
             done();
         })();
     }).timeout(16000);
@@ -34,10 +34,10 @@ describe('=== Check getForecast ===', () => {
         })();
     }).timeout(5000);
 
-    it('Case 3: Invalid Time', done => {
+    it('Case 3: Weather within 7 days', done => {
         (async () => {
             const msg = await getForecast("臺北市後天的天氣");
-            assert.equal(msg.includes("查不到"), true);
+            assert.equal(msg.includes("描述"), true);
             done();
         })();
     }).timeout(1000);
