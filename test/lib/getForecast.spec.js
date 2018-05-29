@@ -34,12 +34,23 @@ describe('=== Check getForecast ===', () => {
         })();
     }).timeout(5000);
 
-    it('Case 3: Weather within 7 days', done => {
+    it('Case 3: Weather within 3, 5, 7 days', done => {
         (async () => {
-            const msg = await getForecast("臺北市後天的天氣");
+            let msg = await getForecast("臺北市後天的天氣");
             logger.debug(msg);
-            assert.equal(msg.includes("降雨機率"), true);
+            assert.equal(msg.includes("臺北市"), true);
+            assert.equal(msg.includes("最低溫度"), true);
+
+            msg = await getForecast("苗栗五天後的天氣");
+            logger.debug(msg);
+            assert.equal(msg.includes("苗栗"), true);
+            assert.equal(msg.includes("最低溫度"), true);
+
+            msg = await getForecast("高雄市七天後的天氣");
+            logger.debug(msg);
+            assert.equal(msg.includes("高雄市"), true);
+            assert.equal(msg.includes("最低溫度"), true);
             done();
         })();
-    }).timeout(1000);
+    }).timeout(16000);
 });
