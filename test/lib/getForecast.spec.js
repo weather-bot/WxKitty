@@ -21,10 +21,10 @@ describe('=== Check getForecast ===', () => {
             msg = await getForecast("宜蘭明天晚上預報");
             logger.debug(msg);
             assert.equal(msg.includes("宜蘭"), true);
-            assert.equal(msg.includes("降雨機率"), true);
+            assert.equal(msg.includes("最低溫度"), true);
             done();
         })();
-    }).timeout(16000);
+    }).timeout(8000);
 
     it('Case 2: No Area', done => {
         (async () => {
@@ -32,9 +32,9 @@ describe('=== Check getForecast ===', () => {
             assert.equal(msg.includes("查不到"), true);
             done();
         })();
-    }).timeout(5000);
+    });
 
-    it('Case 3: Weather within 3, 5, 7 days', done => {
+    it('Case 3: Weather within 3, 5, 6 days', done => {
         (async () => {
             let msg = await getForecast("臺北市後天的天氣");
             logger.debug(msg);
@@ -46,13 +46,13 @@ describe('=== Check getForecast ===', () => {
             assert.equal(msg.includes("苗栗"), true);
             assert.equal(msg.includes("最低溫度"), true);
 
-            msg = await getForecast("高雄市七天後的天氣");
+            msg = await getForecast("高雄市6天後的天氣");
             logger.debug(msg);
             assert.equal(msg.includes("高雄市"), true);
             assert.equal(msg.includes("最低溫度"), true);
             done();
         })();
-    }).timeout(16000);
+    }).timeout(8000);
 
     it('Case 4: Invalid Time', done => {
         (async () => {
