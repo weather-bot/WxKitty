@@ -89,7 +89,7 @@ bot.onEvent(async context => {
                 require('./message/issueMsg')
             );
         } else if (msg.toLowerCase().includes("github") || msg.includes("原始碼")) {
-            await platformReplyText(context, "https://github.com/ntu-as-cooklab/weather-bot/");
+            await platformReplyText(context, "https://github.com/weather-bot/weather-bot/");
         } else if (msg.toLowerCase().includes("cwb") || msg.includes("氣象局")) {
             await platformReplyText(context, "www.cwb.gov.tw/");
         } else if (msg.includes("觀測站清單")) {

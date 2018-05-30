@@ -1,6 +1,6 @@
 # 氣象機器人 Weather Bot
 
-[![Build Status](https://travis-ci.org/ntu-as-cooklab/weather-bot.svg?branch=master)](https://travis-ci.org/ntu-as-cooklab/weather-bot)
+[![Build Status](https://travis-ci.org/weather-bot/weather-bot.svg?branch=master)](https://travis-ci.org/weather-bot/weather-bot)
 
 使用 messenger 和 line bot 實作的氣象機器人，用來自動回應有關天氣的訊息
 
@@ -8,7 +8,7 @@ Using messenger and line bot to implement weather rebot, in order to tell weathe
 
 對此專案有興趣的話，可以閱讀這篇：[來寫個氣象機器人吧！](https://medium.com/@tigercosmos/1563c32a2f34)。
 
-<img width="300" border="0" alt="bot_home" src="https://raw.githubusercontent.com/ntu-as-cooklab/line-bot/master/img/bot-home.png">
+<img width="300" border="0" alt="bot_home" src="https://raw.githubusercontent.com/weather-bot/weather-bot/master/img/bot-home.png">
 
 ## Usage 如何使用
 
@@ -18,27 +18,27 @@ Like to page https://www.facebook.com/weather.bot.tw/
 
 and enjoy talk to messeenger :)
 
-<img width="400" border="0" alt="demo_messenger" src="https://raw.githubusercontent.com/ntu-as-cooklab/line-bot/master/img/messenger.png">
+<img width="400" border="0" alt="demo_messenger" src="https://raw.githubusercontent.com/weather-bot/weather-bot/master/img/messenger.png">
 
 ### For Line
 
 Add the bot via QR code or click the button below
 
-![QRcode](https://raw.githubusercontent.com/ntu-as-cooklab/line-bot/master/img/qrcode.png)
+![QRcode](https://raw.githubusercontent.com/weather-bot/weather-bot/master/img/qrcode.png)
 
 <a href="https://line.me/R/ti/p/%40lbz9453s"><img height="36" border="0" alt="加入好友" src="https://scdn.line-apps.com/n/line_add_friends/btn/zh-Hant.png"></a>
 
 ## Demo
 
-<img width="400" border="0" alt="demo_enter" src="https://raw.githubusercontent.com/ntu-as-cooklab/line-bot/master/img/demo_enter.png">
+<img width="400" border="0" alt="demo_enter" src="https://raw.githubusercontent.com/weather-bot/weather-bot/master/img/demo_enter.png">
 
-<img width="400" border="0" alt="demo1" src="https://raw.githubusercontent.com/ntu-as-cooklab/line-bot/master/img/demo1.png">
+<img width="400" border="0" alt="demo1" src="https://raw.githubusercontent.com/weather-bot/weather-bot/master/img/demo1.png">
 
-<img width="400" border="0" alt="demo2" src="https://raw.githubusercontent.com/ntu-as-cooklab/line-bot/master/img/demo2.png">
+<img width="400" border="0" alt="demo2" src="https://raw.githubusercontent.com/weather-bot/weather-bot/master/img/demo2.png">
 
-<img width="400" border="0" alt="demo3" src="https://raw.githubusercontent.com/ntu-as-cooklab/line-bot/master/img/demo3.png">
+<img width="400" border="0" alt="demo3" src="https://raw.githubusercontent.com/weather-bot/weather-bot/master/img/demo3.png">
 
-<img width="400" border="0" alt="demo4" src="https://raw.githubusercontent.com/ntu-as-cooklab/line-bot/master/img/demo4.png">
+<img width="400" border="0" alt="demo4" src="https://raw.githubusercontent.com/weather-bot/weather-bot/master/img/demo4.png">
 
 ## Document 文件
 
@@ -158,7 +158,7 @@ cp /usr/local/Cellar/fontconfig/2.12.6/lib/pkgconfig/fontconfig.pc /usr/local/li
 Make sure npm and nodeJS have installed.
 
 ```sh
-git clone https://github.com/ntu-as-cooklab/weather-bot
+git clone https://github.com/weather-bot/weather-bot
 cd weather-bot
 npm install
 npm start

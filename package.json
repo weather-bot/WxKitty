@@ -1,5 +1,5 @@
 {
-  "name": "line-bot",
+  "name": "weather-bot",
   "version": "0.0.0",
   "description": "line bot",
   "main": "index.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ntu-as-cooklab/line-bot.git"
+    "url": "git+https://github.com/weather-bot/weather-bot.git"
   },
   "keywords": [
     "line",
@@ -20,15 +20,15 @@
   "author": "tigercosmos",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ntu-as-cooklab/line-bot/issues"
+    "url": "https://github.com/weather-bot/weather-bot/issues"
   },
-  "homepage": "https://github.com/ntu-as-cooklab/line-bot#readme",
+  "homepage": "https://github.com/weather-bot/weather-bot#readme",
   "dependencies": {
     "axios": "^0.17.1",
     "bottender": "^0.14.34",
     "canvas": "^1.6.9",
     "chinese-conv": "^1.0.1",
-    "chrono-node": "github:tigercosmos/chrono",
+    "chrono-node": "github:weather-bot/chrono",
     "date2obj": "0.0.7",
     "full-icu": "^1.2.1",
     "geodist": "^0.2.1",
