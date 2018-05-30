@@ -57,11 +57,11 @@ describe('=== Check getForecast ===', () => {
             assert.equal(msg.includes("最低溫度"), true);
             done();
         })();
-    }).timeout(20000);
+    }).timeout(15000);
 
     it('Case 4: Invalid Time', done => {
         (async () => {
-            const msg = await getForecast("臺北市10天後天氣");
+            let msg = await getForecast("臺北市10天後天氣");
             assert.equal(msg.includes("查不到"), true);
 
             msg = await getForecast("紐約後天的天氣");
