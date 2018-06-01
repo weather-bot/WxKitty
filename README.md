@@ -116,13 +116,17 @@ The two bot are synced to `master`.
 
 For more detail about line bot, can visit https://developers.line.me/
 
-### How to test
-
-There is a `dev` branch which syncs to a test line bot.
-
-Please PR to `dev` then test the bot and check the new patch is fine.
+### How to test in bot
 
 Test bot(line) link: https://line.me/R/ti/p/pOGQWj-4j-
+
+Steps:
+
+1. add the test line bot above as friend
+2. send a PR
+3. ask @tigercosmos to help you call the bot
+
+For user IDs in white list, create comment `bot try` in PR.
 
 ### Heroku
 
