@@ -24,7 +24,7 @@ describe('=== Check getForecast ===', () => {
             assert.equal(msg.includes("最低溫度"), true);
             done();
         })();
-    }).timeout(8000);
+    }).timeout(20000);
 
     it('Case 2: No Area', done => {
         (async () => {
@@ -52,7 +52,7 @@ describe('=== Check getForecast ===', () => {
             assert.equal(msg.includes("最低溫度"), true);
             done();
         })();
-    }).timeout(8000);
+    }).timeout(20000);
 
     it('Case 4: Invalid Time', done => {
         (async () => {
