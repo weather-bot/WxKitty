@@ -105,8 +105,8 @@ Add the bot via QR code or click the button below
 
 Currently this repo is connecting with:
 
-- Line: https://weather-bot-tw.herokuapp.com/ 
-- Messenger: https://messenger-weather-bot-tw.herokuapp.com/
+- Line: https://weather-bot-tw.herokuapp.com/line 
+- Messenger: https://weather-bot-tw.herokuapp.com/messenger
 
 The bot use webhook to receive message and reply to users.
 
