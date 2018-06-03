@@ -1,19 +1,29 @@
 const config = require('./config');
 
-// chatroom platform framework
+// Platforms
 const {
     LineBot,
-    MessengerBot
+    MessengerBot,
+    ConsoleBot
 } = require('bottender');
 
-const bot = (config.chatroomPlatform == 'messenger') ?
-    new MessengerBot({
+// Choose platform
+let bot;
+if (process.argv[2] == "console") {
+    bot = new ConsoleBot({
+        fallbackMethods: true,
+    });
+} else if (config.chatroomPlatform == 'messenger') {
+    bot = new MessengerBot({
         accessToken: config.messengerAccessToken,
         appSecret: config.messengerAppSecret,
-    }) : new LineBot({
+    });
+} else {
+    bot = new LineBot({
         channelSecret: config.channelSecret,
         accessToken: config.channelAccessToken
     });
+}
 
 const {
     createServer
@@ -284,6 +294,10 @@ bot.onEvent(async context => {
         }
     }
 });
+
+if (process.argv[2] == "console") {
+    bot.createRuntime();
+}
 
 const server = (config.chatroomPlatform == 'messenger') ?
     createServer(bot, {

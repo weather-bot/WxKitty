@@ -114,7 +114,17 @@ The two bot are synced to `master`.
 
 For more detail about line bot, can visit https://developers.line.me/
 
-### How to test in bot
+### How to test
+
+#### Console mode testing
+
+Console mode is an interactive mode that you can test in local.
+
+```sh
+node . console
+```
+
+#### Test the real bot
 
 Test bot(line) link: https://line.me/R/ti/p/pOGQWj-4j-
 
