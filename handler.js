@@ -25,7 +25,7 @@ const getForecast = require('./lib/getForecast');
 const config = require('./config');
 
 async function platformReplyText(context, messenge) {
-    if (config.chatroomPlatform == 'messenger') {
+    if (context.platform == 'messenger') {
         await context.sendText(messenge)
     } else {
         await context.replyText(messenge);
@@ -33,7 +33,7 @@ async function platformReplyText(context, messenge) {
 }
 
 async function platformReplyImage(context, url) {
-    if (config.chatroomPlatform == 'messenger') {
+    if (context.platform == 'messenger') {
         await context.sendImage(url)
     } else {
         await context.replyImage(url);
