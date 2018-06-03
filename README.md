@@ -10,15 +10,13 @@ Using messenger and line bot to implement weather rebot, in order to tell weathe
 
 <img width="300" border="0" alt="bot_home" src="https://raw.githubusercontent.com/weather-bot/weather-bot/master/img/bot-home.png">
 
-## Usage 如何使用
+## Use the bot
 
 ### For Messenger
 
-Like to page https://www.facebook.com/weather.bot.tw/
+Link: http://m.me/weather.bot.tw/
 
-and enjoy talk to messeenger :)
-
-<img width="400" border="0" alt="demo_messenger" src="https://raw.githubusercontent.com/weather-bot/weather-bot/master/img/messenger.png">
+<img width="300" border="0" alt="demo_messenger" src="https://raw.githubusercontent.com/weather-bot/weather-bot/master/img/messenger.png">
 
 ### For Line
 
@@ -159,7 +157,7 @@ cp /usr/local/Cellar/fontconfig/2.12.6/lib/pkgconfig/fontconfig.pc /usr/local/li
 
 ### Run
 
-Make sure npm and nodeJS have installed.
+Make sure npm and nodeJS(require above version 7.6) have installed.
 
 ```sh
 git clone https://github.com/weather-bot/weather-bot
@@ -170,8 +168,8 @@ npm start
 
 ## Developer
 
-- programmer: [＠tigercosmos](https://github.com/tigercosmos), [@csinrn](https://github.com/csinrn)
-- designer: 戴君倢 Jennesy Dai
+- Programmer: [＠tigercosmos](https://github.com/tigercosmos), [@csinrn](https://github.com/csinrn), [＠cochiachang](https://github.com/cochiachang)
+- Art Designer: 戴君倢 Jennesy Dai
 
 ## License
 
