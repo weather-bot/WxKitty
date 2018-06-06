@@ -26,7 +26,7 @@ describe('=== Check getForecast ===', () => {
             msg = await getForecast("紐約明天晚上預報");
             logger.debug(msg);
             assert.equal(msg.includes("紐約"), true);
-            assert.equal(msg.includes("開始時間"), true);
+            assert.equal(msg.includes("時間"), true);
             done();
         })();
     }).timeout(20000);
