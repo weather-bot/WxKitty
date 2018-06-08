@@ -18,7 +18,7 @@ describe('=== Check getForecast ===', () => {
             assert.equal(msg.includes("臺中市"), true);
             assert.equal(msg.includes("降雨機率"), true);
 
-            msg = await getForecast("宜蘭明天晚上預報"); //output can't find time
+            msg = await getForecast("宜蘭明天晚上預報");
             logger.debug(msg);
             assert.equal(msg.includes("宜蘭"), true);
             assert.equal(msg.includes("降雨機率"), true);
@@ -62,7 +62,7 @@ describe('=== Check getForecast ===', () => {
             assert.equal(msg.includes("最低溫度"), true);
             done();
         })();
-    }).timeout(15000);
+    }).timeout(20000);
 
     it('Case 4: Invalid Time', done => {
         (async () => {
