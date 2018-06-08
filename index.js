@@ -31,6 +31,7 @@ if (process.argv[2] == "console") {
     bots = new ConsoleBot({
         fallbackMethods: true,
     }).onEvent(handler);
+    bots.createRuntime();
 } else {
     bots = {
         messenger: new MessengerBot({
@@ -42,11 +43,6 @@ if (process.argv[2] == "console") {
             accessToken: config.channelAccessToken
         }).onEvent(handler),
     };
-}
-
-if (process.argv[2] == "console") {
-    bots.createRuntime();
-} else {
     registerRoutes(server, bots.messenger, {
         path: '/messenger',
         verifyToken: config.messengerVerifyToken
@@ -54,7 +50,6 @@ if (process.argv[2] == "console") {
     registerRoutes(server, bots.line, {
         path: '/line'
     });
-
     server.listen(process.env.PORT || 5000, () => {
         console.log('server is running on 5000 port...');
     });
