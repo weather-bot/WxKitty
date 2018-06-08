@@ -28,7 +28,7 @@ describe('=== Check getForecast ===', () => {
             assert.equal(msg.includes("紐約"), true);
             assert.equal(msg.includes("時間"), true);
 
-            msg = await getForecast("NewYork tomorrow");
+            msg = await getForecast("NEW YORK tomorrow");
             logger.debug(msg);
             assert.equal(msg.includes("New York"), true);
             assert.equal(msg.includes("時間"), true);
