@@ -2,9 +2,14 @@
 
 [![Build Status](https://travis-ci.org/weather-bot/weather-bot.svg?branch=master)](https://travis-ci.org/weather-bot/weather-bot)
 
-使用 messenger 和 line bot 實作的氣象機器人，用來自動回應有關天氣的訊息
+氣象機器人，自動回應有關天氣的訊息
 
-Using messenger and line bot to implement weather rebot, in order to tell weather information to users automatically.
+Ｗeather Bot: anwser all questions about weather.
+
+Supporting:
+- [Line](https://line.me/R/ti/p/%40lbz9453s)
+- [Messenger](http://m.me/weather.bot.tw/)
+- [Telegram](https://t.me/weather_tw_bot)
 
 對此專案有興趣的話，可以閱讀這篇：[來寫個氣象機器人吧！](https://medium.com/@tigercosmos/1563c32a2f34)。
 
@@ -12,19 +17,27 @@ Using messenger and line bot to implement weather rebot, in order to tell weathe
 
 ## Use the bot
 
-### For Messenger
+### Messenger
+
+You can chat with the bot via the link.
 
 Link: http://m.me/weather.bot.tw/
 
-<img width="300" border="0" alt="demo_messenger" src="https://raw.githubusercontent.com/weather-bot/weather-bot/master/img/messenger.png">
-
-### For Line
+### Line
 
 Add the bot via QR code or click the button below
 
+You can chat with the bot directly or add the bot in the group.
+
 ![QRcode](https://raw.githubusercontent.com/weather-bot/weather-bot/master/img/qrcode.png)
 
-<a href="https://line.me/R/ti/p/%40lbz9453s"><img height="36" border="0" alt="加入好友" src="https://scdn.line-apps.com/n/line_add_friends/btn/zh-Hant.png"></a>
+<a href="https://line.me/R/ti/p/%40lbz9453s"><img height="20" border="0" alt="加入好友" src="https://scdn.line-apps.com/n/line_add_friends/btn/zh-Hant.png"></a>
+
+### Telegram
+
+Add the bot: https://t.me/weather_tw_bot
+
+You can chat with the bot directly or add the bot in the group.
 
 ## Demo
 

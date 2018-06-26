@@ -52,9 +52,10 @@ const handler = async context => {
     } else if (context.event.isText) {
         let msg = context.event.text;
         // record all message
-        if (context.platform != 'console' ||
-            (context.platform == 'line' &&
-                !context.event.rawEvent.source.type == 'user')
+        if (context.platform != 'console' &&
+            !(context.platform == 'line' &&
+                (context.event.rawEvent.source.type == 'room' ||
+                    context.event.rawEvent.source.type == 'group'))
         ) {
             messagedb.write(msg);
         }
