@@ -9,6 +9,8 @@ module.exports = {
     messengerAccessToken: process.env.messengerAccessToken,
     messengerAppSecret: process.env.messengerAppSecret,
     messengerVerifyToken: process.env.messengerVerifyToken,
+    // telegram
+    telegramAccessToken: process.env.telegramAccessToken,
     // open weather map
     owmApiKey: process.env.owmApiKey,
     // imgur

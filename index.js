@@ -6,6 +6,7 @@ const config = require('./config');
 const {
     LineBot,
     MessengerBot,
+    TelegramBot,
     ConsoleBot
 } = require('bottender');
 
@@ -42,6 +43,9 @@ if (process.argv[2] == "console") {
             channelSecret: config.channelSecret,
             accessToken: config.channelAccessToken
         }).onEvent(handler),
+        telegram: new TelegramBot({
+            accessToken: config.telegramAccessToken,
+        }).onEvent(handler),
     };
     registerRoutes(server, bots.messenger, {
         path: '/messenger',
@@ -49,6 +53,9 @@ if (process.argv[2] == "console") {
     });
     registerRoutes(server, bots.line, {
         path: '/line'
+    });
+    registerRoutes(server, bots.telegram, {
+        path: '/telegram'
     });
     server.listen(process.env.PORT || 5000, () => {
         console.log('server is running on 5000 port...');

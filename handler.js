@@ -25,7 +25,7 @@ const getForecast = require('./lib/getForecast');
 const config = require('./config');
 
 async function platformReplyText(context, messenge) {
-    if (context.platform == 'messenger') {
+    if (context.platform == 'messenger' || context.platform == 'telegram') {
         await context.sendText(messenge)
     } else {
         await context.replyText(messenge);
@@ -33,7 +33,7 @@ async function platformReplyText(context, messenge) {
 }
 
 async function platformReplyImage(context, url) {
-    if (context.platform == 'messenger') {
+    if (context.platform == 'messenger' || context.platform == 'telegram') {
         await context.sendImage(url)
     } else {
         await context.replyImage(url);
