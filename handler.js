@@ -257,7 +257,8 @@ const handler = async context => {
                 replyMsg = await getAreaWeather(area);
             }
             await platformReplyText(context, replyMsg);
-        } else if ((context.platform == 'line' && context.event.rawEvent.source.type == 'user') || context.platform == 'messenger') {
+        } else if ((context.platform == 'line' && context.event.rawEvent.source.type == 'user') ||
+            context.platform == 'messenger' || context.platform == 'telegram') {
             if (funnyReply) {
                 await platformReplyText(context, funnyReply);
             } else {
