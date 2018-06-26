@@ -29,9 +29,9 @@ Add the bot via QR code or click the button below
 
 You can chat with the bot directly or add the bot in the group.
 
-![QRcode](https://raw.githubusercontent.com/weather-bot/weather-bot/master/img/qrcode.png)
+<img height="100" border="0" alt="QRcode" src="https://raw.githubusercontent.com/weather-bot/weather-bot/master/img/qrcode.png">
 
-<a href="https://line.me/R/ti/p/%40lbz9453s"><img height="20" border="0" alt="加入好友" src="https://scdn.line-apps.com/n/line_add_friends/btn/zh-Hant.png"></a>
+<a href="https://line.me/R/ti/p/%40lbz9453s"><img height="30" border="0" alt="加入好友" src="https://scdn.line-apps.com/n/line_add_friends/btn/zh-Hant.png"></a>
 
 ### Telegram
 
