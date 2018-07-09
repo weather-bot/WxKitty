@@ -223,8 +223,16 @@ const handler = async context => {
             if (url != null) {
                 await platformReplyImage(context, url);
             } else {
-                // if get imgur image url fail, just reply in text
+                // if get image url fail, just reply in text
                 await platformReplyText(context, "取得最新資料失敗。請上 http://www.cwb.gov.tw/V7/earthquake/ 查詢");
+            }
+        } else if (msg.includes("颱風")) {
+            const url = await require('./lib/getTyphoon')();
+            if (url != null) {
+                await platformReplyImage(context, url);
+            } else {
+                // if get imgur image url fail, just reply in text
+                await platformReplyText(context, "取得最新資料失敗。請上 https://www.cwb.gov.tw/V7/prevent/typhoon/ty.htm 查詢");
             }
         } else if (msg.includes('概況')) {
             const table = require('./data/overviewID');
