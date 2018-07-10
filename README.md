@@ -95,6 +95,7 @@ You can chat with the bot directly or add the bot in the group.
  ＊天氣圖
  ＊衛星雲
  ＊雷達
+ ＊颱風
 
 <氣象觀測站>：查詢單一測站的詳細數據
  ＊[觀測站名稱]觀測
