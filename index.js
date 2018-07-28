@@ -7,7 +7,8 @@ const {
     LineBot,
     MessengerBot,
     TelegramBot,
-    ConsoleBot
+    ConsoleBot,
+    FileSessionStore 
 } = require('bottender');
 
 const {
@@ -38,13 +39,16 @@ if (process.argv[2] == "console") {
         messenger: new MessengerBot({
             accessToken: config.messengerAccessToken,
             appSecret: config.messengerAppSecret,
+            sessionStore: new FileSessionStore(),
         }).onEvent(handler),
         line: new LineBot({
             channelSecret: config.channelSecret,
-            accessToken: config.channelAccessToken
+            accessToken: config.channelAccessToken,
+            sessionStore: new FileSessionStore(),
         }).onEvent(handler),
         telegram: new TelegramBot({
             accessToken: config.telegramAccessToken,
+            sessionStore: new FileSessionStore(),
         }).onEvent(handler),
     };
     registerRoutes(server, bots.messenger, {
