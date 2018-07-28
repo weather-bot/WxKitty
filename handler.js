@@ -59,22 +59,23 @@ const handler = async context => {
         // trim space and change charactor
         msg = msg.replace(/\s/g, '');
         msg = msg.replace(/台/g, '臺');
+        msg = msg.toLowerCase();
         const weatherKeyword = isWeather(msg);
         const airKeyword = isAir(msg);
         const funnyReply = isFunny(msg);
         const timeKeyword = isTime(msg);
 
-        if (msg.toLowerCase().includes("help")) {
+        if (msg.includes("help")) {
             await platformReplyText(context,
                 require('./message/helpMsg')
             );
-        } else if (msg.toLowerCase().includes("issue") || msg.includes("回報問題")) {
+        } else if (msg.includes("issue") || msg.includes("回報問題")) {
             await platformReplyText(context,
                 require('./message/issueMsg')
             );
-        } else if (msg.toLowerCase().includes("github") || msg.includes("原始碼")) {
+        } else if (msg.includes("github") || msg.includes("原始碼")) {
             await platformReplyText(context, "https://github.com/weather-bot/weather-bot/");
-        } else if (msg.toLowerCase().includes("cwb") || msg.includes("氣象局")) {
+        } else if (msg.includes("cwb") || msg.includes("氣象局")) {
             await platformReplyText(context, "www.cwb.gov.tw/");
         } else if (msg.includes("觀測站清單")) {
             await platformReplyText(context,
