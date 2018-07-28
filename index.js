@@ -2,13 +2,16 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const config = require('./config');
 
+const MAX_ITEMS_IN_CACHE = 500;
+const EXPIRED_IN_FIVE_MINUTE = 5 * 60;
+
 // Platforms
 const {
     LineBot,
     MessengerBot,
     TelegramBot,
     ConsoleBot,
-    FileSessionStore 
+    MemorySessionStore
 } = require('bottender');
 
 const {
@@ -27,6 +30,11 @@ server.use(
     })
 );
 
+// Session
+const mSession = new MemorySessionStore(
+    MAX_ITEMS_IN_CACHE, EXPIRED_IN_FIVE_MINUTE
+);
+
 // Choose platform
 let bots;
 if (process.argv[2] == "console") {
@@ -39,16 +47,16 @@ if (process.argv[2] == "console") {
         messenger: new MessengerBot({
             accessToken: config.messengerAccessToken,
             appSecret: config.messengerAppSecret,
-            sessionStore: new FileSessionStore(),
+            sessionStore: mSession,
         }).onEvent(handler),
         line: new LineBot({
             channelSecret: config.channelSecret,
             accessToken: config.channelAccessToken,
-            sessionStore: new FileSessionStore(),
+            sessionStore: mSession,
         }).onEvent(handler),
         telegram: new TelegramBot({
             accessToken: config.telegramAccessToken,
-            sessionStore: new FileSessionStore(),
+            sessionStore: mSession,
         }).onEvent(handler),
     };
     registerRoutes(server, bots.messenger, {
