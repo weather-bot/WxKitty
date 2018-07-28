@@ -9,7 +9,6 @@ const {
 const {
     isAir,
     isWeather,
-    isObservation,
     isFunny,
     isAirStation,
     isForeignAirStation,
@@ -21,8 +20,6 @@ const messagedb = require('./lib/messagedb');
 const getForeignAirData = require('./lib/getForeignAir');
 const parseForeAirStMsg = require('./message/parseForeignAirMsg');
 const getForecast = require('./lib/getForecast');
-
-const config = require('./config');
 
 async function platformReplyText(context, messenge) {
     if (context.platform == 'messenger' || context.platform == 'telegram') {
@@ -144,8 +141,7 @@ const handler = async context => {
                         }
                     })
                 } catch (err) {
-                    console.log("input text: ", msg);
-                    console.log(err);
+                    console.log("input text: ", msg, err);
                     replyMsg = '取得資料失敗';
                 }
                 await platformReplyText(context, replyMsg);
