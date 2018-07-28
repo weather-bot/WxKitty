@@ -48,7 +48,7 @@ const handler = async context => {
         );
     } else if (context.event.isText) {
         let msg = context.event.text;
-        // record all message
+        // record all message if in personal mode
         if (context.platform != 'console' &&
             !(context.platform == 'line' &&
                 (context.event.rawEvent.source.type == 'room' ||
