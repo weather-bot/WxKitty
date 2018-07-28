@@ -181,7 +181,9 @@ cp /usr/local/Cellar/fontconfig/2.12.6/lib/pkgconfig/fontconfig.pc /usr/local/li
 
 ### Run
 
-Make sure npm and nodeJS(require above version 7.6) have installed.
+Make sure npm and NodeJS(v8.11.2) have installed.
+
+> note: it is known that not work in NodeJS v10
 
 ```sh
 git clone https://github.com/weather-bot/weather-bot
