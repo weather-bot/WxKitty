@@ -47,7 +47,7 @@ const handler = async context => {
         await platformReplyText(context,
             require('./message/joinMsg')
         );
-    } else if (context.event.isImage) {
+    } else if (context.event.isImage || context.event.isPhoto) {
         if (context.state.isGotReqWaitImg) {
             const result = await getCloudClassification({
                 platform: context.platform,
