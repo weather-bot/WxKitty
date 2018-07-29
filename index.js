@@ -30,10 +30,17 @@ server.use(
     })
 );
 
-// Session
+// Session: how we store session. We stores sessions in memory.
 const mSession = new MemorySessionStore(
     MAX_ITEMS_IN_CACHE, EXPIRED_IN_FIVE_MINUTE
 );
+
+// Session data: used for conversation
+const sessData = {
+    isGotImgWaitAnwser: false,
+    isGotReqWaitImg: false,
+    previousContext: {}
+}
 
 // Choose platform
 let bots;
@@ -48,16 +55,16 @@ if (process.argv[2] == "console") {
             accessToken: config.messengerAccessToken,
             appSecret: config.messengerAppSecret,
             sessionStore: mSession,
-        }).onEvent(handler),
+        }).setInitialState(sessData).onEvent(handler),
         line: new LineBot({
             channelSecret: config.channelSecret,
             accessToken: config.channelAccessToken,
             sessionStore: mSession,
-        }).onEvent(handler),
+        }).setInitialState(sessData).onEvent(handler),
         telegram: new TelegramBot({
             accessToken: config.telegramAccessToken,
             sessionStore: mSession,
-        }).onEvent(handler),
+        }).setInitialState(sessData).onEvent(handler),
     };
     registerRoutes(server, bots.messenger, {
         path: '/messenger',

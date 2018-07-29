@@ -3,6 +3,7 @@ const axios = require("axios");
 const segment = require('./lib/segment');
 const parseTime = require('./lib/parseTime');
 const imagedb = require('./lib/imagedb');
+const getCloudClassification = require('./lib/getCloudClassification');
 const {
     getAreaWeather,
 } = require('./lib/areaWeather');
@@ -46,6 +47,35 @@ const handler = async context => {
         await platformReplyText(context,
             require('./message/joinMsg')
         );
+    } else if (context.event.isImage) {
+        if (context.state.isGotReqWaitImg) {
+            const result = await getCloudClassification({
+                platform: context.platform,
+                event: context.event
+            });
+            if (result) {
+                context.resetState();
+                await platformReplyText(context,
+                    require('./message/parseCloudResult')(result)
+                );
+            } else {
+                await platformReplyText(context,
+                    '分析照片失敗，只支援 jpg 格式，請重新上傳檔案'
+                );
+            }
+        } else {
+            context.setState({
+                isGotImgWaitAns: true,
+                isGotReqWaitImg: false,
+                previousContext: {
+                    platform: context.platform,
+                    event: context.event
+                }
+            })
+            await platformReplyText(context,
+                require('./message/isImageMsg')
+            );
+        }
     } else if (context.event.isText) {
         let msg = context.event.text;
         // record all message if in personal mode
@@ -65,6 +95,32 @@ const handler = async context => {
         const funnyReply = isFunny(msg);
         const timeKeyword = isTime(msg);
 
+        // answer for session
+        if (context.state.isGotImgWaitAns) {
+            if (/yes|y|是/.test(msg)) {
+                const result = await getCloudClassification(
+                    context.state.previousContext);
+                if (result) {
+                    context.resetState();
+                    await platformReplyText(context,
+                        require('./message/parseCloudResult')(result)
+                    );
+                } else {
+                    await platformReplyText(context,
+                        '分析照片失敗，只支援 jpg 格式，請重新上傳檔案'
+                    );
+                }
+            } else if (/no|n|否/.test(msg)) {
+                context.resetState();
+                await platformReplyText(context, '不進行分析');
+            } else {
+                // User not answer if need to classify cloud
+                // Reset session and then go on.
+                context.resetState();
+            }
+        }
+
+        // anwser for command
         if (msg.includes("help")) {
             await platformReplyText(context,
                 require('./message/helpMsg')
@@ -81,6 +137,14 @@ const handler = async context => {
             await platformReplyText(context,
                 require('./message/obsStMsg')
             );
+        } else if (/(雲.*辨識)|(辨識.*雲)/.test(msg)) {
+            const replyMsg = "請上傳雲的照片(jpg)";
+            context.setState({
+                isGotImgWaitAnwser: false,
+                isGotReqWaitImg: true,
+                previousContext: {}
+            });
+            await platformReplyText(context, replyMsg);
         } else if (msg.includes("觀測")) {
             let replyMsg = '';
             const parseObsStMsg = require('./message/parseObsStMsg');
