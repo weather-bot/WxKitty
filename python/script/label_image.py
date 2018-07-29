@@ -35,7 +35,10 @@ with tf.Session() as sess:
     for node_id in top_k:
         human_string = label_lines[node_id]
         score = predictions[0][node_id]
-        text = '%s: %.2f' % (human_string, score)
-        outputData.append(text)
+        result = {
+            "name": human_string,
+            "score": "%.2f" % score
+        }
+        outputData.append(result) 
     
     print(json.dumps(outputData))
