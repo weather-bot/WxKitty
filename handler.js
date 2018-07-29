@@ -96,12 +96,14 @@ const handler = async context => {
         const timeKeyword = isTime(msg);
 
         // answer for session
+        let shouldAnsAfterSession = true;
         if (context.state.isGotImgWaitAns) {
             if (/yes|y|是/.test(msg)) {
                 const result = await getCloudClassification(
                     context.state.previousContext);
                 if (result) {
                     context.resetState();
+                    shouldAnsAfterSession = false;
                     await platformReplyText(context,
                         require('./message/parseCloudResult')(result)
                     );
@@ -112,6 +114,7 @@ const handler = async context => {
                 }
             } else if (/no|n|否/.test(msg)) {
                 context.resetState();
+                shouldAnsAfterSession = false;
                 await platformReplyText(context, '不進行分析');
             } else {
                 // User not answer if need to classify cloud
@@ -121,7 +124,9 @@ const handler = async context => {
         }
 
         // anwser for command
-        if (msg.includes("help")) {
+        if (!shouldAnsAfterSession) {
+            // do nothing
+        } else if (msg.includes("help")) {
             await platformReplyText(context,
                 require('./message/helpMsg')
             );
