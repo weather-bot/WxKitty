@@ -1,0 +1,10 @@
+altocumulus
+cirrostratus
+cirrocumulus
+stratus
+nimbostratus
+cumulus
+altostratus
+cumulonimbus
+stratocumulus
+cirrus
