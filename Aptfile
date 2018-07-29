@@ -4,3 +4,4 @@ libpango1.0-dev
 libgif-dev
 build-essential
 g++
+libudev-dev
