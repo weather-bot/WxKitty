@@ -54,9 +54,6 @@ You can chat with the bot directly or add the bot in the group.
 ## Document 文件
 
 ```text
-請對我輸入指令（回覆我以下的關鍵字）
-目前支援指令，以及其說明：
-
 【快速使用】
 - 預報（圖）
 - 地震（圖）
@@ -66,7 +63,9 @@ You can chat with the bot directly or add the bot in the group.
 - [縣市][時間]預報 （例如：明天晚上台北預報）
 - [縣市]概況（例如：台北概況）
 - [地區]空氣（例如：北京空氣）
- 
+- 辨識雲 / 雲辨識
+- 颱風
+
 【進階指令】
 <地區天氣>：直接查詢地區的天氣狀況（支援英文查詢國外地區）
  ＊[地址]天氣：取得地區氣象數據
@@ -96,6 +95,11 @@ You can chat with the bot directly or add the bot in the group.
  ＊衛星雲
  ＊雷達
  ＊颱風
+
+<辨識雲>：上傳圖片，回答雲種
+ 在個人模式可以先傳圖片，機器人會問你要不要分析
+ 群組模式必須先使用本指令，再上傳圖片
+ Telegram 必須以「照片」上傳才有效
 
 <氣象觀測站>：查詢單一測站的詳細數據
  ＊[觀測站名稱]觀測
