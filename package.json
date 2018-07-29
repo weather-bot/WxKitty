@@ -1,7 +1,7 @@
 {
   "name": "weather-bot",
   "version": "0.0.0",
-  "description": "line bot",
+  "description": "weather bot",
   "main": "index.js",
   "scripts": {
     "test": "mocha ./test/lib",
@@ -43,5 +43,8 @@
     "assert": "^1.4.1",
     "mocha": "^5.0.0",
     "node-color-log": "^2.0.0"
+  },
+  "engines": {
+    "node": "8"
   }
 }
