@@ -63,7 +63,11 @@ const handler = async context => {
                     '分析照片失敗，只支援 jpg 格式，請重新上傳檔案'
                 );
             }
-        } else {
+            // only ask if need to classify the photo when user
+            // upload a photo in personal mode, otherwise we
+            // ignore the photo.
+        } else if (!(context.event.rawEvent.source.type == 'room' ||
+                context.event.rawEvent.source.type == 'group')) {
             context.setState({
                 isGotImgWaitAns: true,
                 isGotReqWaitImg: false,
