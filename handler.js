@@ -21,6 +21,7 @@ const messagedb = require('./lib/messagedb');
 const getForeignAirData = require('./lib/getForeignAir');
 const parseForeAirStMsg = require('./message/parseForeignAirMsg');
 const getForecast = require('./lib/getForecast');
+const config = require("./config");
 
 async function platformReplyText(context, messenge) {
     if (context.platform == 'messenger' || context.platform == 'telegram') {
@@ -38,6 +39,24 @@ async function platformReplyImage(context, url) {
     }
 }
 
+function getPlatformToken(platform) {
+    if (platform == "line")
+        return config.channelAccessToken;
+    else if (platform == "telegram")
+        return config.telegramAccessToken;
+    else
+        return "none";
+}
+
+function getImageId(context) {
+    if (context.platform == "line")
+        return context.event.image.id;
+    else if (context.platform == "telegram")
+        return context.event.photo[0].file_id;
+    else
+        return "none";
+}
+
 const handler = async context => {
     if (context.event.isFollow) {
         await platformReplyText(context,
@@ -51,7 +70,8 @@ const handler = async context => {
         if (context.state.isGotReqWaitImg) {
             const result = await getCloudClassification({
                 platform: context.platform,
-                event: context.event
+                id: getImageId(context),
+                token: getPlatformToken(context.platform)
             });
             if (result) {
                 context.resetState();
@@ -73,7 +93,8 @@ const handler = async context => {
                 isGotReqWaitImg: false,
                 previousContext: {
                     platform: context.platform,
-                    event: context.event
+                    id: getImageId(context),
+                    token: getPlatformToken(context.platform)
                 }
             })
             await platformReplyText(context,
