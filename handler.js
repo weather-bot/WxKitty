@@ -100,7 +100,7 @@ const handler = async context => {
             // only ask if need to classify the photo when user
             // upload a photo in personal mode, otherwise we
             // ignore the photo.
-        } else if (!(context.event.rawEvent.source.type == 'room' ||
+        } else if (context.platform == "telegram" || !(context.event.rawEvent.source.type == 'room' ||
                 context.event.rawEvent.source.type == 'group')) {
             context.setState({
                 isGotImgWaitAns: true,
