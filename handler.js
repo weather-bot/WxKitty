@@ -3,7 +3,10 @@ const axios = require("axios");
 const segment = require('./lib/segment');
 const parseTime = require('./lib/parseTime');
 const imagedb = require('./lib/imagedb');
-const getCloudClassification = require('./lib/getCloudClassification');
+const {
+    getCloudClassification,
+    CloudClassifyingException
+} = require('./lib/getCloudClassification');
 const {
     getAreaWeather,
 } = require('./lib/areaWeather');
@@ -57,6 +60,31 @@ function getImageId(context) {
         return "none";
 }
 
+async function cloudClassifyingHandler(context) {
+    const requestBody = context.state.isGotReqWaitImg ? {
+        platform: context.platform,
+        id: getImageId(context),
+        token: getPlatformToken(context.platform)
+    } : context.state.previousContext;
+    try {
+        const result = await getCloudClassification(requestBody);
+        context.resetState();
+        await platformReplyText(context,
+            require('./message/parseCloudResult')(result)
+        );
+    } catch (err) {
+        if (err === CloudClassifyingException.BodyError) {
+            await platformReplyText(context, '不支援此平台');
+        } else if (err === CloudClassifyingException.ClassifyError) {
+            await platformReplyText(context, '分析照片失敗，只支援 jpg 格式，請重新上傳檔案');
+        } else if (err === CloudClassifyingException.PoolLimitationError) {
+            await platformReplyText(context, '分析服務達到上限，請稍後再試');
+        } else {
+            await platformReplyText(context, '未知錯誤，請重新嘗試');
+        }
+    }
+}
+
 const handler = async context => {
     if (context.event.isFollow) {
         await platformReplyText(context,
@@ -68,21 +96,7 @@ const handler = async context => {
         );
     } else if (context.event.isImage || context.event.isPhoto) {
         if (context.state.isGotReqWaitImg) {
-            const result = await getCloudClassification({
-                platform: context.platform,
-                id: getImageId(context),
-                token: getPlatformToken(context.platform)
-            });
-            if (result) {
-                context.resetState();
-                await platformReplyText(context,
-                    require('./message/parseCloudResult')(result)
-                );
-            } else {
-                await platformReplyText(context,
-                    '分析照片失敗，只支援 jpg 格式，請重新上傳檔案'
-                );
-            }
+            await cloudClassifyingHandler(context);
             // only ask if need to classify the photo when user
             // upload a photo in personal mode, otherwise we
             // ignore the photo.
@@ -124,19 +138,8 @@ const handler = async context => {
         let shouldAnsAfterSession = true;
         if (context.state.isGotImgWaitAns) {
             if (/yes|y|是/.test(msg)) {
-                const result = await getCloudClassification(
-                    context.state.previousContext);
-                if (result) {
-                    context.resetState();
-                    shouldAnsAfterSession = false;
-                    await platformReplyText(context,
-                        require('./message/parseCloudResult')(result)
-                    );
-                } else {
-                    await platformReplyText(context,
-                        '分析照片失敗，只支援 jpg 格式，請重新上傳檔案'
-                    );
-                }
+                await cloudClassifyingHandler(context)
+                shouldAnsAfterSession = false;
             } else if (/no|n|否/.test(msg)) {
                 context.resetState();
                 shouldAnsAfterSession = false;

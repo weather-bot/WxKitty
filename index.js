@@ -5,6 +5,9 @@ const config = require('./config');
 const MAX_ITEMS_IN_CACHE = 500;
 const EXPIRED_IN_FIVE_MINUTE = 5 * 60;
 
+// Initialize Variable
+global.CLOUD_POOL_SIZE = 0;
+
 // Platforms
 const {
     LineBot,
