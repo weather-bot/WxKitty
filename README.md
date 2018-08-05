@@ -4,24 +4,18 @@
 
 氣象機器人，自動回應有關天氣的訊息
 
-Ｗeather Bot: anwser all questions about weather.
+Weather Bot: anwser all questions about weather.
 
-Supporting:
+<img width="700px" border="0" alt="bot_home" src="https://raw.githubusercontent.com/weather-bot/weather-bot/master/img/cover.JPG">
+
+***Supporting:***
 - [Line](https://line.me/R/ti/p/%40lbz9453s)
-- [Messenger](http://m.me/weather.bot.tw/)
 - [Telegram](https://t.me/weather_tw_bot)
+- [Messenger](http://m.me/weather.bot.tw/)(deprecated)
 
 對此專案有興趣的話，可以閱讀這篇：[來寫個氣象機器人吧！](https://medium.com/@tigercosmos/1563c32a2f34)。
 
-<img width="300" border="0" alt="bot_home" src="https://raw.githubusercontent.com/weather-bot/weather-bot/master/img/bot-home.png">
-
-## Use the bot
-
-### Messenger
-
-You can chat with the bot via the link.
-
-Link: http://m.me/weather.bot.tw/
+## Start to Use 開始使用
 
 ### Line
 
@@ -38,6 +32,12 @@ You can chat with the bot directly or add the bot in the group.
 Add the bot: https://t.me/weather_tw_bot
 
 You can chat with the bot directly or add the bot in the group.
+
+### Messenger(deprecated)
+
+You can chat with the bot via the link.
+
+Link: http://m.me/weather.bot.tw/
 
 ## Demo
 
@@ -153,12 +153,6 @@ Steps:
 3. ask @tigercosmos to help you call the bot
 
 For user IDs in white list, create comment `bot try` in PR.
-
-### Heroku
-
-see https://github.com/Automattic/node-canvas/wiki/Installation-on-Heroku
-
-`./Aptfile`, `app.json` is for Heroku.
 
 ## Setup
 
