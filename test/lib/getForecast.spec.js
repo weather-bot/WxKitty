@@ -34,7 +34,7 @@ describe('=== Check getForecast ===', () => {
             assert.equal(msg.includes("時間"), true);
             done();
         })();
-    }).timeout(30000);
+    }).timeout(60000);
 
     it('Case 2: No Area', done => {
         (async () => {
