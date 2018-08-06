@@ -11,7 +11,7 @@ Weather Bot: anwser all questions about weather.
 ***Supporting:***
 - [Line](https://line.me/R/ti/p/%40lbz9453s)
 - [Telegram](https://t.me/weather_tw_bot)
-- [Messenger](http://m.me/weather.bot.tw/)(deprecated)
+- ~~[Messenger](http://m.me/weather.bot.tw/)~~(deprecated)
 
 對此專案有興趣的話，可以閱讀這篇：[來寫個氣象機器人吧！](https://medium.com/@tigercosmos/1563c32a2f34)。
 
@@ -33,11 +33,11 @@ Add the bot: https://t.me/weather_tw_bot
 
 You can chat with the bot directly or add the bot in the group.
 
-### Messenger(deprecated)
+### ~~Messenger~~(deprecated)
 
 You can chat with the bot via the link.
 
-Link: http://m.me/weather.bot.tw/
+~~Link: http://m.me/weather.bot.tw/~~
 
 ## Demo
 
