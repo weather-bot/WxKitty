@@ -11,7 +11,7 @@ global.CLOUD_POOL_SIZE = 0;
 // Platforms
 const {
     LineBot,
-    MessengerBot,
+    // MessengerBot,
     TelegramBot,
     ConsoleBot,
     MemorySessionStore
@@ -54,11 +54,11 @@ if (process.argv[2] == "console") {
     bots.createRuntime();
 } else {
     bots = {
-        messenger: new MessengerBot({
-            accessToken: config.messengerAccessToken,
-            appSecret: config.messengerAppSecret,
-            sessionStore: mSession,
-        }).setInitialState(sessData).onEvent(handler),
+        // messenger: new MessengerBot({
+        //     accessToken: config.messengerAccessToken,
+        //     appSecret: config.messengerAppSecret,
+        //     sessionStore: mSession,
+        // }).setInitialState(sessData).onEvent(handler),
         line: new LineBot({
             channelSecret: config.channelSecret,
             accessToken: config.channelAccessToken,
@@ -69,10 +69,10 @@ if (process.argv[2] == "console") {
             sessionStore: mSession,
         }).setInitialState(sessData).onEvent(handler),
     };
-    registerRoutes(server, bots.messenger, {
-        path: '/messenger',
-        verifyToken: config.messengerVerifyToken
-    });
+    // registerRoutes(server, bots.messenger, {
+    //     path: '/messenger',
+    //     verifyToken: config.messengerVerifyToken
+    // });
     registerRoutes(server, bots.line, {
         path: '/line'
     });
