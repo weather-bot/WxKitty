@@ -29,7 +29,7 @@
     "bottender": "^0.15.1",
     "canvas": "^1.6.9",
     "chinese-conv": "^1.0.1",
-    "chrono-node": "github:weather-bot/chrono",
+    "chrono-node-zh": "^1.0.1",
     "date2obj": "0.0.7",
     "express": "^4.16.3",
     "full-icu": "^1.2.1",
