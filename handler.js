@@ -3,6 +3,7 @@ const axios = require("axios");
 const segment = require('./lib/segment');
 const parseTime = require('./lib/parseTime');
 const imagedb = require('./lib/imagedb');
+const URL = require('./data/public_url.json');
 const {
     getCloudClassification,
     CloudClassifyingException
@@ -163,7 +164,7 @@ const handler = async context => {
                 require('./message/issueMsg')
             );
         } else if (msg.includes("github") || msg.includes("原始碼")) {
-            await platformReplyText(context, "https://github.com/weather-bot/weather-bot/");
+            await platformReplyText(context, URL.WEATHER_BOT_URL);
         } else if (msg.includes("cwb") || msg.includes("氣象局")) {
             await platformReplyText(context, "www.cwb.gov.tw/");
         } else if (msg.includes("觀測站清單")) {
@@ -183,7 +184,7 @@ const handler = async context => {
             const parseObsStMsg = require('./message/parseObsStMsg');
             const stationName = msg.split('觀測')[0];
             try {
-                const res = await axios.get('http://140.112.67.183/mospc/returnJson.php?file=CWBOBS.json');
+                const res = await axios.get(URL.OBS_STATION_API_URL);
                 const data = res.data;
                 const results = [];
                 //  find candidates stations
@@ -229,7 +230,7 @@ const handler = async context => {
             if (stationName) {
                 let replyMsg = '';
                 const epoch = new Date().getMilliseconds();
-                const url = `https://taqm.epa.gov.tw/taqm/aqs.ashx?lang=tw&act=aqi-epa&ts=${epoch}`;
+                const url = `${URL.AIR_STATION_API_URL}?lang=tw&act=aqi-epa&ts=${epoch}`;
                 try {
                     const res = await axios.get(url);
                     const data = res.data;
@@ -266,7 +267,7 @@ const handler = async context => {
             if (msg == "預報") {
                 const d = parseTime();
                 const dbKey = `${d.year}${d.month}${d.day}${d.hour}`;
-                const imgUrl = 'http://www.cwb.gov.tw/V7/forecast/taiwan/Data/Forecast01.png';
+                const imgUrl = URL.FORECAST_IMG_URL;
                 const url = await imagedb('forecast', dbKey, imgUrl)
                 if (url != null) {
                     await platformReplyImage(context, url);
@@ -281,7 +282,7 @@ const handler = async context => {
         } else if (msg.includes("天氣圖")) {
             const d = parseTime();
             const dbKey = `${d.year}${d.month}${d.day}${d.hour}`;
-            const imgUrl = 'http://www.cwb.gov.tw/V7/forecast/fcst/Data/I04.jpg';
+            const imgUrl = URL.WEATHER_IMG_URL;
             const url = await imagedb('weather', dbKey, imgUrl);
             if (url != null) {
                 await platformReplyImage(context, url);
@@ -292,7 +293,7 @@ const handler = async context => {
         } else if (msg.includes("雷達")) {
             const d = parseTime();
             const time = `${d.year}${d.month}${d.day}${d.hour}${d.minute}`;
-            const imgUrl = `http://www.cwb.gov.tw/V7/observe/radar/Data/HD_Radar/CV1_3600_${time}.png`;
+            const imgUrl = `${URL.RADAR_IMG_URL_PREFIX}/CV1_3600_${time}.png`;
             const url = await imagedb('radar', time, imgUrl);
             if (url != null) {
                 await platformReplyImage(context, url);
@@ -304,7 +305,7 @@ const handler = async context => {
             const d = parseTime();
             const time = `${d.year}-${d.month}-${d.day}-${d.hour}-${d.minute}`;
             const dbKey = `${d.year}${d.month}${d.day}${d.hour}${d.minute}`;
-            const imgUrl = `http://www.cwb.gov.tw/V7/observe/satellite/Data/ts1p/ts1p-${time}.jpg`;
+            const imgUrl = `${URL.STATELLITE_IMG_URL_PREFIX}/ts1p-${time}.jpg`;
             const url = await imagedb('satellite', dbKey, imgUrl);
             if (url != null) {
                 await platformReplyImage(context, url);
@@ -318,7 +319,7 @@ const handler = async context => {
                 await platformReplyImage(context, url);
             } else {
                 // if get image url fail, just reply in text
-                await platformReplyText(context, "取得最新資料失敗。請上 http://www.cwb.gov.tw/V7/earthquake/ 查詢");
+                await platformReplyText(context, `取得最新資料失敗。請上 ${URL.CWB_EARTHQUAKE_URL} 查詢`);
             }
         } else if (msg.includes("颱風")) {
             const url = await require('./lib/getTyphoon')();
@@ -326,7 +327,7 @@ const handler = async context => {
                 await platformReplyImage(context, url);
             } else {
                 // if get imgur image url fail, just reply in text
-                await platformReplyText(context, "取得最新資料失敗。請上 https://www.cwb.gov.tw/V7/prevent/typhoon/ty.htm 查詢");
+                await platformReplyText(context, `取得最新資料失敗。請上 ${URL.CWB_TYPHOON_URL} 查詢`);
             }
         } else if (msg.includes('概況')) {
             const table = require('./data/overviewID');
@@ -335,7 +336,7 @@ const handler = async context => {
             for (areaID in table) {
                 if (table[areaID].includes(areaName)) {
                     try {
-                        const res = await axios.get(`http://www.cwb.gov.tw/V7/forecast/taiwan/Data/${areaID}.txt`);
+                        const res = await axios.get(`${URL.CWB_INTRO_URL_PRIFIX}/${areaID}.txt`);
                         const data = res.data;
                         replyMsg = data.replace(/<BR>/g, '\n');
                         replyMsg = replyMsg.split('<div')[0];
