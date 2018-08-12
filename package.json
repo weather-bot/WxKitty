@@ -4,6 +4,7 @@
   "description": "weather bot",
   "main": "index.js",
   "scripts": {
+    "console": "node . console",
     "test": "mocha --recursive ./test",
     "test-lib": "mocha ./test/lib",
     "test-msg": "mocha ./test/msg",

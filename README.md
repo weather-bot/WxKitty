@@ -139,7 +139,7 @@ For more detail about line bot, can visit https://developers.line.me/
 Console mode is an interactive mode that you can test in local.
 
 ```sh
-node . console
+npm run console
 ```
 
 #### Test the real bot
