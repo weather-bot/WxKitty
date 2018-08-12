@@ -1,6 +1,5 @@
 // third parties
 const axios = require("axios");
-const segment = require('./lib/segment');
 const parseTime = require('./lib/parseTime');
 const imagedb = require('./lib/imagedb');
 const URL = require('./data/public_url.json');
@@ -8,6 +7,10 @@ const {
     getCloudClassification,
     CloudClassifyingException
 } = require('./lib/getCloudClassification');
+const {
+    OverviewException,
+    getOverview
+} = require('./lib/getOverview');
 const {
     getAreaWeather,
 } = require('./lib/areaWeather');
@@ -330,22 +333,16 @@ const handler = async context => {
                 await platformReplyText(context, `取得最新資料失敗。請上 ${URL.CWB_TYPHOON_URL} 查詢`);
             }
         } else if (msg.includes('概況')) {
-            const table = require('./data/overviewID');
-            const areaName = msg.split('概況')[0];
-            let replyMsg = '';
-            for (areaID in table) {
-                if (table[areaID].includes(areaName)) {
-                    try {
-                        const res = await axios.get(`${URL.CWB_INTRO_URL_PRIFIX}/${areaID}.txt`);
-                        const data = res.data;
-                        replyMsg = data.replace(/<BR>/g, '\n');
-                        replyMsg = replyMsg.split('<div')[0];
-                    } catch (err) {
-                        console.log("input text: ", msg);
-                        console.log(err);
-                        replyMsg = '取得資料失敗';
-                    }
-                    await platformReplyText(context, replyMsg);
+            try {
+                const replyMsg = await getOverview(msg);
+                await platformReplyText(context, replyMsg);
+            } catch (e) {
+                if (e === OverviewException.CANNOT_FIND_LOC) {
+                    await platformReplyText(context, `查無此縣市`);
+                } else if (e === OverviewException.DATA_FAILED) {
+                    await platformReplyText(context, `從氣象局取得資料發生錯誤，請晚點重試`);
+                } else {
+                    await platformReplyText(context, `發生未知錯誤，請輸入 issue 取得回報管道`);
                 }
             }
         } else if (weatherKeyword) {
