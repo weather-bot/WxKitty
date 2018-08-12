@@ -4,7 +4,9 @@
   "description": "weather bot",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./test/lib",
+    "test": "mocha --recursive ./test",
+    "test-lib": "mocha ./test/lib",
+    "test-msg": "mocha ./test/msg",
     "start": "node --icu-data-dir=./node_modules/full-icu ."
   },
   "repository": {
