@@ -1,10 +1,10 @@
 # 氣象喵 WxKitty
 
-[![Build Status](https://travis-ci.org/weather-bot/weather-bot.svg?branch=master)](https://travis-ci.org/weather-bot/weather-bot)
+[![Build Status](https://travis-ci.org/weather-bot/WxKitty.svg?branch=master)](https://travis-ci.org/weather-bot/WxKitty)
 
-「氣象喵」是一個氣象機器人，自動回應有關天氣的訊息
+「氣象喵」是一個氣象機器人，自動回應有關天氣的訊息（原名：氣象機器人）
 
-"WxKitty" is a weather chatbot that answers all questions about weather.[English here](README-EN.md)
+"WxKitty" is a weather chatbot that answers all questions about weather. [English here](README-EN.md)
 
 <img width="700px" border="0" alt="bot_home" src="https://raw.githubusercontent.com/weather-bot/weather-bot/master/img/cover.JPG">
 
