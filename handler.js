@@ -12,6 +12,10 @@ const {
     getOverview
 } = require('./lib/getOverview');
 const {
+    getObsStation,
+    ObsStException
+} = require('./lib/getObsStation');
+const {
     getAreaWeather,
 } = require('./lib/areaWeather');
 const {
@@ -183,40 +187,19 @@ const handler = async context => {
             });
             await platformReplyText(context, replyMsg);
         } else if (msg.includes("觀測")) {
-            let replyMsg = '';
             const parseObsStMsg = require('./message/parseObsStMsg');
-            const stationName = msg.split('觀測')[0];
+            let replyMsg = "";
             try {
-                const res = await axios.get(URL.OBS_STATION_API_URL);
-                const data = res.data;
-                const results = [];
-                //  find candidates stations
-                data.forEach(e => {
-                    if (e.name.includes(stationName)) {
-                        results.push(e);
-                    }
-                })
-                // choose candidates for precise name
-                results.forEach(e => {
-                    if (e.name == stationName) {
-                        replyMsg = parseObsStMsg(e);
-                    }
-                })
-                // choose candidates for approximative name
-                if (replyMsg == '') {
-                    results.forEach(e => {
-                        if (e.name.includes(stationName)) {
-                            replyMsg = parseObsStMsg(e);
-                        }
-                    })
-                }
-                if (replyMsg == '') {
+                const result = await getObsStation(msg);
+                console.log(result);
+                replyMsg = parseObsStMsg(result);
+            } catch (e) {
+                if (e === ObsStException.DATA_ERROR)
+                    replyMsg = `無法取得資料或資料來源出錯`;
+                else if (e === ObsStException.NO_STATION)
                     replyMsg = `無此測站，請輸入「觀測站清單」尋找欲查詢測站`;
-                }
-            } catch (err) {
-                console.log("input text: ", msg);
-                console.log(err);
-                replyMsg = '取得資料失敗';
+                else
+                    replyMsg = `發生未知錯誤，請輸入 issue 取得回報管道`;
             }
             await platformReplyText(context, replyMsg);
         } else if (msg.includes("監測站清單")) {
