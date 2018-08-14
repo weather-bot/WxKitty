@@ -2,24 +2,25 @@
 
 [![Build Status](https://travis-ci.org/weather-bot/weather-bot.svg?branch=master)](https://travis-ci.org/weather-bot/weather-bot)
 
-「氣象喵」是一個氣象機器人，自動回應有關天氣的訊息
+「氣象喵」是聊天氣象機器人，自動回應有關天氣的訊息
 
-"WxKitty" is a weather chatbot that answers all questions about weather.[English here](README-EN.md)
+"WxKitty" is a weather chatbot that answers all questions about weather.
 
 <img width="700px" border="0" alt="bot_home" src="https://raw.githubusercontent.com/weather-bot/weather-bot/master/img/cover.JPG">
 
-***支援以下平台***
-
+***Supporting:***
 - [Line](https://line.me/R/ti/p/%40lbz9453s)
 - [Telegram](https://t.me/weather_tw_bot)
 
-對此專案有興趣的話，可以閱讀這篇：[來寫個氣象機器人吧！](https://medium.com/@tigercosmos/1563c32a2f34)。
+If you want to know more about this project, you can checkout this article(Chinese)：[來寫個氣象機器人吧！](https://medium.com/@tigercosmos/1563c32a2f34)。
 
-## 開始使用
+## Start to Use
 
 ### Line
 
-掃 QR code 或是點擊「加朋友」，你可以把「氣象喵」加入群組喔！
+Add the bot via QR code or click the button below
+
+You can chat with the bot directly or add the bot in the group.
 
 <img height="100" border="0" alt="QRcode" src="https://raw.githubusercontent.com/weather-bot/weather-bot/master/img/qrcode.png">
 
@@ -27,17 +28,17 @@
 
 ### Telegram
 
-連結： https://t.me/weather_tw_bot
+Add the bot: https://t.me/weather_tw_bot
 
-你可以直接使用「氣象喵」，或是加入到 telegram 的群組
+You can chat with the bot directly or add the bot in the group.
 
-### ~~Messenger~~(棄用)
+### ~~Messenger~~(deprecated)
 
-已不支援
+You can chat with the bot via the link.
 
 ~~Link: http://m.me/weather.bot.tw/~~
 
-## 範例
+## Demo
 
 <img width="400" border="0" alt="demo_enter" src="https://raw.githubusercontent.com/weather-bot/weather-bot/master/img/demo_enter.png">
 
@@ -49,72 +50,20 @@
 
 <img width="400" border="0" alt="demo4" src="https://raw.githubusercontent.com/weather-bot/weather-bot/master/img/demo4.png">
 
-## 文件
+## Document
+
+Enter questions, and WxKitty will anwser you.
 
 ```text
-【快速使用】
-- 預報（圖）
-- 地震（圖）
-- 空氣品質（圖）
-- 衛星雲圖（圖）
-- [地區]天氣（例如：東京天氣）
-- [縣市][時間]預報 （例如：明天晚上台北預報）
-- [台灣地區]概況（例如：台北概況、士林概況）
-- [地區]空氣（例如：北京空氣）
-- 辨識雲 / 雲辨識
-- 颱風
+[Quickly Use]
+New York Weather
+Tokyo Weather
 
-【進階指令】
-<地區天氣>：直接查詢地區的天氣狀況（支援英文查詢國外地區）
- ＊[地址]天氣：取得地區氣象數據
-    例如：高雄市天氣、淡水天氣
-         new york 天氣、東京天氣
+Taipei Air
+London Air
 
- ＊[縣市][時間]天氣：取得縣市預報
-    例如：明天台中天氣、明天17:00台南天氣
-
- ＊[縣市]概況：臺灣的縣市天氣概況
-    例如：全臺概況、金門縣概況
-
-<預報>：台灣縣市預報
- ＊預報：取得台灣地區預報圖
-
- ＊[縣市][時間]預報
-    例如：明天晚上台北預報
- ＊[縣市][未來時間]天氣
-    例如：明天台中天氣、明天17:00台南天氣
-
- 註：目前只支援 7 天內台灣縣市預報
-
-<氣象圖>：提供氣象圖的連結
- ＊空汙
- ＊預報
- ＊天氣圖
- ＊衛星雲
- ＊雷達
- ＊颱風
-
-<辨識雲>：上傳圖片，回答雲種
- 在個人模式可以先傳圖片，機器人會問你要不要分析
- 群組模式必須先使用本指令，再上傳圖片
- Telegram 必須以「照片」上傳才有效
-
-<氣象觀測站>：查詢單一測站的詳細數據
- ＊[觀測站名稱]觀測
-    例如：宜蘭觀測、士林觀測
- ＊觀測站清單：用來查詢有哪些觀測站
-
-<空氣品質查詢>：查詢地區或測站空氣資訊
- ＊[地區]空氣
-    例如：紐約空氣、北京空氣、台北空氣
- ＊[監測站名稱]空氣
-    例如：基隆空氣、淡水空氣
- ＊監測站清單：用來查詢有哪些台灣監測站
-
-<其他>
- ＊氣象局/CWB
- ＊回報問題/issue
- ＊Github/原始碼
+[Checkout all command]
+Help
 ```
 
 ## Develop
@@ -188,10 +137,10 @@ npm install
 npm start
 ```
 
-## 開發者
+## Developer
 
-- 工程師： [＠tigercosmos](https://github.com/tigercosmos), [@csinrn](https://github.com/csinrn), [＠cochiachang](https://github.com/cochiachang)
-- 設計師： 戴君倢 Jennesy Dai
+- Programmer: [＠tigercosmos](https://github.com/tigercosmos), [@csinrn](https://github.com/csinrn), [＠cochiachang](https://github.com/cochiachang)
+- Art Designer: 戴君倢 Jennesy Dai
 
 ## License
 
