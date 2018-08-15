@@ -35,7 +35,9 @@
 
 已不支援
 
-~~Link: http://m.me/weather.bot.tw/~~
+## 粉絲專頁
+
+FB: http://fb.me/WxKitty.tw
 
 ## 範例
 
