@@ -16,6 +16,10 @@ const {
     ObsStException
 } = require('./lib/getObsStation');
 const {
+    findSchoolId,
+    getTpaSchoolRawData
+} = require('./lib/getTpaSchoolApi');
+const {
     getAreaWeather,
 } = require('./lib/areaWeather');
 const {
@@ -26,11 +30,13 @@ const {
     isForeignAirStation,
     isTaiwanArea,
     isTime,
-    isForecast
+    isForecast,
+    isSchool
 } = require('./lib/keywords');
 const messagedb = require('./lib/messagedb');
 const getForeignAirData = require('./lib/getForeignAir');
 const parseForeAirStMsg = require('./message/parseForeignAirMsg');
+const parseSchool = require('./message/parseTpaSchoolMsg');
 const getForecast = require('./lib/getForecast');
 const config = require("./config");
 
@@ -141,6 +147,7 @@ const handler = async context => {
         const airKeyword = isAir(msg);
         const funnyReply = isFunny(msg);
         const timeKeyword = isTime(msg);
+        const schoolKeyword = isSchool(msg);
 
         // answer for session
         let shouldAnsAfterSession = true;
@@ -344,6 +351,30 @@ const handler = async context => {
             } else {
                 // get the current wearther
                 replyMsg = await getAreaWeather(area);
+            }
+            await platformReplyText(context, replyMsg);
+        }else if(schoolKeyword != null){
+            const id = findSchoolId(msg);
+            if(id == null ){
+                replyMsg = `欲查詢臺北市校園氣象,請輸入"校園氣象"查詢目標國中小後直接輸入 ,範例輸入:"北投國小"`;
+            }else{
+                const rawData = await getTpaSchoolRawData(id);
+                if(rawData == null){
+                    replyMsg = `資料獲取錯誤`;
+                }else{
+                    replyMsg =parseSchool(rawData);
+                }
+            }
+            await platformReplyText(context, replyMsg);
+        }else if(msg == "校園氣象"){
+            replyMsg = "校園氣象站：\n";
+            const schools = require("./data/TpaSchool");
+            for(let i in schools){
+                replyMsg+= i+':\n';
+                for(let j in schools[i]){
+                    replyMsg+= schools[i][j].SchoolName+',';
+                }
+                replyMsg+='\n';
             }
             await platformReplyText(context, replyMsg);
         } else if ((context.platform == 'line' && context.event.rawEvent.source.type == 'user') ||

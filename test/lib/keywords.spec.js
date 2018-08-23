@@ -9,7 +9,8 @@ const {
     isWeather,
     isFunny,
     isTaiwanArea,
-    isTime
+    isTime,
+    isSchool,
 } = require('../../lib/keywords');
 
 describe('=== Check keywords ===', () => {
@@ -102,4 +103,10 @@ describe('=== Check keywords ===', () => {
         assert.equal(isTaiwanArea("美國紐約"), null);
         done();
     }).timeout(3000);
+
+    it('Test isSchool', done => {
+        assert.equal(isSchool("北投國小"), "北投國小");
+        assert.equal(isSchool("北投"), null);
+        done();
+    });
 });
