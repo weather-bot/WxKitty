@@ -16,7 +16,7 @@ const {
     ObsStException
 } = require('./lib/getObsStation');
 const {
-    findSchoolId,
+    TPASchoolException,
     getTpaSchoolRawData
 } = require('./lib/getTpaSchoolApi');
 const {
@@ -353,19 +353,20 @@ const handler = async context => {
                 replyMsg = await getAreaWeather(area);
             }
             await platformReplyText(context, replyMsg);
-        }else if(schoolKeyword != null){
-            const id = findSchoolId(msg);
-            if(id == null ){
-                replyMsg = `欲查詢臺北市校園氣象,請輸入"校園氣象"查詢目標國中小後直接輸入 ,範例輸入:"北投國小"`;
-            }else{
-                const rawData = await getTpaSchoolRawData(id);
-                if(rawData == null){
-                    replyMsg = `資料獲取錯誤`;
+        }else if(schoolKeyword){
+            try{
+                const rawData = await getTpaSchoolRawData(msg);
+                replyMsg =parseSchool(rawData);
+                await platformReplyText(context, replyMsg);
+            }catch(e){
+                if( e == TPASchoolException.CANNOT_FIND_ID ){
+                    await platformReplyText(context, `欲查詢臺北市校園氣象,請輸入"校園氣象"查詢目標國中小後直接輸入 ,範例輸入:"北投國小"`);
+                }else if(e == TPASchoolException.DATA_FAILED){
+                    await platformReplyText(context, `資料獲取錯誤`);
                 }else{
-                    replyMsg =parseSchool(rawData);
+                    await platformReplyText(context, `發生未知錯誤，請輸入 issue 取得回報管道`);
                 }
             }
-            await platformReplyText(context, replyMsg);
         }else if(msg == "校園氣象"){
             replyMsg = "校園氣象站：\n";
             const schools = require("./data/TpaSchool");

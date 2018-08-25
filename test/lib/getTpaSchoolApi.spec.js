@@ -13,7 +13,7 @@ const axios = require("axios");
 describe('=== Check TpaSchoolAPI ===', () => {
     it('Test SchoolAPI', done => {
         (async () => { 
-            let ret = await getTpaSchoolRawData("423601");
+            let ret = await getTpaSchoolRawData("北投國小");
             assert.equal(ret.學校名稱, "北投國小");
             done();
         })();
