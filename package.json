@@ -45,7 +45,7 @@
   "devDependencies": {
     "assert": "^1.4.1",
     "mocha": "^5.0.0",
-    "node-color-log": "^2.0.0"
+    "node-color-log": "^2.1.2"
   },
   "engines": {
     "node": "8"
