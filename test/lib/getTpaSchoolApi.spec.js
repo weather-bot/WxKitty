@@ -20,9 +20,7 @@ describe('=== Check TpaSchoolAPI ===', () => {
     }).timeout(5000);
 
     it('Test FindSchoolId', done => {
-        (async () => { 
-            assert.equal(findSchoolId("北投國小"), "423601");
-            done();
-        })();
-    }).timeout(5000);
+        assert.equal(findSchoolId("北投國小"), "423601");
+        done();
+    });
 });
