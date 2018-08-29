@@ -1,4 +1,12 @@
 {
+    "EARTHQUAKE_LOCAL_IMG_API_URL":"http://www.cwb.gov.tw/V7/earthquake/Data/local",
+    "EARTHQUAKE_QUAKE_IMG_API_URL":"http://www.cwb.gov.tw/V7/earthquake/Data/quake",
+    "EARTHQUAKE_SITE_URL": "http://www.cwb.gov.tw/V7/modules/MOD_EC_Home.htm",
+    "BREEZOMETER_API_URL": "https://api.breezometer.com/baqi",
+    "CWB_TYPHOON_IMG_URL": "https://www.cwb.gov.tw/V7/prevent/typhoon/Data/PTA_NEW/imgs",
+    "CWB_TYPHOON_SITE_URL": "https://www.cwb.gov.tw/V7/prevent/typhoon/Data/PTA_NEW/",
+    "WXKITTY_FB_URL": "http://fb.me/WxKitty.tw",
+    "CWB_URL": "http://www.cwb.gov.tw",
     "WEATHER_BOT_URL": "https://github.com/weather-bot/weather-bot/",
     "AIR_STATION_API_URL": "https://taqm.epa.gov.tw/taqm/aqs.ashx",
     "FORECAST_IMG_URL": "http://www.cwb.gov.tw/V7/forecast/taiwan/Data/Forecast01.png",

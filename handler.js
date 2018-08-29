@@ -180,13 +180,13 @@ const handler = async context => {
         } else if (/^(原始碼|github)$/.test(msg)) {
             await platformReplyText(context, URL.WEATHER_BOT_URL);
         } else if (/(氣象局(\s|的)?(網站|網址))|(\bcwb\b.*(\burl\b|\blink\b))/.test(msg)) {
-            await platformReplyText(context, "http://www.cwb.gov.tw");
+            await platformReplyText(context, URL.CWB_URL);
         } else if (msg.includes("觀測站清單")) {
             await platformReplyText(context,
                 require('./message/obsStMsg')
             );
         } else if (/^(fb|粉專|粉絲專頁)$/.test(msg)) {
-            await platformReplyText(context, "http://fb.me/WxKitty.tw");
+            await platformReplyText(context, URL.WXKITTY_FB_URL);
         } else if (/(雲.*辨識)|(辨識.*雲)/.test(msg)) {
             const replyMsg = "請上傳雲的照片(jpg)";
             context.setState({
