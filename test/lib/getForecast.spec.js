@@ -18,7 +18,7 @@ describe('=== Check getForecast ===', () => {
             assert.equal(msg.includes("臺中市"), true);
             assert.equal(msg.includes("降雨機率"), true);
 
-            msg = await getForecast("宜蘭明天晚上預報");
+            msg = await getForecast("宜蘭明天預報");
             logger.debug(msg);
             assert.equal(msg.includes("宜蘭"), true);
             assert.equal(msg.includes("降雨機率"), true);
