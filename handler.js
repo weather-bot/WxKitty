@@ -83,7 +83,8 @@ async function cloudClassifyingHandler(context) {
     try {
         const result = await getCloudClassification(requestBody);
         context.resetState();
-        await platformReplyText(context,
+        await platformReplyText(
+            context,
             require('./message/parseCloudResult')(result)
         );
     } catch (err) {
@@ -101,11 +102,13 @@ async function cloudClassifyingHandler(context) {
 
 const handler = async context => {
     if (context.event.isFollow) {
-        await platformReplyText(context,
+        await platformReplyText(
+            context,
             require('./message/followMsg')
         );
     } else if (context.event.isJoin) {
-        await platformReplyText(context,
+        await platformReplyText(
+            context,
             require('./message/joinMsg')
         );
     } else if (context.event.isImage || context.event.isPhoto) {
@@ -125,7 +128,8 @@ const handler = async context => {
                     token: getPlatformToken(context.platform)
                 }
             })
-            await platformReplyText(context,
+            await platformReplyText(
+                context,
                 require('./message/isImageMsg')
             );
         }
@@ -152,10 +156,10 @@ const handler = async context => {
         // answer for session
         let shouldAnsAfterSession = true;
         if (context.state.isGotImgWaitAns) {
-            if (/yes|y|是/.test(msg)) {
+            if ((/yes|y|是/).test(msg)) {
                 await cloudClassifyingHandler(context)
                 shouldAnsAfterSession = false;
-            } else if (/no|n|否/.test(msg)) {
+            } else if ((/no|n|否/).test(msg)) {
                 context.resetState();
                 shouldAnsAfterSession = false;
                 await platformReplyText(context, '不進行分析');
@@ -169,25 +173,28 @@ const handler = async context => {
         // anwser for command
         if (!shouldAnsAfterSession) {
             // do nothing
-        } else if (/^help$/.test(msg)) {
-            await platformReplyText(context,
+        } else if ((/^help$/).test(msg)) {
+            await platformReplyText(
+                context,
                 require('./message/helpMsg')
             );
-        } else if (/^(問題|回報問題|issue)$/.test(msg)) {
-            await platformReplyText(context,
+        } else if ((/^(問題|回報問題|issue)$/).test(msg)) {
+            await platformReplyText(
+                context,
                 require('./message/issueMsg')
             );
-        } else if (/^(原始碼|github)$/.test(msg)) {
+        } else if ((/^(原始碼|github)$/).test(msg)) {
             await platformReplyText(context, URL.WEATHER_BOT_URL);
-        } else if (/(氣象局(\s|的)?(網站|網址))|(\bcwb\b.*(\burl\b|\blink\b))/.test(msg)) {
+        } else if ((/(氣象局(\s|的)?(網站|網址))|(\bcwb\b.*(\burl\b|\blink\b))/).test(msg)) {
             await platformReplyText(context, URL.CWB_URL);
         } else if (msg.includes("觀測站清單")) {
-            await platformReplyText(context,
+            await platformReplyText(
+                context,
                 require('./message/obsStMsg')
             );
-        } else if (/^(fb|粉專|粉絲專頁)$/.test(msg)) {
+        } else if ((/^(fb|粉專|粉絲專頁)$/).test(msg)) {
             await platformReplyText(context, URL.WXKITTY_FB_URL);
-        } else if (/(雲.*辨識)|(辨識.*雲)/.test(msg)) {
+        } else if ((/(雲.*辨識)|(辨識.*雲)/).test(msg)) {
             const replyMsg = "請上傳雲的照片(jpg)";
             context.setState({
                 isGotImgWaitAnwser: false,
@@ -212,7 +219,8 @@ const handler = async context => {
             }
             await platformReplyText(context, replyMsg);
         } else if (msg.includes("監測站清單")) {
-            await platformReplyText(context,
+            await platformReplyText(
+                context,
                 require('./message/airStMsg')
             );
         } else if (airKeyword) {
@@ -282,7 +290,7 @@ const handler = async context => {
             if (url != null) {
                 await platformReplyImage(context, url);
             } else {
-                // if get imgur image url fail, just reply in text                
+                // if get imgur image url fail, just reply in text
                 await platformReplyText(context, imgUrl);
             }
         } else if (msg.includes("雷達")) {
@@ -293,7 +301,7 @@ const handler = async context => {
             if (url != null) {
                 await platformReplyImage(context, url);
             } else {
-                // if get imgur image url fail, just reply in text                
+                // if get imgur image url fail, just reply in text
                 await platformReplyText(context, imgUrl);
             }
         } else if (msg.includes("衛星雲")) {
@@ -353,29 +361,29 @@ const handler = async context => {
                 replyMsg = await getAreaWeather(area);
             }
             await platformReplyText(context, replyMsg);
-        }else if(schoolKeyword){
-            try{
+        } else if (schoolKeyword) {
+            try {
                 const rawData = await getTpaSchoolRawData(msg);
-                replyMsg =parseSchool(rawData);
+                replyMsg = parseSchool(rawData);
                 await platformReplyText(context, replyMsg);
-            }catch(e){
-                if( e == TPASchoolException.CANNOT_FIND_ID ){
+            } catch (e) {
+                if (e == TPASchoolException.CANNOT_FIND_ID) {
                     await platformReplyText(context, `欲查詢臺北市校園氣象,請輸入"校園氣象"查詢目標國中小後直接輸入 ,範例輸入:"北投國小"`);
-                }else if(e == TPASchoolException.DATA_FAILED){
+                } else if (e == TPASchoolException.DATA_FAILED) {
                     await platformReplyText(context, `資料獲取錯誤`);
-                }else{
+                } else {
                     await platformReplyText(context, `發生未知錯誤，請輸入 issue 取得回報管道`);
                 }
             }
-        }else if(msg == "校園氣象"){
+        } else if (msg == "校園氣象") {
             replyMsg = "校園氣象站：\n";
             const schools = require("./data/TpaSchool");
-            for(let i in schools){
-                replyMsg+= i+':\n';
-                for(let j in schools[i]){
-                    replyMsg+= schools[i][j].SchoolName+',';
+            for (let i in schools) {
+                replyMsg += i + ':\n';
+                for (let j in schools[i]) {
+                    replyMsg += schools[i][j].SchoolName + ',';
                 }
-                replyMsg+='\n';
+                replyMsg += '\n';
             }
             await platformReplyText(context, replyMsg);
         } else if ((context.platform == 'line' && context.event.rawEvent.source.type == 'user') ||

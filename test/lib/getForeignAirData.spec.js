@@ -1,10 +1,6 @@
 //'use strict';
 const assert = require('assert');
-const logger = require('node-color-log');
 const getForeignAirData = require('../../lib/getForeignAir');
-
-// third parties
-const axios = require("axios");
 
 describe('=== Check ForeignAirAPI ===', () => {
     it('Test ForeignAirAPI', done => {
@@ -14,7 +10,7 @@ describe('=== Check ForeignAirAPI ===', () => {
                     "long_name": "紐約",
                     "short_name": "紐約",
                     "types": ["locality", "political"]
-                }, ],
+                }],
                 "formatted_address": "美國紐約州紐約",
                 "geometry": {
                     "location": {

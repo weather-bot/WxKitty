@@ -25,18 +25,14 @@ const handler = require("./handler");
 
 const server = express();
 
-server.use(
-    bodyParser.json({
-        verify: (req, res, buf) => {
-            req.rawBody = buf.toString();
-        },
-    })
-);
+server.use(bodyParser.json({
+    verify: (req, res, buf) => {
+        req.rawBody = buf.toString();
+    },
+}));
 
 // Session: how we store session. We stores sessions in memory.
-const mSession = new MemorySessionStore(
-    MAX_ITEMS_IN_CACHE, EXPIRED_IN_FIVE_MINUTE
-);
+const mSession = new MemorySessionStore(MAX_ITEMS_IN_CACHE, EXPIRED_IN_FIVE_MINUTE);
 
 // Session data: used for conversation
 const sessData = {
@@ -63,11 +59,13 @@ if (process.argv[2] == "console") {
             channelSecret: config.channelSecret,
             accessToken: config.channelAccessToken,
             sessionStore: mSession,
-        }).setInitialState(sessData).onEvent(handler),
+        }).setInitialState(sessData).
+        onEvent(handler),
         telegram: new TelegramBot({
             accessToken: config.telegramAccessToken,
             sessionStore: mSession,
-        }).setInitialState(sessData).onEvent(handler),
+        }).setInitialState(sessData).
+        onEvent(handler),
     };
     // registerRoutes(server, bots.messenger, {
     //     path: '/messenger',

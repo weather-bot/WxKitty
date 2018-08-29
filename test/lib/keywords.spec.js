@@ -53,7 +53,7 @@ describe('=== Check keywords ===', () => {
         assert.equal(isTime("裡面沒有時間"), null);
         assert.equal(isTime("for fun no time"), null);
         assert.equal(isTime("明天天氣好嗎").text, "明天");
-        assert.equal(isTime("後天天氣好嗎").text, "後天");        
+        assert.equal(isTime("後天天氣好嗎").text, "後天");
         assert.equal(isTime("What is next Sun. weather?").text, "next Sun");
         assert.equal(isTime("星期五天氣好嗎").text, "星期五");
         assert.equal(isTime("禮拜六天氣好嗎").text, "禮拜六");
