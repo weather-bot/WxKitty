@@ -26,4 +26,9 @@ module.exports = {
     cwbKey: process.env.cwbKey,
     // Cloud Lady URL
     cloudLadyUrl: process.env.cloudLadyUrl,
+    // Olami AI
+    olamiAiKey: process.env.olamiAiKey,
+    olamiAiSecret: process.env.olamiAiSecret,
+    // Dark Sky Api
+    darkSkyKey: process.env.darkSkyKey,
 }
