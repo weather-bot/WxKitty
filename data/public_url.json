@@ -17,5 +17,6 @@
     "CWB_EARTHQUAKE_URL": "http://www.cwb.gov.tw/V7/earthquake/",
     "CWB_TYPHOON_URL": "https://www.cwb.gov.tw/V7/prevent/typhoon/ty.htm",
     "CWB_INTRO_URL_PRIFIX": "http://www.cwb.gov.tw/V7/forecast/taiwan/Data",
-    "TPASCHOOL_URL": "http://weather.tp.edu.tw/Ajax/jsonp/LastEffect.ashx"
+    "TPASCHOOL_URL": "http://weather.tp.edu.tw/Ajax/jsonp/LastEffect.ashx",
+    "OLAMI_SPEECH_API_URL": "https://tw.olami.ai/cloudservice/api"
 }

@@ -40,6 +40,7 @@
     "full-icu": "^1.2.1",
     "geodist": "^0.2.1",
     "image-downloader": "^3.3.0",
+    "md5": "^2.2.1",
     "merge-images": "^1.1.0",
     "nodejieba": "^2.2.5",
     "xml2json": "^0.11.2"
