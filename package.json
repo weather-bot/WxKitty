@@ -8,7 +8,7 @@
     "test": "mocha --recursive ./test",
     "test-lib": "mocha ./test/lib",
     "test-msg": "mocha ./test/msg",
-    "lint": "eslint index.js handler.js lib test",
+    "lint": "eslint index.js handle lib test",
     "lint-fix": "eslint --fix index.js handler.js lib test",
     "start": "node --icu-data-dir=./node_modules/full-icu ."
   },

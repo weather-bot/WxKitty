@@ -21,7 +21,7 @@ const {
     registerRoutes
 } = require('bottender/express');
 
-const handler = require("./handler");
+const handler = require("./handle/handler");
 
 const server = express();
 
