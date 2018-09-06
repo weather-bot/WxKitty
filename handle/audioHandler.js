@@ -6,7 +6,11 @@ const {
     olamiSpeech,
     OlamiException
 } = require('../lib/olamiSpeech');
+const {
+    platformReplyText,
+} = require("./crossPlatformHandle");
 const textHandler = require('./textHandler');
+const toWav = require('audiobuffer-to-wav');
 
 // Parse audio to text and then handle the text.
 async function audioHandler(context) {
@@ -24,7 +28,7 @@ async function audioHandler(context) {
                 replyMsg = "Unknown error. Please consider filing the issue via 'issue' command";
         }
         try {
-            const text = await olamiSpeech(audioBin, "bin");
+            const text = await olamiSpeech(toWav(audioBin), "bin");
             textHandler(context, text);
         } catch (err) {
             if (err === OlamiException.SEND_API_ERROR)
