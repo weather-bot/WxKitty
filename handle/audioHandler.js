@@ -17,7 +17,7 @@ const textHandler = require('./textHandler');
 // Parse audio to text and then handle the text.
 async function audioHandler(context) {
     let replyMsg = "";
-    const time = Date.now(); // simpily use time as uuid
+    const time = Date.now(); // simply use time as uuid
     const inputFileName = `${time}.m4a`;
     const outputFileName = `${time}.wav`;
 
