@@ -9,6 +9,10 @@ const parseForeAirStMsg = require('../message/parseForeignAirMsg');
 const parseSchool = require('../message/parseTpaSchoolMsg');
 const getForecast = require('../lib/getForecast');
 const {
+    getGeoLocation,
+    GeoLocError
+} = require("../lib/getGeoLocation");
+const {
     platformReplyText,
     platformReplyImage
 } = require("./crossPlatformHandle");
@@ -18,7 +22,6 @@ const {
     isFunny,
     isAirStation,
     isForeignAirStation,
-    isTaiwanArea,
     isTime,
     isForecast,
     isSchool
@@ -253,19 +256,22 @@ async function textHandle(context, text) {
             }
         }
     } else if (weatherKeyword) {
-        let replyMsg;
-        let area = null;
-        area = isTaiwanArea(msg);
-        if (area == null) {
-            area = {};
-            area['name'] = msg.split(weatherKeyword)[0];
-        }
+        let replyMsg = "";
         // If there is time, use forecast
         if (timeKeyword) {
             replyMsg = await getForecast(msg);
         } else {
-            // get the current wearther
-            replyMsg = await getAreaWeather(area);
+            try {
+                const area = await getGeoLocation(msg.split(weatherKeyword)[0]);
+                // get the current wearther
+                replyMsg = await getAreaWeather(area);
+            } catch (e) {
+                console.log(e)
+                if (e == GeoLocError.HTTP_GEO_API_ERROR)
+                    replyMsg = '找不到這個地區，請再試一次，或試著把地區放大、輸入更完整的名稱。例如有時候「花蓮」會找不到，但「花蓮縣」就可以。';
+                else
+                    replyMsg = `發生未知錯誤，請輸入 issue 取得回報管道`;
+            }
         }
         await platformReplyText(context, replyMsg);
     } else if (schoolKeyword) {
