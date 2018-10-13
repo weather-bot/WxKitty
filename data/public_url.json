@@ -21,5 +21,6 @@
     "LINE_BOT_API_BASE_URL": "https://api.line.me/v2/bot",
     "OLAMI_SPEECH_API_URL": "https://tw.olami.ai/cloudservice/api",
     "GOOGLE_GEO_API_URL": "https://maps.googleapis.com/maps/api/geocode",
+    "WXKITTY_API_URL": "https://wxkitty.tw",
     "DARKSKY_API_URL": "https://api.darksky.net/forecast"
 }
