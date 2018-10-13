@@ -121,6 +121,8 @@ async function textHandle(context, text) {
                 replyMsg = '找不到這個地區，請再試一次，或試著把地區放大、輸入更完整的名稱。例如有時候「花蓮」會找不到，但「花蓮縣」就可以。';
             else if (e === WeatherImgError.HTTP_DARKSKY_ERROR)
                 replyMsg = '取得天氣資料失敗';
+            else if (e === WeatherImgError.HTTP_IMGUR_ERROR)
+                replyMsg = "上傳圖片失敗";
             else if (e === WeatherImgError.HTTP_MEOW_ERROR)
                 replyMsg = "喵圖製作失敗";
             else
