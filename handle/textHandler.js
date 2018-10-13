@@ -112,6 +112,7 @@ async function textHandle(context, text) {
         try {
             const area = await getGeoLocation(msg.split("喵喵")[0]);
             const url = await createWeatherImg(area);
+            console.log(url)
             await platformReplyImage(context, url);
         } catch (e) {
             console.log(e);
