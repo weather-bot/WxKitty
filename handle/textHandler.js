@@ -42,6 +42,10 @@ const {
     getAreaWeather,
 } = require('../lib/areaWeather');
 const cloudClassifyingHandler = require('./cloudClassifyingHandle');
+const {
+    createWeatherImg,
+    WeatherImgError
+} = require('../lib/createWeatherImg')
 
 async function textHandle(context, text) {
     let msg = text;
@@ -104,6 +108,23 @@ async function textHandle(context, text) {
         );
     } else if ((/^(fb|粉專|粉絲專頁)$/).test(msg)) {
         await platformReplyText(context, URL.WXKITTY_FB_URL);
+    } else if ((/喵喵$/).test(msg)) {
+        try {
+            const area = await getGeoLocation(msg.split("喵喵")[0]);
+            const url = await createWeatherImg(area);
+            await platformReplyImage(context, url);
+        } catch (e) {
+            let replyMsg = "";
+            if (e === GeoLocError.HTTP_GEO_API_ERROR)
+                replyMsg = '找不到這個地區，請再試一次，或試著把地區放大、輸入更完整的名稱。例如有時候「花蓮」會找不到，但「花蓮縣」就可以。';
+            else if (e === WeatherImgError.HTTP_DARKSKY_ERROR)
+                replyMsg = '取得天氣資料失敗';
+            else if (e === WeatherImgError.HTTP_MEOW_ERROR)
+                replyMsg = "喵圖製作失敗";
+            else
+                replyMsg = `發生未知錯誤，請輸入 issue 取得回報管道`;
+            await platformReplyText(context, replyMsg);
+        }
     } else if ((/(雲.*辨識)|(辨識.*雲)/).test(msg)) {
         const replyMsg = "請上傳雲的照片(jpg)";
         context.setState({
