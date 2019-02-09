@@ -240,7 +240,7 @@ async function textHandle(context, text) {
             }
         } else { // Case2: there is future time
             let replyMsg = await getForecast(msg);
-            replyMsg += "\n---\n公告：可以使用「[地區]豬豬」（例如彰化豬豬）使用春節氣象圖喔！"
+            // replyMsg += "\n---\n公告：可以使用「[地區]豬豬」（例如彰化豬豬）使用春節氣象圖喔！"
             await platformReplyText(context, replyMsg);
         }
     } else if (msg.includes("天氣圖")) {
@@ -324,7 +324,7 @@ async function textHandle(context, text) {
                     replyMsg = `發生未知錯誤，請輸入 issue 取得回報管道`;
             }
         }
-        replyMsg += "\n---\n公告：可以使用「[地區]豬豬」（例如彰化豬豬）使用春節氣象圖喔！"
+        // replyMsg += "\n---\n公告：可以使用「[地區]豬豬」（例如彰化豬豬）使用春節氣象圖喔！"
         await platformReplyText(context, replyMsg);
     } else if (schoolKeyword) {
         try {
