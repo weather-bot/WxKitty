@@ -33,7 +33,7 @@
     "audiobuffer-to-wav": "^1.0.0",
     "axios": "^0.17.1",
     "body-parser": "^1.18.3",
-    "bottender": "^0.15.1",
+    "bottender": "^0.15.17",
     "canvas": "^1.6.9",
     "chinese-conv": "^1.0.1",
     "chrono-node-zh": "^1.0.1",
@@ -49,7 +49,7 @@
   },
   "devDependencies": {
     "assert": "^1.4.1",
-    "eslint": "^5.4.0",
+    "eslint": "^5.14.1",
     "mocha": "^5.0.0",
     "node-color-log": "^2.1.2"
   },
