@@ -51,6 +51,10 @@ FB: http://fb.me/WxKitty.tw
 
 <img width="400" border="0" alt="demo4" src="https://raw.githubusercontent.com/weather-bot/weather-bot/master/img/demo4.png">
 
+<img width="400" border="0" alt="demo5" src="https://raw.githubusercontent.com/weather-bot/weather-bot/master/img/demo5.png">
+
+<img width="400" border="0" alt="demo6" src="https://raw.githubusercontent.com/weather-bot/weather-bot/master/img/demo6.png">
+
 ## 文件
 
 ```text
