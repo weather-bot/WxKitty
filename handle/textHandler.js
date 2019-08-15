@@ -342,7 +342,7 @@ async function textHandle(context, text) {
         }
     } else if (msg == "校園氣象") {
         replyMsg = "校園氣象站：\n";
-        const schools = require("./data/TpaSchool");
+        const schools = require("../data/TpaSchool");
         for (let i in schools) {
             replyMsg += i + ':\n';
             for (let j in schools[i]) {
