@@ -49,6 +49,7 @@ const {
 
 async function textHandle(context, text) {
     let msg = text;
+    console.log(text);
     // record all message if in personal mode
     if (context.platform != 'console' &&
         !(context.platform == 'line' &&
