@@ -108,6 +108,7 @@ async function textHandle(context, text) {
         );
     } else if ((/^(fb|粉專|粉絲專頁)$/).test(msg)) {
         await platformReplyText(context, URL.WXKITTY_FB_URL);
+    /* === Turn off weather images ===
     } else if ((/喵喵$/).test(msg)) {
         try {
             const area = await getGeoLocation(msg.split("喵喵")[0]);
@@ -154,7 +155,10 @@ async function textHandle(context, text) {
                 replyMsg = `發生未知錯誤，請輸入 issue 取得回報管道`;
             await platformReplyText(context, replyMsg);
         }
+    === */
+
     } else if ((/(雲.*辨識)|(辨識.*雲)/).test(msg)) {
+        /* turn off cloud recognizing
         const replyMsg = "請上傳雲的照片(jpg)";
         context.setState({
             isGotImgWaitAnwser: false,
@@ -162,6 +166,9 @@ async function textHandle(context, text) {
             previousContext: {}
         });
         await platformReplyText(context, replyMsg);
+        */
+
+       await platformReplyText(context, "雲辨識功能暫停");
     } else if (msg.includes("觀測")) {
         const parseObsStMsg = require('../message/parseObsStMsg');
         let replyMsg = "";

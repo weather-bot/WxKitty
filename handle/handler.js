@@ -20,6 +20,9 @@ const handler = async context => {
             require('../message/joinMsg')
         );
     } else if (context.event.isImage || context.event.isPhoto) {
+        await platformReplyText(context, "雲辨識功能暫停");
+
+        /*
         if (context.state.isGotReqWaitImg) {
             await cloudClassifyingHandler(context);
             // only ask if need to classify the photo when user
@@ -41,8 +44,10 @@ const handler = async context => {
                 require('../message/isImageMsg')
             );
         }
+        */
     } else if (context.event.isAudio) {
-        await audioHandler(context);
+        await platformReplyText(context, "語音功能暫停");
+        // await audioHandler(context);
     } else if (context.event.isText) {
         await textHandler(context, context.event.text);
     }
