@@ -1,15 +1,23 @@
-function parseObsStMsg(e) {
-    return `測站：${e.name}
-時間：${e.time}
-溫度：${e.temp}℃
-體感溫度：${e.feel}℃
-濕度：${e.humd}%
-壓力：${e.pres}hPa
-風速：${e.ws}m/s
-風向：${e.wd}
-雨量：${e.rain}mm
----
+function parseObsStMsg(data) {
+    const elementsWanted = {
+        'obsTime': '時間',
+        'TEMP': '溫度(℃)', 
+        'HUMD': '濕度(%)',
+        'PRES': '壓力(hPa)',
+        'WDSD': '風速(m/s)',
+        'WDIR': '風向',
+        'H_24R': '雨量(mm)'
+    }
+    var res = `測站： ${data.locationName}\n`
+    data.weatherElement.forEach(e => {
+        if (elementsWanted[e.elementName] != null) {
+            res += `${elementsWanted[e.elementName]}: ${e.elementValue}\n`
+        }
+    });
+
+    res += `---
 資料來源：中央氣象局`;
+    return res
 }
 
 module.exports = parseObsStMsg;
