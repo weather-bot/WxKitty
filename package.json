@@ -44,6 +44,7 @@
     "image-downloader": "^3.3.0",
     "md5": "^2.2.1",
     "merge-images": "^1.1.0",
+    "node-html-parser": "^1.2.16",
     "nodejieba": "^2.2.5",
     "xml2json": "^0.11.2"
   },

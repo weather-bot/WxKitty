@@ -8,10 +8,10 @@ const getEarthquake = require('../../lib/getEarthquake');
 describe('=== Check getEarthquake ===', () => {
     it('Test getEarthquake', done => {
         (async () => {
-            const url = await getEarthquake();
-            logger.debug(url);
-            assert.equal(url.includes("https://"), true);
-            assert.notEqual(url, null);
+            const res = await getEarthquake();
+            logger.debug(res);
+            assert.equal(res.includes("地震"), true);
+            assert.equal(res.includes("/"), true);  // include date
             done();
         })();
     }).timeout(10000);
