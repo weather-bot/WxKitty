@@ -287,7 +287,7 @@ async function textHandle(context, text) {
     } else if (msg.includes("地震")) {
         const url = await require('../lib/getEarthquake')();
         if (url != null) {
-            await platformReplyImage(context, url);
+            await platformReplyText(context, url);
         } else {
             // if get image url fail, just reply in text
             await platformReplyText(context, `取得最新資料失敗。請上 ${URL.CWB_EARTHQUAKE_URL} 查詢`);

@@ -13,7 +13,7 @@
     "RADAR_IMG_URL_PREFIX": "http://www.cwb.gov.tw/V7/observe/radar/Data/HD_Radar",
     "STATELLITE_IMG_URL_PREFIX": "http://www.cwb.gov.tw/V7/observe/satellite/Data/ts1p",
     "OBS_STATION_API_URL": "http://140.112.67.183/mospc/returnJson.php?file=CWBOBS.json",
-    "CWB_EARTHQUAKE_URL": "http://www.cwb.gov.tw/V7/earthquake/",
+    "CWB_EARTHQUAKE_URL": "https://www.cwb.gov.tw/V8/C/E/index.html",
     "CWB_TYPHOON_URL": "https://www.cwb.gov.tw/V7/prevent/typhoon/ty.htm",
     "CWB_INTRO_URL_PRIFIX": "https://www.cwb.gov.tw/V8/C/W/County/index.html",
     "TPASCHOOL_URL": "http://weather.tp.edu.tw/Ajax/jsonp/LastEffect.ashx",
