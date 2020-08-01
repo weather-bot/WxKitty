@@ -276,7 +276,7 @@ async function textHandle(context, text) {
         const d = parseTime();
         const time = `${d.year}-${d.month}-${d.day}-${d.hour}-${d.minute}`;
         const dbKey = `${d.year}${d.month}${d.day}${d.hour}${d.minute}`;
-        const imgUrl = `${URL.STATELLITE_IMG_URL_PREFIX}/ts1p-${time}.jpg`;
+        const imgUrl = `${URL.STATELLITE_IMG_URL_PREFIX}-${time}.jpg`;
         const url = await imagedb('satellite', dbKey, imgUrl);
         if (url != null) {
             await platformReplyImage(context, url);
