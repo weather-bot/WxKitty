@@ -166,9 +166,9 @@ async function textHandle(context, text) {
             previousContext: {}
         });
         await platformReplyText(context, replyMsg);
-        */
+        
 
-       await platformReplyText(context, "雲辨識功能暫停");
+       await platformReplyText(context, "雲辨識功能暫停");*/
     } else if (msg.includes("觀測")) {
         const parseObsStMsg = require('../message/parseObsStMsg');
         let replyMsg = "";
