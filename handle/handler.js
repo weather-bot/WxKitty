@@ -20,9 +20,9 @@ const handler = async context => {
             require('../message/joinMsg')
         );
     } else if (context.event.isImage || context.event.isPhoto) {
-        await platformReplyText(context, "雲辨識功能暫停");
+        /*await platformReplyText(context, "雲辨識功能暫停");
 
-        /*
+        
         if (context.state.isGotReqWaitImg) {
             await cloudClassifyingHandler(context);
             // only ask if need to classify the photo when user
