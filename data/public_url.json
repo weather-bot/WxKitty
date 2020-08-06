@@ -9,7 +9,7 @@
     "WEATHER_BOT_URL": "https://github.com/weather-bot/weather-bot/",
     "AIR_STATION_API_URL": "https://taqm.epa.gov.tw/taqm/aqs.ashx",
     "FORECAST_IMG_URL": "http://www.cwb.gov.tw/V7/forecast/taiwan/Data/Forecast01.png",
-    "WEATHER_IMG_URL": "http://www.cwb.gov.tw/V7/forecast/fcst/Data/I04.jpg",
+    "WEATHER_IMG_URL": "https://www.cwb.gov.tw/Data/fcst_img/",
     "RADAR_IMG_URL_PREFIX": "https://www.cwb.gov.tw/Data/radar",
     "SATELLITE_IMG_URL_PREFIX": "https://www.cwb.gov.tw/Data/satellite/LCC_IR1_CR_1000/LCC_IR1_CR_1000",
     "OBS_STATION_API_URL": "http://140.112.67.183/mospc/returnJson.php?file=CWBOBS.json",

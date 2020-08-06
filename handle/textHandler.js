@@ -252,8 +252,29 @@ async function textHandle(context, text) {
         }
     } else if (msg.includes("天氣圖")) {
         const d = parseTime();
-        const dbKey = `${d.year}${d.month}${d.day}${d.hour}`;
-        const imgUrl = URL.WEATHER_IMG_URL;
+	let day = d.day;
+	let hour = d.hour;
+
+	if (parseInt(d.hour,10) < 23 && parseInt(d.hour,10) > 20){
+	    hour = "12";
+	} else if (parseInt(d.hour,10) < 20 && parseInt(d.hour,10) > 14){
+	    hour = "06";
+	} else if (parseInt(d.hour,10) < 14 && parseInt(d.hour,10) > 8){
+	    hour = "00";
+	} else{
+	    day = String(parseInt(d.day,10) - 1).padStart(2, '0');
+	    if (day == "00"){
+		day = "30";
+	    }
+	    if (parseInt(d.hour,10) < 8 && parseInt(d.hour,10) > 2){
+	        hour = "18";
+	    } else {
+	        hour = "12";
+	    }
+	}
+
+        const dbKey = `${d.year}-${d.month}${day}-${hour}00`;
+        const imgUrl = `${URL.WEATHER_IMG_URL}${dbKey}_SFCcombo.jpg`;
         const url = await imagedb('weather', dbKey, imgUrl);
         if (url != null) {
             await platformReplyImage(context, url);
