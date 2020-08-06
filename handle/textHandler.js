@@ -255,18 +255,24 @@ async function textHandle(context, text) {
 	let day = d.day;
 	let hour = d.hour;
 
-	if (parseInt(d.hour,10) < 23 && parseInt(d.hour,10) > 20){
+	if (parseInt(d.hour,10) <= 23 && parseInt(d.hour,10) > 20){
 	    hour = "12";
-	} else if (parseInt(d.hour,10) < 20 && parseInt(d.hour,10) > 14){
+	} else if (parseInt(d.hour,10) <= 20 && parseInt(d.hour,10) > 14){
 	    hour = "06";
-	} else if (parseInt(d.hour,10) < 14 && parseInt(d.hour,10) > 8){
+	} else if (parseInt(d.hour,10) <= 14 && parseInt(d.hour,10) > 8){
 	    hour = "00";
 	} else{
 	    day = String(parseInt(d.day,10) - 1).padStart(2, '0');
 	    if (day == "00"){
-		day = "30";
+		if(d.month == "01" || d.month == "03" || d.month == "05" || d.month == "07" || d.month == "08" || d.month == "10" || d.month == "12"){
+		    day = "31";
+		} else if (d.month == "04" || d.month == "06" || d.month == "09" || d.month == "11"){
+		    day = "30";
+		} else {
+		    day = "28";
+		}
 	    }
-	    if (parseInt(d.hour,10) < 8 && parseInt(d.hour,10) > 2){
+	    if (parseInt(d.hour,10) <= 8 && parseInt(d.hour,10) > 2){
 	        hour = "18";
 	    } else {
 	        hour = "12";

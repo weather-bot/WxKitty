@@ -1,5 +1,5 @@
 {
-    "EARTHQUAKE_LOCAL_IMG_API_URL": "http://www.cwb.gov.tw/V7/earthquake/Data/local",
+    "EARTHQUAKE_LOCAL_API_URL": "https://opendata.cwb.gov.tw/api/v1/rest/datastore/",
     "EARTHQUAKE_QUAKE_IMG_API_URL": "http://www.cwb.gov.tw/V7/earthquake/Data/quake",
     "BREEZOMETER_API_URL": "https://api.breezometer.com/baqi",
     "CWB_TYPHOON_IMG_URL": "https://www.cwb.gov.tw/Data/warning/W21_C.png",
