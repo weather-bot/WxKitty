@@ -11,7 +11,7 @@ describe('=== Check getEarthquake ===', () => {
             const res = await getEarthquake();
             logger.debug(res);
             assert.equal(res.includes("地震"), true);
-            assert.equal(res.includes("/"), true);  // include date
+            assert.equal(res.includes("/"), true); // include date
             done();
         })();
     }).timeout(10000);

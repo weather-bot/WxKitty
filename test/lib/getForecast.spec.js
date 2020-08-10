@@ -23,18 +23,15 @@ describe('=== Check getForecast ===', () => {
             assert.equal(msg.includes("宜蘭"), true);
             assert.equal(msg.includes("降雨機率"), true);
 
-            // FIX: Once CWB foreign API is re-opened, uncomment this section 
-            /*
-            msg = await getForecast("紐約明天早上預報");
-            logger.debug(msg);
-            assert.equal(msg.includes("紐約"), true);
-            assert.equal(msg.includes("時間"), true);
-
-            msg = await getForecast("NEW YORK forecast");
-            logger.debug(msg);
-            assert.equal(msg.includes("New York"), true);
-            assert.equal(msg.includes("時間"), true);
-            */
+            // FIX: Once CWB foreign API is re-opened, uncomment this section
+            // msg = await getForecast("紐約明天早上預報");
+            // logger.debug(msg);
+            // assert.equal(msg.includes("紐約"), true);
+            // assert.equal(msg.includes("時間"), true);
+            // msg = await getForecast("NEW YORK forecast");
+            // logger.debug(msg);
+            // assert.equal(msg.includes("New York"), true);
+            // assert.equal(msg.includes("時間"), true);
             done();
         })();
     }).timeout(60000);
@@ -69,12 +66,10 @@ describe('=== Check getForecast ===', () => {
             let msg = await getForecast("臺北市10天後天氣");
             assert.equal(msg.includes("查不到"), true);
 
-            // FIX: Once CWB foreign API is re-opened, uncomment this section 
-            /*
-            msg = await getForecast("紐約後天的天氣");
-            logger.debug(msg)
-            assert.equal(msg.includes("查不到"), true);
-            */
+            // FIX: Once CWB foreign API is re-opened, uncomment this section
+            // msg = await getForecast("紐約後天的天氣");
+            // logger.debug(msg)
+            // assert.equal(msg.includes("查不到"), true);
             done();
         })();
     }).timeout(5000);
