@@ -1,6 +1,7 @@
 // third parties
 const axios = require("axios");
 const parseTime = require('../lib/parseTime');
+const checkUrl = require('../lib/checkUrl');
 const imagedb = require('../lib/imagedb');
 const URL = require('../data/public_url.json');
 const messagedb = require('../lib/messagedb');
@@ -251,42 +252,29 @@ async function textHandle(context, text) {
             await platformReplyText(context, replyMsg);
         }
     } else if (msg.includes("天氣圖")) {
-        const d = parseTime();
-	let day = d.day;
-	let hour = d.hour;
+	const date = new Date();
+	let d = new Date(date.getTime() + (date.getTimezoneOffset() * 60000));
+	let count = 4;
+	let success = 0;
 
-	if (parseInt(d.hour,10) <= 23 && parseInt(d.hour,10) > 20){
-	    hour = "12";
-	} else if (parseInt(d.hour,10) <= 20 && parseInt(d.hour,10) > 14){
-	    hour = "06";
-	} else if (parseInt(d.hour,10) <= 14 && parseInt(d.hour,10) > 8){
-	    hour = "00";
-	} else{
-	    day = String(parseInt(d.day,10) - 1).padStart(2, '0');
-	    if (day == "00"){
-		if(d.month == "01" || d.month == "03" || d.month == "05" || d.month == "07" || d.month == "08" || d.month == "10" || d.month == "12"){
-		    day = "31";
-		} else if (d.month == "04" || d.month == "06" || d.month == "09" || d.month == "11"){
-		    day = "30";
-		} else {
-		    day = "28";
-		}
-	    }
-	    if (parseInt(d.hour,10) <= 8 && parseInt(d.hour,10) > 2){
-	        hour = "18";
-	    } else {
-	        hour = "12";
-	    }
+	while (count > 0){
+	    let hour = String(Math.floor(d.getHours() / 6) * 6).padStart(2, '0');
+	    let day = String(d.getDate()).padStart(2, '0');
+	    let month = String(d.getMonth()+1).padStart(2, '0');
+            let imgUrl = `${URL.WEATHER_IMG_URL}${d.getFullYear()}-${month}${day}-${hour}00_SFCcombo.jpg`;
+	    let check = await checkUrl(imgUrl);
+	    if (check) {
+                await platformReplyImage(context, imgUrl);
+		count = 0;
+		success = 1;
+		break;
+            } 
+	    d = new Date(d.getTime() -(3600000 * 6));
+	    count--;
 	}
-
-        const dbKey = `${d.year}-${d.month}${day}-${hour}00`;
-        const imgUrl = `${URL.WEATHER_IMG_URL}${dbKey}_SFCcombo.jpg`;
-        const url = await imagedb('weather', dbKey, imgUrl);
-        if (url != null) {
-            await platformReplyImage(context, url);
-        } else {
+	if (success == 0) {
             // if get imgur image url fail, just reply in text
-            await platformReplyText(context, imgUrl);
+	    await platformReplyText(context, "資料取得失敗，歡迎至中央氣象局網站https://www.cwb.gov.tw/V8/C/W/analysis.html查詢");
         }
     } else if (msg.includes("雷達")) {
         const d = parseTime();
