@@ -5,14 +5,13 @@ function parseObsStMsg(data) {
         'HUMD': '濕度：{}%',
         'PRES': '壓力：{}hPa',
         'WDSD': '風速：{}m/s',
-        'WDIR': '風向：{}',
+        'WDIR': '風向：{}°',
         'H_24R': '雨量：{}mm'
     }
-    let reg = /{\w*}/
     let res = `測站：${data.locationName}\n`
     data.weatherElement.forEach(e => {
         if (elementsWanted[e.elementName] != null) {
-            res += elementsWanted[e.elementName].replace(reg, e.elementValue) + '\n'
+            res += elementsWanted[e.elementName].replace(/{\w*}/, e.elementValue) + '\n'
         }
     });
 
