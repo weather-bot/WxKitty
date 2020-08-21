@@ -8,8 +8,8 @@ function parseObsStMsg(data) {
         'WDIR': '風向：{}',
         'H_24R': '雨量：{}mm'
     }
-    var reg = /{\w*}/
-    var res = `測站：${data.locationName}\n`
+    let reg = /{\w*}/
+    let res = `測站：${data.locationName}\n`
     data.weatherElement.forEach(e => {
         if (elementsWanted[e.elementName] != null) {
             res += elementsWanted[e.elementName].replace(reg, e.elementValue) + '\n'

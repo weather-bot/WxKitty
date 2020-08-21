@@ -12,7 +12,7 @@
     "WEATHER_IMG_URL": "https://www.cwb.gov.tw/Data/fcst_img/",
     "RADAR_IMG_URL_PREFIX": "https://www.cwb.gov.tw/Data/radar",
     "SATELLITE_IMG_URL_PREFIX": "https://www.cwb.gov.tw/Data/satellite/LCC_IR1_CR_1000/LCC_IR1_CR_1000",
-    "OBS_STATION_API_URL": "https://opendata.cwb.gov.tw/api/v1/rest/datastore/O-A0001-001?Authorization=",
+    "OBS_STATION_API_URL": "https://opendata.cwb.gov.tw/api/v1/rest/datastore/O-A0001-001",
     "CWB_EARTHQUAKE_URL": "https://www.cwb.gov.tw/V8/C/E/index.html",
     "CWB_TYPHOON_URL": "https://www.cwb.gov.tw/V7/prevent/typhoon/ty.htm",
     "CWB_INTRO_URL_PRIFIX": "https://www.cwb.gov.tw/V8/C/W/County/index.html",

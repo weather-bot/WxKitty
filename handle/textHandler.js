@@ -175,7 +175,7 @@ async function textHandle(context, text) {
         let replyMsg = "";
         try {
             const result = await getObsStation(msg);
-            console.log(result);
+            //console.log(result);
             replyMsg = parseObsStMsg(result);
         } catch (e) {
             if (e === ObsStException.DATA_ERROR)
