@@ -199,12 +199,11 @@ async function textHandle(context, text) {
         }
         if (stationName) {
             let replyMsg = '';
-            const epoch = new Date().getMilliseconds();
-            const url = `${URL.AIR_STATION_API_URL}?lang=tw&act=aqi-epa&ts=${epoch}`;
+            const url = `${URL.AIR_STATION_API_URL}`;
             try {
                 const res = await axios.get(url);
                 const data = res.data;
-                data['Data'].forEach(e => {
+                data.forEach(e => {
                     if (e.SiteName.includes(stationName)) {
                         replyMsg = require('../message/parseAirStMsg')(e);
                     }
@@ -365,9 +364,9 @@ async function textHandle(context, text) {
         replyMsg = "校園氣象站：\n";
         const schools = require("../data/TpaSchool");
         for (let i in schools) {
-            replyMsg += i + ':\n';
+            replyMsg += '【'+ i + '】\n';
             for (let j in schools[i]) {
-                replyMsg += schools[i][j].SchoolName + ',';
+                replyMsg += schools[i][j].SchoolName + ' ';
             }
             replyMsg += '\n';
         }
