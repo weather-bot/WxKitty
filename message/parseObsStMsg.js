@@ -1,24 +1,20 @@
 function parseObsStMsg(data) {
-    const elementsWanted = {
-        'obsTime': '時間 {}',
-        'TEMP': '溫度 {}℃', 
-        'HUMD': '濕度 {}%',
-        'PRES': '壓力 {}hPa',
-        'WDSD': '風速 {}m/s',
-        'WDIR': '風向 {}',
-        'H_24R': '雨量 {}mm'
-    }
-    var reg = /{\w*}/
-    var res = `測站： ${data.locationName}\n`
-    data.weatherElement.forEach(e => {
-        if (elementsWanted[e.elementName] != null) {
-            res += elementsWanted[e.elementName].replace(reg, e.elementValue) + '\n'
-        }
-    });
-
-    res += `---
-資料來源：中央氣象局`;
-    return res
+    let TEMP = data.weatherElement[3].elementValue == '-99' ? '因故無資料' : data.weatherElement[3].elementValue;
+    let HUMD = data.weatherElement[4].elementValue == '-99' ? '因故無資料' : data.weatherElement[4].elementValue;
+    let PRES = data.weatherElement[5].elementValue == '-99' ? '因故無資料' : data.weatherElement[5].elementValue;
+    let WDIR = data.weatherElement[1].elementValue == '-99' ? '因故無資料' : data.weatherElement[1].elementValue;
+    let WDSD = data.weatherElement[2].elementValue == '-99' ? '因故無資料' : data.weatherElement[2].elementValue;
+    let H_24R = data.weatherElement[6].elementValue == '-99' ? '因故無資料' : data.weatherElement[6].elementValue;
+    return res = `測站：${data.locationName}
+時間：${data.time.obsTime}
+溫度：${TEMP}℃
+濕度：${HUMD}%
+壓力：${PRES}hPa
+風速：${WDSD}m/s
+風向：${WDIR}°
+雨量：${H_24R}mm
+---
+資料來源：中央氣象局`
 }
 
 module.exports = parseObsStMsg;
