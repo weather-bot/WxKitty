@@ -1,4 +1,3 @@
-const audioHandler = require('./audioHandler');
 const textHandler = require('./textHandler');
 const {
     platformReplyText,
@@ -43,9 +42,6 @@ const handler = async context => {
         // require('../message/isImageMsg')
         // );
         // }
-    } else if (context.event.isAudio) {
-        await platformReplyText(context, "語音功能暫停");
-        // await audioHandler(context);
     } else if (context.event.isText) {
         await textHandler(context, context.event.text);
     }

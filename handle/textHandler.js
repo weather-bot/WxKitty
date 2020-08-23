@@ -60,7 +60,6 @@ async function textHandle(context, text) {
     const airKeyword = isAir(msg);
     const funnyReply = isFunny(msg);
     const timeKeyword = isTime(msg);
-    const schoolKeyword = isSchool(msg);
 
     // answer for session
     let shouldAnsAfterSession = true;
