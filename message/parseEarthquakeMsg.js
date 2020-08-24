@@ -1,14 +1,14 @@
 function parseEarthquakeMsg(majorList, mildList){
-    var res = ""
+    let res = ""
     if (majorList.length != 0){
         res += "近日較大地震:\n"
-        majorList.forEach(e =>{
+        majorList.forEach(e => {
             res += "⦿ " + e + '\n'
         })
     }
     if (mildList.length != 0){
         res += "近日一般地震:\n"
-        mildList.forEach(e =>{
+        mildList.forEach(e => {
             res += "⦿ " + e + '\n'
         })
     }
