@@ -21,6 +21,7 @@ const {
     isWeather,
     isFunny,
     isAirStation,
+    isTaiwanArea,
     isForeignAirStation,
     isTime,
     isForecast
@@ -188,7 +189,8 @@ async function textHandle(context, text) {
         );
     } else if (airKeyword) {
         const stationName = isAirStation(msg);
-        foreignStation = await isForeignAirStation(msg);
+        const taiwanArea = isTaiwanArea(msg);
+        const foreignStation = await isForeignAirStation(msg);
         if (stationName) {
             let replyMsg = '';
             const url = `${URL.AIR_STATION_API_URL}`;
@@ -205,6 +207,19 @@ async function textHandle(context, text) {
                 replyMsg = '取得資料失敗';
             }
             await platformReplyText(context, replyMsg);
+        } else if (taiwanArea) {
+            try {
+                const area = await getGeoLocation(msg.split(airKeyword)[0]);
+                // get the current wearther
+                replyMsg = await getAreaAir(area);
+            } catch (e) {
+                console.log(e)
+                if (e == GeoLocError.HTTP_GEO_API_ERROR)
+                    replyMsg = '找不到這個地區，請再試一次，或試著把地區放大、輸入更完整的名稱。例如有時候「花蓮」會找不到，但「花蓮縣」就可以。';
+                else
+                    replyMsg = `發生未知錯誤，請輸入 issue 取得回報管道`;
+            }
+            await platformReplyText(context, replyMsg);
         } else if (foreignStation) {
             try {
                 const AirData = await getForeignAirData(foreignStation);
@@ -216,19 +231,6 @@ async function textHandle(context, text) {
             } catch (e) {
                 console.log(e)
                 replyMsg = `查不到此地區天氣資料`;
-            }
-            await platformReplyText(context, replyMsg);
-        } else if (msg != airKeyword) {
-            try {
-                const area = await getGeoLocation(msg.split(airKeyword)[0]);
-                // get the current wearther
-                replyMsg = await getAreaAir(area);
-            } catch (e) {
-                console.log(e)
-                if (e == GeoLocError.HTTP_GEO_API_ERROR)
-                    replyMsg = '找不到這個地區，請再試一次，或試著把地區放大、輸入更完整的名稱。例如有時候「花蓮」會找不到，但「花蓮縣」就可以。';
-                else
-                    replyMsg = `發生未知錯誤，請輸入 issue 取得回報管道`;
             }
             await platformReplyText(context, replyMsg);
         } else { // else return taiwan air image
