@@ -222,7 +222,7 @@ async function textHandle(context, text) {
 	    try {
     		const area = await getGeoLocation(msg.split(airKeyword)[0]);
                 // get the current wearther
-                replyMsg = await getAreaAir(area, msg);
+                replyMsg = await getAreaAir(area);
             } catch (e) {
                 console.log(e)
                 if (e == GeoLocError.HTTP_GEO_API_ERROR)
