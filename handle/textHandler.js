@@ -5,9 +5,9 @@ const checkUrl = require('../lib/checkUrl');
 const imagedb = require('../lib/imagedb');
 const URL = require('../data/public_url.json');
 const messagedb = require('../lib/messagedb');
+const getForecast = require('../lib/getForecast');
 const getForeignAirData = require('../lib/getForeignAir');
 const parseForeAirStMsg = require('../message/parseForeignAirMsg');
-const getForecast = require('../lib/getForecast');
 const {
     getGeoLocation,
     GeoLocError
@@ -36,6 +36,9 @@ const {
 const {
     getAreaWeather,
 } = require('../lib/areaWeather');
+const {
+    getAreaAir,
+} = require('../lib/areaAir');
 const cloudClassifyingHandler = require('./cloudClassifyingHandle');
 const {
     createWeatherImg,
@@ -103,54 +106,54 @@ async function textHandle(context, text) {
     } else if ((/^(fb|粉專|粉絲專頁)$/).test(msg)) {
         await platformReplyText(context, URL.WXKITTY_FB_URL);
 
-    // === Turn off weather images ===
-    // } else if ((/喵喵$/).test(msg)) {
-    // try {
-    // const area = await getGeoLocation(msg.split("喵喵")[0]);
-    // const url = await createWeatherImg(area);
-    // console.log(url)
-    // await platformReplyImage(context, url);
-    // } catch (e) {
-    // console.log(e);
-    // let replyMsg = "";
-    // if (e === GeoLocError.HTTP_GEO_API_ERROR)
-    // replyMsg = '找不到這個地區，請再試一次，或試著把地區放大、輸入更完整的名稱。例如有時候「花蓮」會找不到，但「花蓮縣」就可以。';
-    // else if (e === WeatherImgError.HTTP_DARKSKY_ERROR)
-    // replyMsg = '取得天氣資料失敗';
-    // else if (e === WeatherImgError.HTTP_IMGUR_ERROR)
-    // replyMsg = "上傳圖片失敗";
-    // else if (e === WeatherImgError.HTTP_AIR_ERROR)
-    // replyMsg = '取得空氣資料失敗';
-    // else if (e === WeatherImgError.HTTP_MEOW_ERROR)
-    // replyMsg = "喵圖製作失敗";
-    // else
-    // replyMsg = `發生未知錯誤，請輸入 issue 取得回報管道`;
-    // await platformReplyText(context, replyMsg);
-    // }
-    // } else if ((/豬豬$/).test(msg)) {
-    // try {
-    // const area = await getGeoLocation(msg.split("豬豬")[0]);
-    // const url = await createWeatherImg(area, "chinese");
-    // console.log(url)
-    // await platformReplyImage(context, url);
-    // } catch (e) {
-    // console.log(e);
-    // let replyMsg = "";
-    // if (e === GeoLocError.HTTP_GEO_API_ERROR)
-    // replyMsg = '找不到這個地區，請再試一次，或試著把地區放大、輸入更完整的名稱。例如有時候「花蓮」會找不到，但「花蓮縣」就可以。';
-    // else if (e === WeatherImgError.HTTP_DARKSKY_ERROR)
-    // replyMsg = '取得天氣資料失敗';
-    // else if (e === WeatherImgError.HTTP_AIR_ERROR)
-    // replyMsg = '取得空氣資料失敗';
-    // else if (e === WeatherImgError.HTTP_IMGUR_ERROR)
-    // replyMsg = "上傳圖片失敗";
-    // else if (e === WeatherImgError.HTTP_MEOW_ERROR)
-    // replyMsg = "豬豬圖製作失敗";
-    // else
-    // replyMsg = `發生未知錯誤，請輸入 issue 取得回報管道`;
-    // await platformReplyText(context, replyMsg);
-    // }
-    // ===
+        // === Turn off weather images ===
+        // } else if ((/喵喵$/).test(msg)) {
+        // try {
+        // const area = await getGeoLocation(msg.split("喵喵")[0]);
+        // const url = await createWeatherImg(area);
+        // console.log(url)
+        // await platformReplyImage(context, url);
+        // } catch (e) {
+        // console.log(e);
+        // let replyMsg = "";
+        // if (e === GeoLocError.HTTP_GEO_API_ERROR)
+        // replyMsg = '找不到這個地區，請再試一次，或試著把地區放大、輸入更完整的名稱。例如有時候「花蓮」會找不到，但「花蓮縣」就可以。';
+        // else if (e === WeatherImgError.HTTP_DARKSKY_ERROR)
+        // replyMsg = '取得天氣資料失敗';
+        // else if (e === WeatherImgError.HTTP_IMGUR_ERROR)
+        // replyMsg = "上傳圖片失敗";
+        // else if (e === WeatherImgError.HTTP_AIR_ERROR)
+        // replyMsg = '取得空氣資料失敗';
+        // else if (e === WeatherImgError.HTTP_MEOW_ERROR)
+        // replyMsg = "喵圖製作失敗";
+        // else
+        // replyMsg = `發生未知錯誤，請輸入 issue 取得回報管道`;
+        // await platformReplyText(context, replyMsg);
+        // }
+        // } else if ((/豬豬$/).test(msg)) {
+        // try {
+        // const area = await getGeoLocation(msg.split("豬豬")[0]);
+        // const url = await createWeatherImg(area, "chinese");
+        // console.log(url)
+        // await platformReplyImage(context, url);
+        // } catch (e) {
+        // console.log(e);
+        // let replyMsg = "";
+        // if (e === GeoLocError.HTTP_GEO_API_ERROR)
+        // replyMsg = '找不到這個地區，請再試一次，或試著把地區放大、輸入更完整的名稱。例如有時候「花蓮」會找不到，但「花蓮縣」就可以。';
+        // else if (e === WeatherImgError.HTTP_DARKSKY_ERROR)
+        // replyMsg = '取得天氣資料失敗';
+        // else if (e === WeatherImgError.HTTP_AIR_ERROR)
+        // replyMsg = '取得空氣資料失敗';
+        // else if (e === WeatherImgError.HTTP_IMGUR_ERROR)
+        // replyMsg = "上傳圖片失敗";
+        // else if (e === WeatherImgError.HTTP_MEOW_ERROR)
+        // replyMsg = "豬豬圖製作失敗";
+        // else
+        // replyMsg = `發生未知錯誤，請輸入 issue 取得回報管道`;
+        // await platformReplyText(context, replyMsg);
+        // }
+        // ===
 
     } else if ((/(雲.*辨識)|(辨識.*雲)/).test(msg)) {
 
@@ -184,12 +187,8 @@ async function textHandle(context, text) {
             require('../message/airStMsg')
         );
     } else if (airKeyword) {
-        // If there is a staton, return detail data
         const stationName = isAirStation(msg);
-        let foreignStation = null;
-        if (stationName == null && msg != airKeyword) {
-            foreignStation = await isForeignAirStation(msg);
-        }
+        foreignStation = await isForeignAirStation(msg);
         if (stationName) {
             let replyMsg = '';
             const url = `${URL.AIR_STATION_API_URL}`;
@@ -206,7 +205,33 @@ async function textHandle(context, text) {
                 replyMsg = '取得資料失敗';
             }
             await platformReplyText(context, replyMsg);
-        } else if (foreignStation == null) { // else return taiwan air image
+        } else if (foreignStation) {
+            try {
+                const AirData = await getForeignAirData(foreignStation);
+                if (AirData != null) {
+                    replyMsg = parseForeAirStMsg(AirData);
+                } else {
+                    replyMsg = '外國地區取得資料失敗';
+                }
+            } catch (e) {
+                console.log(e)
+                replyMsg = `查不到此地區天氣資料`;
+            }
+            await platformReplyText(context, replyMsg);
+        } else if (msg != airKeyword) {
+            try {
+                const area = await getGeoLocation(msg.split(airKeyword)[0]);
+                // get the current wearther
+                replyMsg = await getAreaAir(area);
+            } catch (e) {
+                console.log(e)
+                if (e == GeoLocError.HTTP_GEO_API_ERROR)
+                    replyMsg = '找不到這個地區，請再試一次，或試著把地區放大、輸入更完整的名稱。例如有時候「花蓮」會找不到，但「花蓮縣」就可以。';
+                else
+                    replyMsg = `發生未知錯誤，請輸入 issue 取得回報管道`;
+            }
+            await platformReplyText(context, replyMsg);
+        } else { // else return taiwan air image
             const url = await require('../lib/createAirImage')();
             if (url != null) {
                 await platformReplyImage(context, url);
@@ -214,15 +239,6 @@ async function textHandle(context, text) {
                 // if get imgur image url fail, just reply in text
                 await platformReplyText(context, "取得空氣品質圖失敗。請輸入[監測站清單]來查詢詳細數值。");
             }
-        } else {
-            let replyMsg = '';
-            const AirData = await getForeignAirData(foreignStation);
-            if (AirData != null) {
-                replyMsg += parseForeAirStMsg(AirData);
-            } else {
-                replyMsg = '外國地區取得資料失敗';
-            }
-            await platformReplyText(context, replyMsg);
         }
     } else if (isForecast(msg)) {
         // Case 1: only forecast, then return image
@@ -243,29 +259,29 @@ async function textHandle(context, text) {
             await platformReplyText(context, replyMsg);
         }
     } else if (msg.includes("天氣圖")) {
-	const date = new Date();
-	let d = new Date(date.getTime() + (date.getTimezoneOffset() * 60000));
-	let count = 4;
-	let success = 0;
+        const date = new Date();
+        let d = new Date(date.getTime() + (date.getTimezoneOffset() * 60000));
+        let count = 4;
+        let success = 0;
 
-	while (count > 0){
-	    let hour = String(Math.floor(d.getHours() / 6) * 6).padStart(2, '0');
-	    let day = String(d.getDate()).padStart(2, '0');
-	    let month = String(d.getMonth()+1).padStart(2, '0');
+        while (count > 0) {
+            let hour = String(Math.floor(d.getHours() / 6) * 6).padStart(2, '0');
+            let day = String(d.getDate()).padStart(2, '0');
+            let month = String(d.getMonth() + 1).padStart(2, '0');
             let imgUrl = `${URL.WEATHER_IMG_URL}${d.getFullYear()}-${month}${day}-${hour}00_SFCcombo.jpg`;
-	    let check = await checkUrl(imgUrl);
-	    if (check) {
+            let check = await checkUrl(imgUrl);
+            if (check) {
                 await platformReplyImage(context, imgUrl);
-		count = 0;
-		success = 1;
-		break;
+                count = 0;
+                success = 1;
+                break;
             }
-	    d = new Date(d.getTime() -(3600000 * 6));
-	    count--;
-	}
-	if (success == 0) {
+            d = new Date(d.getTime() - (3600000 * 6));
+            count--;
+        }
+        if (success == 0) {
             // if get imgur image url fail, just reply in text
-	    await platformReplyText(context, "資料取得失敗，歡迎至中央氣象局網站查詢\nhttps://www.cwb.gov.tw/V8/C/W/analysis.html");
+            await platformReplyText(context, "資料取得失敗，歡迎至中央氣象局網站查詢\nhttps://www.cwb.gov.tw/V8/C/W/analysis.html");
         }
     } else if (msg.includes("雷達")) {
         const d = parseTime();

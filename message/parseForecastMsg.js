@@ -1,5 +1,5 @@
 module.exports = {
-    parse36HoursMsg: (e) => {
+    parse36HoursMsg: e => {
         return `地區：${e.area}
 時間：${e.time}
 描述：${e.weatherDescription} ${e.feelingDesciption}
@@ -10,7 +10,7 @@ module.exports = {
 資料來源：中央氣象局`;
     },
 
-    parse48HoursMsg: (e) => {
+    parse48HoursMsg: e => {
         return `地區：${e.area}
 時間：${e.time}
 描述：${e.data[0]}
@@ -21,18 +21,18 @@ module.exports = {
 資料來源：中央氣象局`;
     },
 
-    parse7DaysMsg: (e) => {
-        var msg = `地區：${e.area}
+    parse7DaysMsg: e => {
+        let msg = `地區：${e.area}
 時間：${e.time}`
-        var data = e.data
-        data.forEach((e)=>{
+        let data = e.data
+        data.forEach(e => {
             msg += e + '\n'
         })
         msg += "---\n資料來源：中央氣象局"
         return msg
     },
 
-    parseForeignForecastMsg: (e) => {
+    parseForeignForecastMsg: e => {
         return `地區：${e.area}
 時間：${e.time}
 描述：${e.weatherDescription}
