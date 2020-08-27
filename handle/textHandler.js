@@ -191,8 +191,8 @@ async function textHandle(context, text) {
         const stationName = isAirStation(msg);
         const taiwanArea = isTaiwanArea(msg);
         const foreignStation = await isForeignAirStation(msg);
-        if (stationName) {
-            let replyMsg = '';
+        let replyMsg = '';
+        if (stationName !== null) {
             const url = `${URL.AIR_STATION_API_URL}`;
             try {
                 const res = await axios.get(url);
@@ -206,21 +206,19 @@ async function textHandle(context, text) {
                 console.log("input text: ", msg, err);
                 replyMsg = '取得資料失敗';
             }
-            await platformReplyText(context, replyMsg);
-        } else if (taiwanArea) {
+        } else if (taiwanArea !== null) {
             try {
                 const area = await getGeoLocation(msg.split(airKeyword)[0]);
                 // get the current wearther
-                replyMsg = await getAreaAir(area);
+                replyMsg = await getAreaAir(area, foreignStation);
             } catch (e) {
                 console.log(e)
                 if (e == GeoLocError.HTTP_GEO_API_ERROR)
                     replyMsg = '找不到這個地區，請再試一次，或試著把地區放大、輸入更完整的名稱。例如有時候「花蓮」會找不到，但「花蓮縣」就可以。';
                 else
-                    replyMsg = `發生未知錯誤，請輸入 issue 取得回報管道`;
+                    replyMsg = '發生未知錯誤，請輸入 issue 取得回報管道';
             }
-            await platformReplyText(context, replyMsg);
-        } else if (foreignStation) {
+        } else if (foreignStation !== null) {
             try {
                 const AirData = await getForeignAirData(foreignStation);
                 if (AirData != null) {
@@ -230,18 +228,18 @@ async function textHandle(context, text) {
                 }
             } catch (e) {
                 console.log(e)
-                replyMsg = `查不到此地區天氣資料`;
+                replyMsg = '查不到此地區天氣資料';
             }
-            await platformReplyText(context, replyMsg);
         } else { // else return taiwan air image
             const url = await require('../lib/createAirImage')();
             if (url != null) {
                 await platformReplyImage(context, url);
             } else {
                 // if get imgur image url fail, just reply in text
-                await platformReplyText(context, "取得空氣品質圖失敗。請輸入[監測站清單]來查詢詳細數值。");
+                replyMsg = '取得空氣品質圖失敗。請輸入[監測站清單]來查詢詳細數值。';
             }
         }
+        await platformReplyText(context, replyMsg);
     } else if (isForecast(msg)) {
         // Case 1: only forecast, then return image
         if (msg == "預報") {
