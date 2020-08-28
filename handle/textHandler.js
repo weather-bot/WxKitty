@@ -196,7 +196,7 @@ async function textHandle(context, text) {
             const url = `${URL.AIR_STATION_API_URL}`;
             try {
                 const res = await axios.get(url);
-                const data = res.data;
+                const data = res.data.records;
                 data.forEach(e => {
                     if (e.SiteName.includes(stationName)) {
                         replyMsg = require('../message/parseAirStMsg')(e);
