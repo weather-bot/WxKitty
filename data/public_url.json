@@ -6,7 +6,7 @@
     "WXKITTY_FB_URL": "http://fb.me/WxKitty.tw",
     "CWB_URL": "http://www.cwb.gov.tw",
     "WEATHER_BOT_URL": "https://github.com/weather-bot/weather-bot/",
-    "AIR_STATION_API_URL": "http://opendata.epa.gov.tw/webapi/Data/REWIQA/?$orderby=SiteName&$skip=0&$top=1000&format=json",
+    "AIR_STATION_API_URL": "https://data.epa.gov.tw/api/v1/aqx_p_432?format=json&limit=100&api_key=9be7b239-557b-4c10-9775-78cadfc555e9",
     "WEATHER_IMG_URL": "https://www.cwb.gov.tw/Data/fcst_img/",
     "RADAR_IMG_URL_PREFIX": "https://www.cwb.gov.tw/Data/radar",
     "SATELLITE_IMG_URL_PREFIX": "https://www.cwb.gov.tw/Data/satellite/LCC_IR1_CR_1000/LCC_IR1_CR_1000",
