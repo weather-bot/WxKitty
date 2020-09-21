@@ -33,7 +33,7 @@ describe('=== Check getAreaAir ===', () => {
                 realAreaName: "深坑區"
             }, foreignStation);
             logger.debug(msg);
-            assert.equal(msg.includes("資料來源：breezometer.com"), true);
+            assert.equal(msg.includes("資料來源："), true);
             done();
         })();
     }).timeout(5000);

@@ -1,6 +1,6 @@
 {
     "EARTHQUAKE_LOCAL_API_URL": "https://opendata.cwb.gov.tw/api/v1/rest/datastore/",
-    "BREEZOMETER_API_URL": "https://api.breezometer.com/baqi",
+    "Air_Quality_API_URL": "https://api.waqi.info/feed",
     "CWB_TYPHOON_IMG_URL": "https://www.cwb.gov.tw/Data/warning/W21_C.png",
     "CWB_TYPHOON_SITE_URL": "https://www.cwb.gov.tw/V8/C/P/Warning/W21.html",
     "WXKITTY_FB_URL": "http://fb.me/WxKitty.tw",

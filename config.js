@@ -20,8 +20,6 @@ module.exports = {
     firebaseSecret: process.env.firebaseSecret,
     // Google Map
     googleMapKey: process.env.googleMapKey,
-    // breezometer
-    breezometerKey: process.env.breezometerKey,
     // CWB Open Data
     cwbKey: process.env.cwbKey,
     // Cloud Lady URL
@@ -32,4 +30,6 @@ module.exports = {
     olamiAiSecret: process.env.olamiAiSecret,
     // Dark Sky Api
     darkSkyKey: process.env.darkSkyKey,
+    // Air Quality Open Data Platform Api
+    AirQualityOpenDataPlatformToken: process.env.AirQualityOpenDataPlatformToken
 }

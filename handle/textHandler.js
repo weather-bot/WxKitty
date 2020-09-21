@@ -218,7 +218,7 @@ async function textHandle(context, text) {
                 else
                     replyMsg = '發生未知錯誤，請輸入 issue 取得回報管道';
             }
-        } else if (foreignStation !== null) {
+        } else if (foreignStation !== undefined) {
             try {
                 const AirData = await getForeignAirData(foreignStation);
                 if (AirData != null) {
