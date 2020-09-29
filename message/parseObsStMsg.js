@@ -1,3 +1,4 @@
+const parseComfort = require('../lib/parseComfort.js');
 function parseObsStMsg(data) {
     let TEMP = data.weatherElement[3].elementValue == '-99' ? '因故無資料' : data.weatherElement[3].elementValue;
     let HUMD = data.weatherElement[4].elementValue == '-99' ? '因故無資料' : data.weatherElement[4].elementValue;
@@ -7,6 +8,7 @@ function parseObsStMsg(data) {
     let H_24R = data.weatherElement[6].elementValue == '-99' ? '因故無資料' : data.weatherElement[6].elementValue;
     return res = `測站：${data.locationName}
 時間：${data.time.obsTime}
+體感溫度：${(TEMP - 0.55 * (1 - HUMD / 100) * (TEMP - 14)).toFixed(1)}℃  ${parseComfort(TEMP, HUMD)}
 溫度：${TEMP}℃
 濕度：${HUMD}%
 壓力：${PRES}hPa
