@@ -33,7 +33,7 @@ describe('=== Check getAreaAir ===', () => {
                 realAreaName: "深坑區"
             }, foreignStation);
             logger.debug(msg);
-            assert.equal(msg.includes("資料來源："), true);
+            assert.equal(msg.includes("空氣指標AQI："), true);
             done();
         })();
     }).timeout(5000);
