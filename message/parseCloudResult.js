@@ -57,8 +57,7 @@ ${introduce(result[0].name)}
 分析結果：
 ${translate(result[0].name)}: ${result[0].score}
 ${translate(result[1].name)}: ${result[1].score}
-${translate(result[2].name)}: ${result[2].score}
-`;
+${translate(result[2].name)}: ${result[2].score}`;
 }
 
 module.exports = main;

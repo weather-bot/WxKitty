@@ -16,7 +16,7 @@
     "CWB_INTRO_URL_PRIFIX": "https://www.cwb.gov.tw/V8/C/W/County/index.html",
     "LINE_BOT_API_BASE_URL": "https://api.line.me/v2/bot",
     "GOOGLE_GEO_API_URL": "https://maps.googleapis.com/maps/api/geocode",
-    "WXKITTY_API_URL": "http://52.27.87.6",
+    "WXKITTY_API_URL": "http://140.112.67.199:8000",
     "DARKSKY_API_URL": "https://api.darksky.net/forecast",
     "TAIWAN_OVERALL": "https://www.ttv.com.tw/news/weather/today.asp"
 }
