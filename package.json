@@ -34,7 +34,7 @@
     "axios": "^0.21.2",
     "body-parser": "^1.18.3",
     "bottender": "^0.15.17",
-    "canvas": "^1.6.10",
+    "canvas": "^1.6.11",
     "chinese-conv": "^1.0.1",
     "chrono-node-zh": "^1.0.1",
     "date2obj": "0.0.7",
